@@ -56,8 +56,8 @@ Take-Away: Make tons of different little experiments. A shit ton of baby experim
 **5.11.2024**  
 [ ] Experiments with paged.js  
 [ ] Vanilla CSS  
-[ ] Text flow / paragraphs / columns —> LAYOUT
-[ ] Master pages, possible to set up?
+[ ] Text flow / paragraphs / columns —> LAYOUT  
+[ ] Master pages, possible to set up?  
 [ ] (class list / toggling on and off CSS/JS)
 
 **12.11.2024**
