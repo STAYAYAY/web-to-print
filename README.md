@@ -1,12 +1,9 @@
 # web-to-print
-
 experiments with web-to-print
 
-
-**hello we did some changes**
-
 **CSS**
-test balabal
 
-[Siiri CSS](CSS/20241022_CSS_Grid_001_ST.html)  
-[Alper CSS](CSS/20241022_CSS_Grid_001_AY.html)
+[20241022_CSS_Grid_001_ST](CSS/20241022_CSS_Grid_001_ST.html)  
+[20241022_CSS_Grid_001_AY](CSS/20241022_CSS_Grid_001_AY.html)
+
+[Scedule](ToDo.md)
