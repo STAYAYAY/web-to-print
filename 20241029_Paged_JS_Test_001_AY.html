@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paged.js Example</title>
+    <script src="paged.polyfill.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+
+        .content {
+            page-break-after: always; /* Ensure new content starts on a new page */
+        }
+
+        @page {
+            size: A4; /* Set the page size */
+            margin: 20mm; /* Set page margins */
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>Welcome to Paged.js</h1>
+        <p>
+            Paged.js is a library that allows you to create paginated documents using HTML and CSS.
+            You can style your content just like you would for print media.
+        </p>
+        <h2>Getting Started</h2>
+        <p>
+            To use Paged.js, you simply need to include the library in your HTML and then define your content.
+            Here is how you can paginate long texts:
+        </p>
+        
+        <!-- Add more content to create multiple pages -->
+        <div class="content">
+            <h3>Content Section</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ipsum a purus feugiat laoreet. 
+            Sed convallis, nisl eu fermentum blandit, nunc felis scelerisque sapien, eu dapibus justo velit eu 
+            leo. Fusce scelerisque malesuada ex, et vestibulum odio scelerisque ac.</p>
+
+            <p>Curabitur bibendum neque vitae eros pharetra, eget laoreet eros aliquet. Sed tincidunt ex at 
+            libero luctus, non pellentesque risus aliquam. Vestibulum ante ipsum primis in faucibus orci luctus 
+            et ultrices posuere cubilia curae; Proin dapibus mi ut felis bibendum, ut viverra leo iaculis.</p>
+
+            <p>Integer a ligula sit amet quam varius hendrerit in vel ligula. Etiam bibendum purus eu gravida 
+            convallis. Fusce sed velit sit amet purus dictum tincidunt. Nulla facilisi.</p>
+
+            <p>Donec fermentum, arcu at venenatis bibendum, augue eros varius sem, in aliquam libero justo 
+            vitae nulla. Sed sed cursus sapien, non lacinia metus. Duis a orci vel nunc consectetur tincidunt.</p>
+
+            <!-- Repeat or add more content as needed -->
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin nec ipsum a purus feugiat laoreet. 
+            Sed convallis, nisl eu fermentum blandit, nunc felis scelerisque sapien, eu dapibus justo velit eu 
+            leo. Fusce scelerisque malesuada ex, et vestibulum odio scelerisque ac.</p>
+        </div>
+    </article>
+</body>
+</html>
