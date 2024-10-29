@@ -1,80 +1,92 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text über drei Spalten</title>
     <style>
-       
+        body {
+            font-family: Arial, sans-serif;
+            background-color: blueviolet;
+            /* Set the font family for the entire document */
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Add padding around the body */
+            box-sizing: border-box; /* Include padding in element's total width and height */
+            display: flex;
+        }
+
         .container {
-            
-            column-count: 2;
-            /* Number of columns */
-            column-gap: 20px;
-            /* Gap between columns */
-            width: 600px;
-            /* Width of the container */
-            margin: auto;
-            /* Center the container */
+            font-size: 10em; /* Large font size */
+            line-height: 0.9; /* Line height */
+            text-align: center; /* Center the text */
+            background-color: brown; /* Background color */
+            margin: auto; /* Center the container */
+            width: 100%; /* Make the container full width */
+            max-width: 600px; /* Maximum width for larger screens */
         }
 
         .container2 {
-            
-            column-count: 3;
-            /* Number of columns */
-            column-gap: 20px;
-            /* Gap between columns */
-            width: 600px;
-            /* Width of the container */
-            margin: auto;
-            /* Center the container */
+            column-count: 3; /* Number of columns */
+            column-gap: 20px; /* Gap between columns */
+            width: 100%; /* Make the container full width */
+            max-width: 600px; /* Maximum width for larger screens */
+            margin: auto; /* Center the container */
         }
 
+        .container:hover, .container2:hover {
+            /* No hover effect defined here */
+        }
 
         .column {
-            
-            background-color: lightblue;
-            /* Background color */
-            padding: 10px;
-            /* Padding inside columns */
+            padding: 10px; /* Padding inside columns */
+        }
+
+        @media (max-width: 600px) {
+            .container, .container2 {
+                column-count: 1; /* Switch to 1 column on small screens */
+            }
+        }
+
+        @media (min-width: 601px) and (max-width: 800px) {
+            .container {
+                column-count: 1; /* Switch to 1 column on medium screens */
+            }
+
+            .container2 {
+                column-count: 2; /* Switch to 2 columns on medium screens */
+            }
+        }
+
+        @media (min-width: 801px) {
+            .container {
+                column-count: 1; /* 2 columns on larger screens */
+            2
+
+            .container2 {
+                column-count: 3; /* 3 columns on larger screens */
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque euismod diam sed erat egestas, nec ullamcorper
-        elit fringilla. Nulla facilisi. Suspendisse potenti. Vivamus blandit ligula ut nulla euismod, in suscipit lorem
-        volutpat. Duis auctor, libero a interdum aliquam, ligula est consectetur purus, in bibendum mi ligula ac justo.
-        Sed convallis velit vitae libero sodales, at dapibus elit finibus. Aenean ac ante ut purus feugiat viverra. Sed
-        in mi id felis suscipit gravida. Etiam dapibus turpis vitae neque efficitur, a ultrices justo congue. Cras
-        vestibulum, ligula vitae volutpat tincidunt, nunc odio gravida urna, a sagittis nisi ligula ut ligula. Phasellus
-        sit amet quam a felis facilisis laoreet. Curabitur feugiat elit id diam accumsan, sit amet facilisis nulla
-        varius. Donec non augue sed orci euismod bibendum. Aliquam erat volutpat. Nulla porttitor, felis sit amet varius
-        tincidunt, velit eros efficitur magna, ac euismod neque purus et magna. Ut vel erat non purus venenatis
-        convallis. Suspendisse potenti. Duis accumsan felis sed mi tincidunt, nec faucibus nunc fermentum. Aenean
-        feugiat auctor ipsum, ac vehicula velit faucibus nec. Cras quis sapien vel erat convallis pharetra. Aliquam erat
-        volutpat. Donec nec felis arcu. Proin bibendum arcu ac velit auctor, eu auctor odio volutpat. Etiam scelerisque
-        lacus a velit scelerisque, ac feugiat neque suscipit. Sed venenatis ex in ex viverra, et fringilla lorem
-        pretium.
-    </div>
-    <div class="container2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque euismod diam sed erat egestas, nec ullamcorper
-        elit fringilla. Nulla facilisi. Suspendisse potenti. Vivamus blandit ligula ut nulla euismod, in suscipit lorem
-        volutpat. Duis auctor, libero a interdum aliquam, ligula est consectetur purus, in bibendum mi ligula ac justo.
-        Sed convallis velit vitae libero sodales, at dapibus elit finibus. Aenean ac ante ut purus feugiat viverra. Sed
-        in mi id felis suscipit gravida. Etiam dapibus turpis vitae neque efficitur, a ultrices justo congue. Cras
-        vestibulum, ligula vitae volutpat tincidunt, nunc odio gravida urna, a sagittis nisi ligula ut ligula. Phasellus
-        sit amet quam a felis facilisis laoreet. Curabitur feugiat elit id diam accumsan, sit amet facilisis nulla
-        varius. Donec non augue sed orci euismod bibendum. Aliquam erat volutpat. Nulla porttitor, felis sit amet varius
-        tincidunt, velit eros efficitur magna, ac euismod neque purus et magna. Ut vel erat non purus venenatis
-        convallis. Suspendisse potenti. Duis accumsan felis sed mi tincidunt, nec faucibus nunc fermentum. Aenean
-        feugiat auctor ipsum, ac vehicula velit faucibus nec. Cras quis sapien vel erat convallis pharetra. Aliquam erat
-        volutpat. Donec nec felis arcu. Proin bibendum arcu ac velit auctor, eu auctor odio volutpat. Etiam scelerisque
-        lacus a velit scelerisque, ac feugiat neque suscipit. Sed venenatis ex in ex viverra, et fringilla lorem
-        pretium.
-    </div>
-</body>
+    <div class="container" id="container1"></div>
+    <div class="container2" id="container2"></div>
 
+    <script>
+        // Function to load text from an external file
+        function loadText(file, elementId) {
+            fetch(file)
+                .then(response => response.text())
+                .then(text => {
+                    document.getElementById(elementId).innerText = text;
+                })
+                .catch(error => console.error('Error loading the text file:', error));
+        }
+
+        // Load content into both containers
+        loadText('Material/Title.txt', 'container1');
+        loadText('Material/content.txt', 'container2');
+    </script>
+</body>
 </html>
