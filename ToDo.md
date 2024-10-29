@@ -1,5 +1,7 @@
 To Do
 
+[Project_Description](HS24_IP_Yagcioglu-Alper_Taennler-Siiri_REV.pdf)
+
 LIST OF THINGS TO CHECK OUT:  
 — CSS grid & flex  
 — Does CSS grid work with Paged.js?  
