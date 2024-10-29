@@ -12,7 +12,7 @@ LIST OF THINGS TO CHECK OUT:
 — json  
 1.4: JSON - Arbeiten mit Daten und APIs in JavaScript
 
-Schedule
+**Schedule**
 
 **15.10.2024 — Projekt auslegen**
 
@@ -42,7 +42,7 @@ Control each cellar in the Grid
 **22.10.2024 — Meeting with Ted**
 
 (see Hacked MD for detailed notes)
-https://hackmd.io/SSLkuaU9RfeTpcE6LhCBSw
+[Hacked MD file](https://hackmd.io/SSLkuaU9RfeTpcE6LhCBSw)
 
 Take-Away: Make tons of different little experiments. A shit ton of baby experiments to understand the concepts. As many mini examples you can the better.
 
