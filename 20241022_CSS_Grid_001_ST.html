@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Rectangle Grid</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* 1 column */
+        gap: 5px; /* Smaller space between the rectangles */
+        width: 90%;
+        max-height: 90vh; /* Limit the height of the grid */
+      }
+
+      .rectangle {
+        background-color: lightblue;
+        height: 100px; /* Default height */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+      }
+
+      /* Target the rectangles individually */
+      .rectangle:nth-child(1) {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 400px;
+        word-wrap: break-word;
+        text-shadow: 20px 22px 2px #1c6ea4;
+      }
+
+      .rectangle:nth-child(2) {
+        height: 250px; /* Increased height for the second rectangle */
+        background-color: coral; /* Optional color change */
+        opacity: 20%;
+        border-radius: 50px;
+      }
+
+      .rectangle:nth-child(3) {
+        height: 250px;
+        background: linear-gradient(
+          0deg,
+          rgb(255, 28, 3) 0%,
+          rgba(9, 9, 121, 1) 35%,
+          rgb(30, 255, 0) 100%
+        );
+        border-radius: 60px;
+      }
+
+      .rectangle:nth-child(4) {
+        box-shadow: 5px 5px 100px 5px #000000;
+      }
+
+      .rectangle:nth-child(5) {
+        height: 250px;
+        background: linear-gradient(
+          90deg,
+          rgba(2, 0, 36, 1) 0%,
+          rgba(9, 9, 121, 1) 35%,
+          rgba(0, 212, 255, 1) 100%
+        );
+        border-radius: 650px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <div class="rectangle">hello</div>
+      <div class="rectangle">2</div>
+      <div class="rectangle">whatthathatah</div>
+      <div class="rectangle">4</div>
+      <div class="rectangle">5</div>
+      <div class="rectangle">6</div>
+    </div>
+  </body>
+</html>
