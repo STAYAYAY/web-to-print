@@ -7,6 +7,5 @@ experiments with web-to-print
 \*\* CSS
 test balabal
 
-[text](CSS/20241022_CSS_Grid_001_ST.html)
-[SiiriCSS](CSS/20241022_CSS_Grid_001_AY.html)
-[View the HTML code](https://github.com/STAYAYAY/web-to-print/blob/main/20241022_CSS_Grid_001_AY.html)
+[Siiri CSS](CSS/20241022_CSS_Grid_001_ST.html)  
+[Alper CSS](CSS/20241022_CSS_Grid_001_AY.html)
