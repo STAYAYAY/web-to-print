@@ -1,6 +1,11 @@
 # web-to-print
+
 experiments with web-to-print
 
-** hello we did some changes
+\*\* hello we did some changes
+
+\*\* CSS
+[Experiment 1] (CSS/20241022_CSS_Grid_001_AY.html)
+[Experiment 2] (CSS/20241022_CSS_Grid_001_ST.html)
 
 [View the HTML code](https://github.com/STAYAYAY/web-to-print/blob/main/20241022_CSS_Grid_001_AY.html)
