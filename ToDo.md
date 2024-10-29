@@ -53,7 +53,7 @@ Take-Away: Make tons of different little experiments. A shit ton of baby experim
 [X] 1.2 Watch tutorial on GitHub Desktop Collaboration  
 [X] Make a laundry list of the bits and pieces we think we should learn: then categorize them, where do they fall under (CSS, JS, typography) so we can work in them, folder structure or naming structure.
 
-**5.11.2024**
+**5.11.2024**  
 [ ] Experiments with paged.js  
 [ ] Vanilla CSS  
 [ ] Text flow / paragraphs / columns —> LAYOUT
