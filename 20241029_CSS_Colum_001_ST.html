@@ -21,6 +21,7 @@
           rgba(34, 193, 195, 1) 0%,
           rgba(253, 187, 45, 1) 100%
         );
+        transition: background 0.1s ease;
       }
 
       .container {
@@ -99,5 +100,23 @@
       volutpat. Etiam scelerisque lacus a velit scelerisque, ac feugiat neque
       suscipit. Sed venenatis ex in ex viverra, et fringilla lorem pretium.
     </div>
+    <script>
+      document.body.onmousemove = function (event) {
+        const x = event.clientX;
+        const y = event.clientY;
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        // Normalize the mouse position to range between 0 and 255 for RGB values
+        const red = Math.round((x / width) * 255);
+        const green = Math.round((y / height) * 255);
+        const blue = Math.round(((x + y) / (width + height)) * 255);
+
+        // Update the background gradient with new RGB values
+        document.body.style.background = `linear-gradient(0deg, rgba(${red}, ${green}, ${blue}, 1) 0%, rgba(${
+          255 - red
+        }, ${255 - green}, ${255 - blue}, 1) 100%)`;
+      };
+    </script>
   </body>
 </html>
