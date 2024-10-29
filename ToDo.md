@@ -60,21 +60,21 @@ Take-Away: Make tons of different little experiments. A shit ton of baby experim
 [ ] Master pages, possible to set up?  
 [ ] (class list / toggling on and off CSS/JS)
 
-**12.11.2024**
+**12.11.2024**  
 Experimenting
 
-**18.11.2024**
+**18.11.2024**  
 Meeting with Bérénice TBD
 
-**19.11.2024**
+**19.11.2024**  
 Meeting with Ted TBD
 
-**26.11.2024**
+**26.11.2024**  
 Experimenting
 
-**3.12.2024**
+**3.12.2024**  
 Meeting with Ted TBD IN THE MORNING
 Preperation for presentation
 
-**10.12.2024**
+**10.12.2024**  
 Midterm presentation
