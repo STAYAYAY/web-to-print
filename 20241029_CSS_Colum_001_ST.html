@@ -52,6 +52,14 @@
         padding: 10px;
         /* Padding inside columns */
       }
+
+      .container:hover {
+        column-count: 4; /* Change to 4 columns on hover */
+      }
+
+      .container2:hover {
+        column-count: 3; /* Change to 3 columns on hover */
+      }
     </style>
   </head>
 
@@ -100,7 +108,7 @@
       volutpat. Etiam scelerisque lacus a velit scelerisque, ac feugiat neque
       suscipit. Sed venenatis ex in ex viverra, et fringilla lorem pretium.
     </div>
-    <script>
+    <!-- <script>
       document.body.onmousemove = function (event) {
         const x = event.clientX;
         const y = event.clientY;
@@ -117,6 +125,6 @@
           255 - red
         }, ${255 - green}, ${255 - blue}, 1) 100%)`;
       };
-    </script>
+    </script> -->
   </body>
 </html>
