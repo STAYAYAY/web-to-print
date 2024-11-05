@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,67 +10,89 @@
             font-family: Arial, sans-serif;
             background-color: blueviolet;
             /* Set the font family for the entire document */
-            margin: 0; /* Remove default margin */
-            padding: 20px; /* Add padding around the body */
-            box-sizing: border-box; /* Include padding in element's total width and height */
+            margin: 0;
+            /* Remove default margin */
+            padding: 20px;
+            /* Add padding around the body */
+            box-sizing: border-box;
+            /* Include padding in element's total width and height */
             /* display: flex; */
         }
 
         .container {
-            font-size: 10em; /* Large font size */
-            line-height: 0.9; /* Line height */
-            text-align: center; /* Center the text */
-            background-color: brown; /* Background color */
-            margin: auto; /* Center the container */
-            width: 100%; /* Make the container full width */
-            max-width: 600px; /* Maximum width for larger screens */
+            font-size: 10em;
+            /* Large font size */
+            line-height: 0.9;
+            /* Line height */
+            text-align: center;
+            /* Center the text */
+            background-color: brown;
+            /* Background color */
+            margin: auto;
+            /* Center the container */
+            width: 100%;
+            /* Make the container full width */
+            max-width: 600px;
+            /* Maximum width for larger screens */
         }
 
         .container2 {
-            column-count: 3; /* Number of columns */
-            column-gap: 20px; /* Gap between columns */
-            width: 100%; /* Make the container full width */
-            max-width: 600px; /* Maximum width for larger screens */
-            margin: auto; /* Center the container */
+            column-count: 3;
+            /* Number of columns */
+            column-gap: 20px;
+            /* Gap between columns */
+            width: 100%;
+            /* Make the container full width */
+            max-width: 600px;
+            /* Maximum width for larger screens */
+            margin: auto;
+            /* Center the container */
         }
 
-        .container:hover, .container2:hover {
+        .container:hover,
+        .container2:hover {
             /* No hover effect defined here */
         }
 
         .column {
-            padding: 10px; /* Padding inside columns */
+            padding: 10px;
+            /* Padding inside columns */
         }
 
         @media (max-width: 600px) {
             .container {
-                column-count: 1; /* Switch to 1 column on small screens */
+                column-count: 1;
+                /* Switch to 1 column on small screens */
             }
 
             .container2 {
-                column-count: 1; /* Switch to 2 columns on medium screens */
+                column-count: 1;
+                /* Switch to 2 columns on medium screens */
             }
         }
 
         @media (min-width: 601px) and (max-width: 800px) {
             .container {
-                column-count: 1; /* Switch to 1 column on medium screens */
+                column-count: 1;
+                /* Switch to 1 column on medium screens */
             }
 
             .container2 {
-                column-count: 2; /* Switch to 2 columns on medium screens */
+                column-count: 2;
+                /* Switch to 2 columns on medium screens */
             }
         }
 
         @media (min-width: 801px) {
             .container {
-                column-count: 1; /* 2 columns on larger screens */
-            2
+                column-count: 1;
+                /* 2 columns on larger screens */
 
-            .container2 {
-                column-count: 3; /* 3 columns on larger screens */
+                .container2 {
+                    column-count: 3;
+                    /* 3 columns on larger screens */
+                }
             }
-        }
     </style>
 </head>
 
@@ -93,4 +116,5 @@
         loadText('Material/content.txt', 'container2');
     </script>
 </body>
+
 </html>
