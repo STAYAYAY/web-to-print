@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Rectangle with Random Color</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body,
+      html {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 0;
+      }
+
+      #rectangle {
+        width: 100vw;
+        height: 90vh;
+        background-color: #000;
+        transition: background-color 0.3s;
+      }
+
+      /* Adjust dimensions for smaller screens */
+      @media (max-width: 600px) {
+        #rectangle {
+          width: 40vw;
+          height: 80vh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="rectangle"></div>
+
+    <script>
+      // Function to generate a random color
+      function getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      // Set random color on load
+      const rectangle = document.getElementById("rectangle");
+      rectangle.style.backgroundColor = getRandomColor();
+
+      // Change color on click
+      rectangle.addEventListener("click", () => {
+        rectangle.style.backgroundColor = getRandomColor();
+      });
+    </script>
+  </body>
+</html>
