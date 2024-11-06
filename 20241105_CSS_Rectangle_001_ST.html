@@ -11,20 +11,21 @@
         box-sizing: border-box;
       }
 
-      body,
-      html {
+      html,
+      body {
+        height: 100%; /* Set full height */
+        overflow: hidden; /* Prevent scrolling */
+      }
+
+      body {
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
-        margin: 20px;
-        margin-left: 20px;
-        margin-right: 20px;
-        padding: 0;
+        padding: 5vw; /* Responsive padding */
       }
 
       #rectangle {
-        width: 100vw;
+        width: 90vw;
         height: 90vh;
         background-color: #000;
         transition: background-color 0.3s;
