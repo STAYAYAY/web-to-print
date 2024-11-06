@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle Layout</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      transition: background-color 0.3s;
+    }
+
+    /* Button styling */
+    button {
+      padding: .4vw .5vw;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      transition: background-color 0.3s;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 1vw;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Wrapper styling */
+    .wrapper {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 75%;
+      height: 100%;
+      position: relative;
+      text-align: center;
+      transition: width 0.3s, height 0.3s;
+      margin-top: 0px;
+      z-index: -1;
+    }
+
+    /* Title styling */
+    .title {
+      font-size: 10vw; /* Adjust as needed */
+      color: #333;
+      margin: 0;
+      padding-bottom: 20px;
+    }
+
+    /* Rectangle for A4 size display */
+    .a4-rectangle {
+      display: none; /* Initially hidden */
+      width: 210mm;
+      height: 297mm;
+      background-color: rgba(0, 0, 255, 0.2);
+      border: 2px dashed blue;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      text-align: center;
+      padding-top: 20px;
+    }
+
+    /* Styles for different modes */
+    .screen {
+      background-color: #e0f7fa;
+    }
+
+    .print {
+      background-color: #cfe3ff;
+    }
+
+    /* Hide elements during print */
+    @media print {
+      button {
+        display: none; /* Hide the button */
+      }
+
+      .a4-rectangle {
+        display: none; /* Hide the A4 rectangle during printing */
+      }
+
+      .wrapper {
+        width: 210mm; /* A4 width */
+        height: auto; /* Auto height */
+        margin: 0; /* No margin for print */
+        border: none; /* No border for print */
+        background: none; /* No background for print */
+      }
+
+      /* Title styling for print */
+      .title {
+        color: #333; /* Ensure title color is visible */
+      }
+
+      body {
+        background-color: white; /* Set a clean background for print */
+      }
+    }
+  </style>
+</head>
+<body class="screen">
+  <button id="toggleMode">Toggle View</button>
+  <div class="wrapper">
+    <h1 class="title">My Wrapper Title</h1>
+    <div class="a4-rectangle"></div> <!-- The A4 rectangle is only for visual representation -->
+  </div>
+
+  <script>
+    document.getElementById("toggleMode").addEventListener("click", function () {
+      const body = document.body;
+      const rectangle = document.querySelector('.a4-rectangle');
+
+      if (body.classList.contains("print")) {
+        // Switch back to full screen mode
+        body.classList.remove("print");
+        body.classList.add("screen");
+        rectangle.style.display = "none"; // Hide rectangle
+      } else {
+        // Switch to print (A4) mode
+        body.classList.remove("screen");
+        body.classList.add("print");
+        rectangle.style.display = "block"; // Show rectangle
+      }
+    });
+  </script>
+</body>
+</html>

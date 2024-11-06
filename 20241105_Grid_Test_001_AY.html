@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout Example</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        main {
+            display: grid;
+            grid-template-areas: 
+                "h h h"
+                "a b c"
+                "f f f";
+            grid-template-columns: auto 1fr 20%;
+            height: 100vh; /* Optional: Make the grid take full height */
+        }
+        header {
+            grid-area: h;
+            background-color: #f4f4f4;
+            padding: 1em;
+            text-align: center;
+        }
+        article {
+            grid-area: b;
+            min-width: 12em;
+            padding: 1em;
+            background-color: #fff;
+        }
+        nav {
+            grid-area: a;
+            background-color: #e7e7e7;
+            padding: 1em;
+        }
+        aside {
+            grid-area: c;
+            min-width: 12em;
+            padding: 1em;
+            background-color: #e7e7e7;
+        }
+        footer {
+            grid-area: f;
+            background-color: #f4f4f4;
+            padding: 1em;
+            text-align: center;
+        }
+
+        @media all and (max-width: 60em) {
+            main {
+                display: block;
+            }
+            header, nav, article, aside, footer {
+                width: 100%;
+                padding: 1em;
+                box-sizing: border-box; /* Ensure padding is included in width */
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>Header Section</h1>
+        </header>
+        <nav>
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+            </ul>
+        </nav>
+        <article>
+            <h2>Article Title</h2>
+            <p>This is the main content area where the article goes.</p>
+        </article>
+        <aside>
+            <h2>Aside Section</h2>
+            <p>This area can contain additional information or links.</p>
+        </aside>
+        <footer>
+            <p>Footer Content</p>
+        </footer>
+    </main>
+</body>
+</html>

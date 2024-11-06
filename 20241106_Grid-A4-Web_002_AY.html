@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Layout Toggle (A4 / Webpage)</title>
+  <style>
+    /* Body allows for scrolling and uses full height */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh; /* Full viewport height */
+      display: flex;
+      justify-content: flex-start; /* Align to the left */
+      align-items: flex-start;
+      overflow: auto; /* Allow scrolling */
+      flex-direction: column;
+    }
+
+    /* Outer container with a fixed top margin */
+    .zoom-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start; /* Align to the left */
+      align-items: flex-start;
+      overflow: visible; /* Allow scrolling */
+      transform-origin: top left; /* Ensure it starts scaling from top-left */
+      transition: padding-top 0.3s ease, padding-left 0.3s ease;
+    }
+
+    /* Set up the grid container with padding for A4 layout */
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 210mm); /* 5 columns for A4 width */
+      grid-template-rows: repeat(1, 297mm); /* 2 rows for A4 height */
+      gap: 10mm; /* Optional spacing between pages */
+      transition: transform 0.3s ease; /* Smooth zoom transition */
+      width: max-content; /* Allow the grid to grow with the number of pages */
+      padding-left: 20px; /* Padding on the left side */
+      padding-top: 20px; /* Padding on the top side */
+    }
+
+    /* Styling for each page */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      border: 1px solid #333;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+      color: #555;
+    }
+
+    /* Webpage layout style (when toggled) */
+    .webpage-layout .page-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 0px;
+      padding-left: 0; /* No padding for webpage layout */
+      padding-top: 0;  /* No padding for webpage layout */
+    }
+
+    .webpage-layout .page {
+      width: 100vw; /* Full width of the viewport */
+      height: 100vw; /* Height based on A4 aspect ratio (1:1.414) */
+      max-height: 100vh; /* Ensure the page height does not exceed the viewport height */
+      border: 1px solid #333;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10vw;
+      color: #555;
+    }
+
+    /* Button styling */
+    .toggle-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Button to toggle between A4 grid and webpage layout -->
+  <button class="toggle-button" onclick="toggleLayout()">Toggle Layout</button>
+
+  <!-- Outer container with fixed margin -->
+  <div class="zoom-container" id="zoom-container">
+    <div class="page-grid" id="grid">
+      <!-- 10 Pages (Page 1 to Page 10) -->
+      <div class="page">Page 1</div>
+      <div class="page">Page 2</div>
+      <div class="page">Page 3</div>
+      <div class="page">Page 4</div>
+      <div class="page">Page 5</div>
+      <div class="page">Page 6</div>
+      <div class="page">Page 7</div>
+      <div class="page">Page 8</div>
+      <div class="page">Page 9</div>
+      <div class="page">Page 10</div>
+    </div>
+  </div>
+
+  <script>
+    const grid = document.getElementById('grid');
+    const container = document.getElementById('zoom-container');
+    let scale = 1;
+
+    // Function to toggle between A4 and Webpage layout
+    function toggleLayout() {
+      if (container.classList.contains('webpage-layout')) {
+        // Switch to A4 layout
+        container.classList.remove('webpage-layout');
+      } else {
+        // Switch to webpage layout
+        container.classList.add('webpage-layout');
+      }
+    }
+
+    // Function to handle zooming with shift + wheel
+    function zoom(event) {
+      // Check if Shift key is pressed during scrolling
+      if (event.shiftKey) {
+        event.preventDefault(); // Prevent the normal scroll behavior when zooming
+
+        // Determine the zoom direction (wheel up = zoom in, wheel down = zoom out)
+        if (event.deltaY < 0) {
+          scale += 0.1; // Zoom in
+        } else {
+          scale -= 0.1; // Zoom out
+        }
+
+        // Apply the scaling with limits
+        scale = Math.min(Math.max(0.5, scale), 2); // Limit the zoom scale between 0.5x and 2x
+        grid.style.transform = `scale(${scale})`; // Apply zoom to the grid only
+      }
+    }
+
+    // Add event listeners for mouse wheel
+    window.addEventListener('wheel', zoom);  // Zoom only when Shift is pressed
+  </script>
+
+</body>
+</html>
