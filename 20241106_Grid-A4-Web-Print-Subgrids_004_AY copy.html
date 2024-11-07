@@ -50,29 +50,25 @@
       color: #555;
     }
 
-    /* Simple grid only on Page 1 with top text and 2x2 grid */
-    .page-grid .page:nth-child(1) {
-      display: grid;
-      grid-template-rows: auto 1fr; /* Top text section + grid section */
-      padding: 10px;
-    }
-
-    /* Text section at the top of Page 1 */
-    .page-grid .page:nth-child(1) .page-header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      font-weight: bold;
-      color: red;
-    }
-
-    /* 2x2 grid area on Page 1 */
+   /* Page 1 layout with text section and 2x2 grid */
 .page-grid .page:nth-child(1) {
   display: flex;
-  flex-direction: column; /* Allow header and grid to stack vertically */
+  flex-direction: column; /* Stack header and grid vertically */
+  padding: 10px;
 }
 
+/* Text section at the top of Page 1 */
+.page-grid .page:nth-child(1) .page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+  margin-bottom: 10px; /* Space between header and grid */
+}
+
+/* 2x2 grid area on Page 1 */
 .page-grid .page:nth-child(1) .grid-section {
   flex-grow: 1; /* Take up remaining space */
   display: grid;
@@ -80,10 +76,20 @@
   grid-template-rows: 1fr 1fr;
   gap: 5px;
   width: 100%; /* Full width */
-  height: 100%; /* Full height */
- 
-  color: red;
+  box-sizing: border-box;
 }
+
+/* Styling for each grid cell */
+.page-grid .page:nth-child(1) .grid-section .subpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  border: 2px solid #000; /* Border around each cell */
+  background-color: lightgray;
+  color: #333;
+}
+
 
     /* Webpage layout */
     .webpage-layout .zoom-container {
