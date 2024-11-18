@@ -29,6 +29,9 @@ experiments with web-to-print
 [20241118_CSS_Grid_002_ST](20241118_CSS_Grid_002_ST.html)  
 [20241118_CSS_Grid_003_ST](20241118_CSS_Grid_003_ST.html)  
 [20241118_CSS_Grid_004_ST](20241118_CSS_Grid_004_ST.html)  
+[20241118_CSS_Grid_005_ST](20241118_CSS_Grid_005_ST.html)  
+[20241118_CSS_Grid_006_ST](20241118_CSS_Grid_006_ST.html)  
+[20241118_CSS_Grid_007_ST](20241118_CSS_Grid_007_ST.html)  
 [Text_input](Material/content.txt)  
 [Text_input_2](https://annuel2.framapad.org/p/STAYAYAY)
 
