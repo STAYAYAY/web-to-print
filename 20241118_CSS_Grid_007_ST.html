@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrollable Line of Text</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        display: grid;
+        grid-template-rows: repeat(3, 1fr); /* Three equal-height rows */
+        grid-template-columns: repeat(
+          12,
+          1fr
+        ); /* Twelve columns for precise positioning */
+        height: 100vh; /* Full height of the viewport */
+        overflow-x: auto; /* Enables horizontal scrolling */
+      }
+
+      .scrollable-text {
+        grid-row: 2 / 3; /* Places text in the middle row */
+        grid-column: 1 / -1; /* Spans the entire width */
+        white-space: nowrap; /* Prevents text from wrapping */
+        font-size: 24px;
+        padding: 20px;
+        width: max-content; /* Ensures the container takes the size of the text */
+        justify-self: start; /* Aligns text to the left */
+        align-self: center; /* Centers text vertically in its row */
+      }
+
+      .image {
+        position: relative; /* Allows absolute positioning within grid cells */
+        z-index: 1; /* Keeps images above text */
+      }
+
+      .image[data-word="anchor-1"] {
+        grid-row: 1 / 2; /* Places above the text */
+        grid-column: 6; /* Position linked to the word "stretching" */
+        transform: translate(-50%, -50%); /* Fine-tunes the placement */
+      }
+
+      .image[data-word="anchor-2"] {
+        grid-row: 3 / 4; /* Places below the text */
+        grid-column: 10; /* Position linked to the word "content" */
+        transform: translate(-50%, 50%); /* Fine-tunes the placement */
+      }
+
+      .image img {
+        width: 100px;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scrollable-text">
+      Cras vestibulum, ligula vitae
+      <span class="word" data-word="anchor-1">volutat</span> tincidunt, nunc
+      odio gravida urna, a sagittis nisi ligula ut ligula. Phasellus sit amet
+      quam a felis facilisis laoreet. Curabitur feugiat elit id diam
+      <span class="word" data-word="anchor-2">accumsan,</span> sit amet
+      facilisis nulla varius. Donec non augue sed orci euismod bibendum. Aliquam
+      erat volutpat. Nulla porttitor, felis sit amet varius tincidunt, velit
+      eros efficitur magna, ac euismod neque purus et magna. Ut vel erat non
+      purus venenatis convallis. Suspendisse potenti. Duis accumsan felis sed mi
+      tincidunt, nec faucibus nunc fermentum. Aenean feugiat auctor ipsum, ac
+      vehicula velit faucibus nec. Cras quis sapien vel erat convallis pharetra.
+      Aliquam erat volutpat. Donec nec felis arcu.!
+    </div>
+    <div class="image" data-word="anchor-1">
+      <img src=imgs/99.5269_ph_web-1.jpg>
+    </div>
+    <div class="image" data-word="anchor-2">
+      <img src="imgs/33884_ca_object_representations_media_3104_page.jpg" />
+    </div>
+  </body>
+</html>

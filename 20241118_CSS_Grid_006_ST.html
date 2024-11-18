@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrollable Line of Text</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        display: grid;
+        grid-template-rows: 1fr auto 1fr; /* Images above, text in the middle, and images below */
+        height: 100vh; /* Full height of the viewport */
+        overflow-x: auto; /* Enables horizontal scrolling */
+      }
+
+      .image-row {
+        display: flex;
+        position: relative;
+      }
+
+      /* First Image */
+      .image-row img:first-child {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 400px; /* 100% scale */
+        height: auto;
+      }
+
+      /* Second Image */
+      .image-row img:nth-child(2) {
+        position: relative;
+        margin-left: 95vw; /* Moves it off-screen horizontally */
+        height: 150px; /* Adjusts the size */
+        width: auto;
+      }
+
+      /* Third Image */
+      .image-row img:nth-child(3) {
+        position: relative;
+        margin: 20px; /* Adds spacing around it */
+      }
+
+      .scrollable-text {
+        white-space: nowrap; /* Prevents text from wrapping */
+        font-size: 24px;
+        padding: 20px;
+        width: max-content; /* Ensures the container takes the size of the text */
+        justify-self: start; /* Aligns text to the left (can scroll horizontally) */
+        align-self: center; /* Centers the text vertically in its row */
+      }
+
+      /* Fourth Image */
+      .image-row:nth-of-type(2) img:nth-child(1) {
+        margin: 20px; /* Adds spacing around the fourth image */
+        width: 150px; /* Adjust size */
+        height: auto;
+      }
+
+      /* Fifth Image */
+      .image-row:nth-of-type(2) img:nth-child(2) {
+        margin: 50px; /* Larger spacing for emphasis */
+        width: 200px; /* Adjust size */
+        height: auto;
+      }
+
+      /* Sixth Image */
+      .image-row:nth-of-type(2) img:nth-child(3) {
+        margin: 10px; /* Minimal spacing */
+        width: 100px; /* Smaller size */
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image-row">
+      <img src=imgs/99.5269_ph_web-1.jpg>
+      <img src="imgs/33884_ca_object_representations_media_3104_page.jpg" />
+      <img
+        src="imgs/demaria-the-lightning-field-2-1977-photo-john-cliett.jpg"
+      />
+    </div>
+    <div class="scrollable-text">
+      Cras vestibulum, ligula vitae volutpat tincidunt, nunc odio gravida urna,
+      a sagittis nisi ligula ut ligula. Phasellus sit amet quam a felis
+      facilisis laoreet. Curabitur feugiat elit id diam accumsan, sit amet
+      facilisis nulla varius. Donec non augue sed orci euismod bibendum. Aliquam
+      erat volutpat. Nulla porttitor, felis sit amet varius tincidunt, velit
+      eros efficitur magna, ac euismod neque purus et magna. Ut vel erat non
+      purus venenatis convallis. Suspendisse potenti. Duis accumsan felis sed mi
+      tincidunt, nec faucibus nunc fermentum. Aenean feugiat auctor ipsum, ac
+      vehicula velit faucibus nec. Cras quis sapien vel erat convallis pharetra.
+      Aliquam erat volutpat. Donec nec felis arcu.!
+    </div>
+    <div class="image-row">
+      <img src="imgs/dem-new-york-earth-room-1977-photo-john-cliett.jpg" />
+      <img src="imgs/Holt-Up_and_Under-009.jpg" />
+      <img src="imgs/TV-Garden-Nam-June-Paik.jpg" />
+    </div>
+  </body>
+</html>
