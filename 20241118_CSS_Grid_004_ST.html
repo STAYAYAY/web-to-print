@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scrollable Line of Text</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        overflow-x: auto; /* Enables horizontal scrolling */
+        display: flex;
+        align-items: center; /* Vertically centers the text */
+        justify-content: start; /* Ensures the text aligns to the left (can still scroll) */
+        height: 100vh; /* Full height of the viewport */
+      }
+
+      .scrollable-text {
+        white-space: nowrap; /* Prevents text from wrapping */
+        font-size: 24px;
+        padding: 20px;
+        width: max-content; /* Ensures the container takes the size of the text */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scrollable-text">
+      Cras vestibulum, ligula vitae volutpat tincidunt, nunc odio gravida urna,
+      a sagittis nisi ligula ut ligula. Phasellus sit amet quam a felis
+      facilisis laoreet. Curabitur feugiat elit id diam accumsan, sit amet
+      facilisis nulla varius. Donec non augue sed orci euismod bibendum. Aliquam
+      erat volutpat. Nulla porttitor, felis sit amet varius tincidunt, velit
+      eros efficitur magna, ac euismod neque purus et magna. Ut vel erat non
+      purus venenatis convallis. Suspendisse potenti. Duis accumsan felis sed mi
+      tincidunt, nec faucibus nunc fermentum. Aenean feugiat auctor ipsum, ac
+      vehicula velit faucibus nec. Cras quis sapien vel erat convallis pharetra.
+      Aliquam erat volutpat. Donec nec felis arcu.!
+    </div>
+  </body>
+</html>
