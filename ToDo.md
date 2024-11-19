@@ -63,11 +63,16 @@ Take-Away: Make tons of different little experiments. A shit ton of baby experim
 **12.11.2024**  
 Experimenting
 
-**18.11.2024**  
-Meeting with Bérénice TBD
-
 **19.11.2024**  
-Meeting with Ted TBD
+[ ] Do index.html instead of the MD for all our sketches.
+[ ] style the index.html with CSS, with different columns, classes, favourites etc. so it's easier to navigate
+[ ] reverse chronological order
+[ ] use title tags for comments to each other?
+[ ] And README can just be a quick sentence or whatever (would only be seen if people go on the GitHub)
+[ ] JavaScript classList to switch between classes defined in CSS
+[ ] JavaScript cssText to write CSS within JavaScript, would be useful for CSS grid nested elements
+[ ] back ticks in JavaScript
+[ ] body text across different divs, how to deal with overflow and tell it where to go, how to do that?
 
 **26.11.2024**  
 Experimenting
