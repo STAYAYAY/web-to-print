@@ -72,6 +72,7 @@ Experimenting
 [ ] JavaScript classList to switch between classes defined in CSS
 [ ] JavaScript cssText to write CSS within JavaScript, would be useful for CSS grid nested elements
 [ ] back ticks in JavaScript
+[ ] body text across different divs, how to deal with overflow and tell it where to go, how to do that?
 
 **26.11.2024**  
 Experimenting
