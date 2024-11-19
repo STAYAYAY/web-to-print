@@ -64,17 +64,17 @@ Take-Away: Make tons of different little experiments. A shit ton of baby experim
 Experimenting
 
 **19.11.2024**  
-[ ] Do index.html instead of the MD for all our sketches.
-[ ] style the index.html with CSS, with different columns, classes, favourites etc. so it's easier to navigate
-[ ] reverse chronological order
-[ ] use title tags for comments to each other?
-[ ] And README can just be a quick sentence or whatever (would only be seen if people go on the GitHub)
-[ ] JavaScript classList to switch between classes defined in CSS
-[ ] JavaScript cssText to write CSS within JavaScript, would be useful for CSS grid nested elements
-[ ] back ticks in JavaScript
-[ ] body text across different divs, how to deal with overflow and tell it where to go, how to do that?
-[ ] what do we imagine people putting in? text, images, etc. do we need some sort of database?
-[ ] work with all lowercase for all the folders?
+[ ] Do index.html instead of the MD for all our sketches.  
+[ ] style the index.html with CSS, with different columns, classes, favourites etc. so it's easier to navigate  
+[ ] reverse chronological order  
+[ ] use title tags for comments to each other?  
+[ ] And README can just be a quick sentence or whatever (would only be seen if people go on the GitHub)  
+[ ] JavaScript classList to switch between classes defined in CSS  
+[ ] JavaScript cssText to write CSS within JavaScript, would be useful for CSS grid nested elements  
+[ ] back ticks in JavaScript  
+[ ] body text across different divs, how to deal with overflow and tell it where to go, how to do that?  
+[ ] what do we imagine people putting in? text, images, etc. do we need some sort of database?  
+[ ] work with all lowercase for all the folders?  
 [ ] JSON !!! JSON.stringify JSON.parse
 
 **26.11.2024**  
