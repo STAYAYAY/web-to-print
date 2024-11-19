@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid test</title>
+    <style>
+      * {
+        margin: 0.1em;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        min-height: 100vh;
+      }
+
+      .text {
+        grid-area: text;
+      }
+      .image {
+        grid-area: image;
+      }
+      .caption {
+        grid-area: caption;
+      }
+
+      .image img {
+        width: 100%;
+        height: auto;
+        display: block; /* Ensures no unexpected gaps around the image */
+      }
+
+      .grid-container {
+        margin: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        grid-template-areas:
+          "image image ."
+          "caption text text";
+      }
+
+      /* here are some other layouts to try out below */
+
+      /* "caption image image"
+                      "text text ."; */
+      /* "text image image"
+                      "text . caption"; */
+
+      @media only screen and (max-width: 735px) {
+        .grid-container {
+          margin: 0;
+          display: grid;
+          grid-template-columns: 1fr 4fr;
+          grid-column-gap: 10px;
+          grid-row-gap: 10px;
+          grid-template-areas:
+            ". caption"
+            "image image"
+            "text text";
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="text">
+        Cras vestibulum, ligula vitae volutpat tincidunt, nunc odio gravida
+        urna, a sagittis nisi ligula ut ligula. Phasellus sit amet quam a felis
+        facilisis laoreet. Curabitur feugiat elit id diam accumsan, sit amet
+        facilisis nulla varius. Donec non augue sed orci euismod bibendum.
+        Aliquam erat volutpat. Nulla porttitor, felis sit amet varius tincidunt,
+        velit eros efficitur magna, ac euismod neque purus et magna. Ut vel erat
+        non purus venenatis convallis. Suspendisse potenti. Duis accumsan felis
+        sed mi tincidunt, nec faucibus nunc fermentum. Aenean feugiat auctor
+        ipsum, ac vehicula velit faucibus nec. Cras quis sapien vel erat
+        convallis pharetra. Aliquam erat volutpat. Donec nec felis arcu.
+      </div>
+      <div class="image"><img src=imgs/TV-Garden-Nam-June-Paik.jpg></div>
+      <div class="caption">
+        Suspendisse potenti. Duis accumsan felis sed mi tincidunt, nec faucibus
+        nunc fermentum.
+      </div>
+    </div>
+  </body>
+</html>
