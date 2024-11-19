@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+	<textarea id="mytext"></textarea>
+	<button onclick="save()">save</button>
+
+	<script type="text/javascript">
+		//lookup JSON.stringify() + JSON.parse()
+		var mytext = document.getElementById('mytext')
+		function save(){
+			localStorage.setItem("mytext", mytext.value);
+
+		}
+
+		// check if they have storage
+		if(localStorage.hasOwnProperty('mytext')){
+			mytext.value = localStorage.getItem("mytext");
+		}else{
+			mytext.value = 'type here'
+		}
+	</script>
+
+</body>
+</html>
