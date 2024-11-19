@@ -81,8 +81,10 @@ Experimenting
 Experimenting
 
 **3.12.2024**  
-Meeting with Ted TBD IN THE MORNING
-Preperation for presentation
+Experimenting
+
+**3.12.2024**  
+Meeting with Ted at 2pm
 
 **10.12.2024**  
 Midterm presentation
