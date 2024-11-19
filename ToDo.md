@@ -75,7 +75,7 @@ Experimenting
 [ ] body text across different divs, how to deal with overflow and tell it where to go, how to do that?
 [ ] what do we imagine people putting in? text, images, etc. do we need some sort of database?
 [ ] work with all lowercase for all the folders?
-[ ] JSON !!!
+[ ] JSON !!! JSON.stringify JSON.parse
 
 **26.11.2024**  
 Experimenting
