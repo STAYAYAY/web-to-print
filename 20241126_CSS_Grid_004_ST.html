@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid text overlfow</title>
+    <style>
+      * {
+        margin: 0.1em;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        min-height: 100vh;
+      }
+
+      .text {
+        grid-area: text;
+        /*max-height: 200px;*/ /* set a fixed height for the overflow */
+        overflow: hidden;
+      }
+      .text-2 {
+        grid-area: text-2;
+      }
+      .image {
+        grid-area: image;
+      }
+      .caption {
+        grid-area: caption;
+      }
+
+      .image img {
+        width: 100%;
+        height: auto;
+        display: block; /* Ensures no unexpected gaps around the image */
+      }
+
+      .grid-container {
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        grid-template-areas:
+          ". text text . . text-2"
+          "caption image image image . text-2";
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="text" id="text">
+        In perusing these documents, there is something that startles us even
+        more than their contents—viz., their form. All these letters are
+        "confidential," "private," "secret," "most secret"; but in spite of
+        secrecy, privacy, and confidence, the English statesmen converse among
+        each other about Russia and her rulers in a tone of awful reserve,
+        abject servility, and cynical submission, which would strike us even in
+        the public despatches of Russian statesmen. To conceal intrigues against
+        foreign nations secrecy is recurred to by Russian diplomatists. The same
+        method is adopted by English diplomatists freely to express their
+        devotion to a foreign Court. The secret despatches of Russian
+        diplomatists are fumigated with some equivocal perfume. It is one part
+        the fumée de fausseté, as the Duke of St. Simon has it, and the other
+        part that coquettish display of one's own superiority and cunning which
+        stamps upon the reports of the French Secret Police their indelible
+        character. Even the master despatches of Pozzo di Borgo are tainted with
+        this common blot of the litérature de mauvais lieu. In this point the
+        English secret despatches prove much superior.
+      </div>
+      <div class="image"><img src=imgs/TV-Garden-Nam-June-Paik.jpg></div>
+      <div class="caption">
+        Suspendisse potenti. Duis accumsan felis sed mi tincidunt, nec faucibus
+        nunc fermentum.
+      </div>
+      <div class="text-2" id="text-2">
+        They do not affect superiority but silliness. For instance, can there be
+        anything more silly than Mr. Rondeau informing Horace Walpole that he
+        has betrayed to the Russian[23] Minister the letters addressed by the
+        Turkish Grand Vizier to the King of England, but that he had told "at
+        the same time those gentlemen that as there were several hard
+        reflections on the Russian Court he should not have communicated them,
+        if they had not been so anxious to see them," and then told their
+        excellencies not to tell the Porte that they had seen them (those
+        letters)! At first view the infamy of the act is drowned in the
+        silliness of the man. Or, take Sir George Macartney. Can there be
+        anything more silly than his happiness that Russia seemed "reasonable"
+        enough not to expect that England "should pay the WHOLE EXPENSES" for
+        Russia's "choosing to take the lead at Stockholm"; or his "flattering
+        himself" that he had "persuaded the Russian Court" not to be so
+        "unreasonable" as to ask from England, in a time of peace, subsidies for
+        a time of war against Turkey (then the ally of England); or his warning
+        the Earl of Sandwich "not to mention" to the Russian Ambassador at
+        London the secrets mentioned to himself by the Russian Chancellor at St.
+        Petersburg? Or can there be anything more silly than Sir James Harris
+        confidentially whispering into the ear of Lord Grantham that Catherine
+        II. was devoid of "judgment, precision of idea, reflection, and l'esprit
+        de combinaison"?
+      </div>
+    </div>
+    <script></script>
+  </body>
+</html>
