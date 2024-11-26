@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid fluid layout</title>
+    <style>
+      * {
+        margin: 0.1em;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 28px;
+      }
+
+      h2 {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        margin-bottom: 20px;
+      }
+
+      .title {
+        grid-area: title;
+      }
+      .text {
+        grid-area: text;
+        /* column-count: 2;
+        column-gap: 20px; */
+      }
+
+      .text p {
+        margin: 0;
+        text-indent: 0; /* Ensure no indent for all <p> initially */
+      }
+
+      .text p:first-of-type {
+        text-indent: 0; /* Explicitly reset the first <p> to have no indent */
+      }
+
+      .text p:not(:first-of-type) {
+        text-indent: 1em; /* Indent only subsequent paragraphs */
+      }
+
+      .image-s {
+        grid-area: image-s;
+        align-self: end;
+      }
+
+      .image-l {
+        grid-area: image-l;
+      }
+
+      .image-4 {
+        grid-area: image-4; /* Occupies the designated grid area */
+        display: grid; /* Turns the .image-4 container into a grid */
+        grid-template-columns: repeat(2, 1fr); /* 2 columns of equal width */
+        grid-template-rows: repeat(2, 1fr); /* Rows adjust based on content */
+        gap: 10px; /* Adds spacing between grid items */
+      }
+
+      .image-s img,
+      .image-l img {
+        width: 100%;
+        height: auto;
+        display: block; /* Ensures no unexpected gaps around the image */
+      }
+
+      .image-4 img {
+        width: 100%; /* Ensures the image fills the width of the grid cell */
+        height: 100%; /* Ensures the image fills the height of the grid cell */
+        object-fit: cover; /* Crops the image to fit while preserving aspect ratio */
+        display: block; /* Avoids inline spacing issues */
+      }
+
+      .grid-container {
+        margin: 1fr;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        grid-template-areas:
+          "title image-l image-l image-l"
+          "image-s image-l image-l image-l"
+          "text text image-4 image-4"
+          "text text image-4 image-4";
+      }
+
+      @media only screen and (max-width: 1125px) {
+        .grid-container {
+          margin: 1fr;
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          grid-column-gap: 10px;
+          grid-row-gap: 10px;
+          grid-template-areas:
+            "title image-l image-l image-l"
+            "image-s image-l image-l image-l"
+            "text text image-4 image-4"
+            "text text image-4 image-4";
+        }
+
+        .text {
+          grid-area: text;
+          column-count: 1;
+        }
+
+        .image-4 {
+          grid-area: image-4;
+          display: grid;
+          grid-template-columns: 1fr; /* Single column layout */
+          grid-template-rows: auto; /* Rows adjust to content */
+          gap: 10px; /* Adds spacing between images */
+        }
+      }
+
+      @media only screen and (max-width: 800px) {
+        .grid-container {
+          margin: 1fr;
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          grid-column-gap: 10px;
+          grid-row-gap: 10px;
+          grid-template-areas:
+            "image-l image-l"
+            "title image-s"
+            "text text"
+            "image-4 image-4"
+            "image-4 image-4";
+        }
+
+        .text {
+          grid-area: text;
+          column-count: 1;
+        }
+
+        .image-4 {
+          grid-area: image-4; /* Occupies the designated grid area */
+          display: grid; /* Turns the .image-4 container into a grid */
+          grid-template-columns: repeat(2, 1fr); /* 2 columns of equal width */
+          grid-template-rows: repeat(2, 1fr); /* Rows adjust based on content */
+          gap: 10px; /* Adds spacing between grid items */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="title">
+        <h1>A Cyborg Manifesto<br />Donna Haraway</h1>
+      </div>
+      <div class="image-l"><img src=imgs/TV-Garden-Nam-June-Paik.jpg></div>
+      <div class="image-s"><img src=imgs/Holt-Up_and_Under-009.jpg></div>
+      <div class="image-4">
+        <img
+          src="imgs/dem-new-york-earth-room-1977-photo-john-cliett.jpg"
+          alt="Image 1"
+        />
+        <img
+          src="imgs/demaria-the-lightning-field-2-1977-photo-john-cliett.jpg"
+          alt="Image 2"
+        />
+        <img src="imgs/Sarah-Sze-600.jpg" alt="Image 3" />
+        <img src="imgs/99.5269_ph_web-1.jpg" alt="Image 4" />
+      </div>
+      <div class="text">
+        <h2>
+          AN IRONIC DREAM OF A COMMON LANGUAGE FOR WOMEN IN THE INTEGRATED
+          CIRCUIT
+        </h2>
+        <p>
+          This chapter is an effort to build an ironic political myth faithful
+          to feminism, socialism, and materialism. Perhaps more faithful as
+          blasphemy is faithful, than as reverent worship and identification.
+          Blasphemy has always seemed to require taking things very seriously. I
+          know no better stance to adopt from within the secular-religious,
+          evangelical traditions of United States politics, including the
+          politics of socialist feminism. Blasphemy protects one from the moral
+          majority within, while still insisting on the need for community.
+          Blasphemy is not apostasy. Irony is about contradictions that do not
+          resolve into larger wholes, even dialectically, about the tension of
+          holding incompatible things together because both or all are necessary
+          and true. Irony is about humour and serious play. It is also a
+          rhetorical strategy and a political method, one I would like to see
+          more honoured within socialist-feminism. At the centre of my ironic
+          faith, my blasphemy, is the image of the cyborg.
+        </p>
+        <p>
+          A cyborg is a cybernetic organism, a hybrid of machine and organism, a
+          creature of social reality as well as a creature of fiction. Social
+          reality is lived social relations, our most important political
+          construction, a world-changing fiction. The international women's
+          movements have constructed 'women's experience', as well as uncovered
+          or discovered this crucial collective object. This experience is a
+          fiction and fact of the most crucial, political kind. Liberation rests
+          on the construction of the consciousness, the imaginative
+          apprehension, of oppression, and so of possibility. The cyborg is a
+          matter of fiction and lived experience that changes what counts as
+          women's experience in the late twentieth century. This is a struggle
+          over life and death, but the boundary between science fiction and
+          social reality is an optical illusion.
+        </p>
+        <p>
+          Contemporary science fiction is full of cyborgs - creatures
+          simultaneously animal and machine, who populate worlds ambiguously
+          natural and crafted.Modern medicine is also full of cyborgs, of
+          couplings between organism and machine, each conceived as coded
+          devices, in an intimacy and with a power that was not generated in the
+          history of sexuality. Cyborg 'sex' restores some of the lovely
+          replicative baroque of ferns and invertebrates (such nice organic
+          prophylactics against heterosexism). Cyborg replication is uncoupled
+          from organic reproduction. Modern production seems like a dream of
+          cyborg colonization work, a dream that makes the nightmare of
+          Taylorism seem idyllic. And modern war is a cyborg orgy, coded by C3I,
+          command-control-communication-intelligence, an $84 billion item in
+          1984'sUS defence budget. I am making an argument for the cyborg as a
+          fiction mapping our social and bodily reality and as an imaginative
+          resource suggesting some very fruitful couplings. Michael Foucault's
+          biopolitics is a flaccid premonition of cyborg politics, a very open
+          field.
+        </p>
+      </div>
+    </div>
+    <script></script>
+  </body>
+</html>
