@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Page</title>
+</head>
+
+<body>
+
+  <script>
+    // JSON-style object with CSS rules
+    const styles = {
+      "html, body": {
+        "margin": "0",
+        "padding": "0",
+        "height": "100%",
+        "box-sizing": "border-box"
+      },
+      ".master-page": {
+        "margin": "0 auto",
+        "padding": "2%",
+        "border": "1px solid black",
+        "background": "lightgray",
+        "box-sizing": "border-box",
+        "text-align": "center",
+        "display": "flex",
+        "justify-content": "center",
+        "align-items": "center",
+        "font-size": "calc(1rem + 1vw)",
+        "font-family": "sans-serif"
+      }
+    };
+
+    // Function to apply base styles and adjust sizes dynamically
+    function applyStyles() {
+      const styleSheet = document.createElement('style');
+      document.head.appendChild(styleSheet);
+
+      // Apply base styles from JSON
+      for (const selector in styles) {
+        const rules = styles[selector];
+        let ruleText = `${selector} {`;
+
+        for (const property in rules) {
+          ruleText += `${property}: ${rules[property]}; `;
+        }
+
+        ruleText += `}`;
+        styleSheet.textContent += ruleText;
+      }
+
+      // Adjust sizes for each page dynamically
+      function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+
+      const pageStyles = [
+        { width: `${getRandomInt(100)}vw`, height: "100vh", background: "red", fontFamily: "sans-serif", text: "Page 1" },
+        { width: `${getRandomInt(100)}vw`, height: "25vh", background: "yellow", fontFamily: "serif", text: "Page 2" },
+        { width: `${getRandomInt(100)}vw`, height: "50vh", background: "blue", fontFamily: "cursive", text: "Page 3" },
+        { width: `${getRandomInt(100)}vw`, height: "40vh", background: "pink", fontFamily: "cursive", text: "Page 4" },
+        { width: `${getRandomInt(100)}vw`, height: "25vh", background: "yellow", fontFamily: "serif", text: "Page 5" }
+      ];
+
+      // Loop to dynamically create pages and apply styles
+      pageStyles.forEach((page, index) => {
+        const pageElement = document.createElement('div');
+        pageElement.classList.add('master-page');
+        pageElement.style.width = page.width;
+        pageElement.style.height = page.height;
+        pageElement.style.background = page.background;
+        pageElement.style.fontFamily = page.fontFamily;
+        pageElement.textContent = page.text;
+
+        // Append the new page to the body
+        document.body.appendChild(pageElement);
+      });
+    }
+
+    // Apply the styles when the page loads
+    applyStyles();
+  </script>
+
+</body>
+
+</html>

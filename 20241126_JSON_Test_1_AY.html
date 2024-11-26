@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Page</title>
+</head>
+<body>
+    <div class="master-page" id="page1">
+        Page 1: This layout is responsive to the browser size!
+    </div>
+    <div class="master-page" id="page2">
+        Page 2: This layout is responsive to the browser size!
+    </div>
+    <div class="master-page" id="page3">
+        Page 3: This layout is responsive to the browser size!
+    </div>
+
+  <script>
+    // JSON-style object with CSS rules
+    const styles = {
+      "html, body": {
+        "margin": "0",
+        "padding": "0",
+        "height": "100%",
+        "box-sizing": "border-box"
+      },
+      ".master-page": {
+        "margin": "0 auto",
+        "padding": "2%",
+        "border": "1px solid black",
+        "background": "lightgray",
+        "box-sizing": "border-box",
+        "text-align": "center",
+        "display": "flex",
+        "justify-content": "center",
+        "align-items": "center",
+        "font-size": "calc(1rem + 1vw)",
+        "font-family": "sans-serif",
+        "font-size": "7.5vw"
+      }
+    };
+
+    // Function to apply base styles and adjust sizes for each page
+    function applyStyles() {
+      const styleSheet = document.createElement('style');
+      document.head.appendChild(styleSheet);
+
+      // Apply base styles from JSON
+      for (const selector in styles) {
+        const rules = styles[selector];
+        let ruleText = `${selector} {`;
+
+        for (const property in rules) {
+          ruleText += `${property}: ${rules[property]}; `;
+        }
+
+        ruleText += `}`;
+        styleSheet.textContent += ruleText;
+      }
+
+      // Adjust sizes for each page dynamically
+      const pageStyles = [
+        { id: "page1", width: "80vw", height: "60vh", background: "red", fontFamily: "sans-serif"},
+        { id: "page2", width: "50vw", height: "50vh", background: "yellow", fontFamily: "serif"},
+        { id: "page3", width: "100vw", height: "40vh", background: "blue", fontFamily: "cursive"}
+      ];
+
+      // Apply the dynamic width and height to each page
+      pageStyles.forEach(page => {
+        const pageElement = document.getElementById(page.id);
+        if (pageElement) {
+          pageElement.style.width = page.width;
+          pageElement.style.height = page.height;
+          pageElement.style.background = page.background;
+          pageElement.style.fontFamily = page.fontFamily;
+        }
+      });
+    }
+
+    // Apply the styles when the page loads
+    applyStyles();
+  </script>
+</body>
+</html>
