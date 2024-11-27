@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Text Flow Across Pages</title>
+  <script>
+    // CSS as JSON data
+    const styles = {
+      "htmlBody": {
+        "margin": "0",
+        "padding": "0",
+        "height": "100%",
+        "box-sizing": "border-box"
+      },
+      "masterPage": (columns) => ({
+        "display": "grid",
+        "grid-template-columns": `repeat(${columns}, 1fr)`,  // Dynamic number of columns
+        "gap": "2vw",
+        "padding": "1vw",
+        "width": "100vw",
+        "height": "100vh",
+        "box-sizing": "border-box"
+      }),
+      "gridItem": {
+        "background-color": "", // Empty initially, will be set per page
+        "border": "1px solid black",
+        "padding": "2vw",
+        "display": "flex",
+        "justify-content": "flex-start",
+        "align-items": "flex-start",
+        "text-align": "left",
+        "font-size": "4vw",
+        "font-family": "sans-serif",
+        "overflow": "hidden",
+        "flex-direction": "column",
+        "box-sizing": "border-box"
+      },
+      "content": {
+        "word-wrap": "break-word"
+      }
+    };
+
+    // Function to apply CSS from JSON
+    function applyStyles(columns) {
+      // Apply styles to html and body
+      Object.assign(document.documentElement.style, styles.htmlBody);
+      Object.assign(document.body.style, styles.htmlBody);
+
+      // Apply dynamic styles to master page container
+      const masterPage = document.querySelector('.master-page');
+      Object.assign(masterPage.style, styles.masterPage(columns));
+    }
+  </script>
+</head>
+<body>
+  <div class="master-page" id="master-page">
+    <!-- The divs will be inserted dynamically via JavaScript -->
+  </div>
+
+  <script>
+    // Configuration for pages (can be modified dynamically)
+    const pagesConfig = [
+      { id: "page1", background: "lightblue", text: "Page 1" },
+      { id: "page2", background: "lightgreen", text: "Page 2" },
+      { id: "page3", background: "lightcoral", text: "Page 3" },
+      { id: "page4", background: "yellow", text: "Page 4" }
+    ];
+
+    // Function to dynamically create divs based on the pagesConfig
+    function createPages() {
+      const masterPage = document.getElementById('master-page');
+
+      pagesConfig.forEach((page) => {
+        // Create a new div for each page
+        const pageElement = document.createElement('div');
+        pageElement.classList.add('grid-item');
+        pageElement.id = page.id;
+
+        // Apply background color directly from the page config
+        const pageStyles = { ...styles.gridItem, "background-color": page.background };
+        Object.assign(pageElement.style, pageStyles);
+
+        // Create a div for the content
+        const contentElement = document.createElement('div');
+        contentElement.classList.add('content');
+        contentElement.id = `content-${page.id}`;
+        contentElement.innerText = page.text;
+
+        // Append content to the page div
+        pageElement.appendChild(contentElement);
+        
+        // Append the page div to the master page container
+        masterPage.appendChild(pageElement);
+      });
+
+      // Apply styles after creating the pages
+      applyStyles(pagesConfig.length);  // Set the number of columns based on pagesConfig length
+    }
+
+    // Call the function to create pages
+    createPages();
+
+    // Long text content
+    const longText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nulla aliquet porttitor lacus luctus accumsan tortor. Nulla at volutpat diam ut venenatis. Nunc sed velit dignissim sodales ut eu sem integer. Quis varius quam quisque id diam vel quam elementum. Mi eget mauris pharetra et ultrices neque ornare aenean.`;
+
+    /**
+     * Function to dynamically create the text flow for each page
+     */
+    function flowText() {
+      // Get the page elements based on the configuration
+      const pages = pagesConfig.map(config => {
+        return {
+          pageElement: document.getElementById(config.id),
+          contentElement: document.getElementById(`content-${config.id}`),
+        };
+      });
+
+      // Add the full text to page1 initially
+      pages[0].contentElement.innerText = longText;
+
+      // Handle text overflow across pages
+      let remainingText = longText;
+
+      // Iterate through pages and flow the text
+      for (let i = 0; i < pages.length; i++) {
+        const { pageElement, contentElement } = pages[i];
+
+        // Handle overflow in the current page
+        while (pageElement.scrollHeight > pageElement.clientHeight) {
+          const currentText = contentElement.innerText;
+          const lastSpaceIndex = currentText.lastIndexOf(" ");
+
+          if (lastSpaceIndex === -1) break;
+
+          // Cut off the text that overflows and move it to the next page
+          const overflowText = currentText.slice(lastSpaceIndex + 1);
+          contentElement.innerText = currentText.slice(0, lastSpaceIndex);
+
+          // Check if there's another page to move the text to
+          if (i + 1 < pages.length) {
+            const nextPage = pages[i + 1].contentElement;
+            nextPage.innerText = overflowText + " " + nextPage.innerText;
+            remainingText = overflowText;
+          }
+        }
+      }
+    }
+
+    // Call the flowText function on window load
+    window.onload = flowText;
+
+    // Recheck and flow the text on window resize
+    window.onresize = flowText;
+  </script>
+</body>
+</html>
