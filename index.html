@@ -1,128 +1,304 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Web-to-Print Experiments</title>
     <style type="text/css">
-        body {
-            margin: 50px;
-            line-height: 25px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+      body {
+        margin: 50px;
+        line-height: 25px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
 
-		a:link {
-			color: black;
-			text-decoration: none;
-		}
+      a:link {
+        color: black;
+        text-decoration: none;
+      }
 
-		a:visited{
-			color: black;
-		}
+      a:visited {
+        color: black;
+      }
 
-		a:hover{
-			color: hotpink;
-		}
+      a:hover {
+        color: hotpink;
+      }
 
-        .title {
-            font-size: x-large;
-        }
+      .title {
+        font-size: x-large;
+      }
 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 30px;
-        }
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 30px;
+      }
 
-        .category {
-            padding: 1px;
+      .category {
+        padding: 1px;
+      }
 
-        }
+      .category h2 {
+        font-size: 12pt;
+        margin-bottom: 10px;
+        text-align: left;
+        color: #333;
+      }
 
-        .category h2 {
-            font-size: 12pt;
-            margin-bottom: 10px;
-            text-align: left;
-            color: #333;
-        }
+      .experiment {
+        font-size: 12pt;
+        font-family: Arial, Helvetica, sans-serif;
+      }
 
-        .experiment {
-            font-size: 12pt;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .experiment1 {
-            font-size: 12pt;
-            font-family: Arial, Helvetica, sans-serif;
-            color: red;
-        }
+      .experiment1 {
+        font-size: 12pt;
+        font-family: Arial, Helvetica, sans-serif;
+        color: red;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
-	<div class="title">
-        <h1>STAYAYAY Web-to-Print Experiments</h1>
+  <body>
+    <div class="title">
+      <h1>STAYAYAY Web-to-Print Experiments</h1>
     </div>
 
     <div class="grid-container">
-        <!-- Category 1: CSS GRID -->
-        <div class="category">
-            <h2>CSS GRID</h2>
-            <a class="experiment" href="20241119_CSS_Grid_001_ST.html" target="_blank">20241119_CSS_Grid_001_ST</a><br>
-            <a class="experiment" href="20241118_CSS_Grid_007_ST.html" target="_blank">20241118_CSS_Grid_007_ST</a><br>
-            <a class="experiment" href="20241118_CSS_Grid_006_ST.html" target="_blank">20241118_CSS_Grid_006_ST</a><br>
-            <a class="experiment" href="20241118_CSS_Grid_005_ST.html" target="_blank">20241118_CSS_Grid_005_ST</a><br>
-            <a class="experiment" href="20241118_CSS_Grid_004_ST.html" target="_blank">20241118_CSS_Grid_004_ST</a><br>
-            <a class="experiment" href="20241118_CSS_Grid_003_ST.html" target="_blank">20241118_CSS_Grid_003_ST</a><br>
-            <a class="experiment" href="20241118_CSS_Grid_002_ST.html" target="_blank">20241118_CSS_Grid_002_ST</a><br>
-            <a class="experiment" href="20241118_CSS_Grid_001_ST.html" target="_blank">20241118_CSS_Grid_001_ST</a><br>
-            <a class="experiment" href="20241105_CSS_Grid_004_ST.html" target="_blank">20241105_CSS_Grid_004_ST</a><br>
-            <a class="experiment" href="20241105_CSS_Grid_003_ST.html" target="_blank">20241105_CSS_Grid_003_ST</a><br>
-            <a class="experiment" href="20241105_CSS_Grid_002_ST.html" target="_blank">20241105_CSS_Grid_002_ST</a><br>
-            <a class="experiment" href="20241022_CSS_Grid_001_AY.html" target="_blank">20241022_CSS_Grid_001_AY</a><br>
-            <a class="experiment" href="20241022_CSS_Grid_001_ST.html" target="_blank">20241022_CSS_Grid_001_ST</a><br>
-        </div>
+      <!-- Category 1: CSS GRID -->
+      <div class="category">
+        <h2>CSS GRID</h2>
+        <a
+          class="experiment"
+          href="20241126_CSS_Grid_005_ST.html"
+          target="_blank"
+          >20241126_CSS_Grid_005_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241126_CSS_Grid_004_ST.html"
+          target="_blank"
+          >20241126_CSS_Grid_004_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241126_CSS_Grid_003_ST.html"
+          target="_blank"
+          >20241126_CSS_Grid_003_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241126_CSS_Grid_002_ST.html"
+          target="_blank"
+          >20241126_CSS_Grid_002_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241126_CSS_Grid_001_ST.html"
+          target="_blank"
+          >20241126_CSS_Grid_001_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241125_CSS_Grid_001_ST.html"
+          target="_blank"
+          >20241125_CSS_Grid_001_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241119_CSS_Grid_001_ST.html"
+          target="_blank"
+          >20241119_CSS_Grid_001_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241118_CSS_Grid_007_ST.html"
+          target="_blank"
+          >20241118_CSS_Grid_007_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241118_CSS_Grid_006_ST.html"
+          target="_blank"
+          >20241118_CSS_Grid_006_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241118_CSS_Grid_005_ST.html"
+          target="_blank"
+          >20241118_CSS_Grid_005_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241118_CSS_Grid_004_ST.html"
+          target="_blank"
+          >20241118_CSS_Grid_004_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241118_CSS_Grid_003_ST.html"
+          target="_blank"
+          >20241118_CSS_Grid_003_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241118_CSS_Grid_002_ST.html"
+          target="_blank"
+          >20241118_CSS_Grid_002_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241118_CSS_Grid_001_ST.html"
+          target="_blank"
+          >20241118_CSS_Grid_001_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241105_CSS_Grid_004_ST.html"
+          target="_blank"
+          >20241105_CSS_Grid_004_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241105_CSS_Grid_003_ST.html"
+          target="_blank"
+          >20241105_CSS_Grid_003_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241105_CSS_Grid_002_ST.html"
+          target="_blank"
+          >20241105_CSS_Grid_002_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241022_CSS_Grid_001_AY.html"
+          target="_blank"
+          >20241022_CSS_Grid_001_AY</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241022_CSS_Grid_001_ST.html"
+          target="_blank"
+          >20241022_CSS_Grid_001_ST</a
+        ><br />
+      </div>
 
-        <!-- Category 2: CSS Columns -->
-        <div class="category">
-            <h2>CSS Columns</h2>
-            <a class="experiment" href="20241105_CSS_Colum_001_ST.html" target="_blank">20241105_CSS_Colum_001_ST</a><br>
-            <a class="experiment" href="20241105_CSS_Column_001_AY.html" target="_blank">20241105_CSS_Column_001_AY</a><br>
-            <a class="experiment" href="20241029_CSS_Colum_002_ST.html" target="_blank">20241029_CSS_Colum_002_ST</a><br>
-            <a class="experiment" href="20241029_CSS_Colum_001_ST.html" target="_blank">20241029_CSS_Colum_001_ST</a><br>
-            <a class="experiment" href="20241029_CSS_Colum_001_AY.html" target="_blank">20241029_CSS_Colum_001_AY</a><br>
-        </div>
+      <!-- Category 2: CSS Columns -->
+      <div class="category">
+        <h2>CSS Columns</h2>
+        <a
+          class="experiment"
+          href="20241105_CSS_Colum_001_ST.html"
+          target="_blank"
+          >20241105_CSS_Colum_001_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241105_CSS_Column_001_AY.html"
+          target="_blank"
+          >20241105_CSS_Column_001_AY</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241029_CSS_Colum_002_ST.html"
+          target="_blank"
+          >20241029_CSS_Colum_002_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241029_CSS_Colum_001_ST.html"
+          target="_blank"
+          >20241029_CSS_Colum_001_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241029_CSS_Colum_001_AY.html"
+          target="_blank"
+          >20241029_CSS_Colum_001_AY</a
+        ><br />
+      </div>
 
-        <!-- Category 3: Paged.js Tests -->
-        <div class="category">
-            <h2>Paged.js Tests</h2>
-            <a class="experiment" href="20241106_Grid-A4-Web-Print-Subgrids_004_AY copy.html" target="_blank">20241106_Grid-A4-Web-Print-Subgrids_004_AY copy</a><br>
-            <a class="experiment1" href="20241106_Grid-A4-Web-Print_003_AY.html" target="_blank">20241106_Grid-A4-Web-Print_003_AY</a><br>
-            <a class="experiment" href="20241106_Grid-A4-Web_002_AY.html" target="_blank">20241106_Grid-A4-Web_002_AY</a><br>
-            <a class="experiment" href="20241106_Grid-A4_001_AY copy.html" target="_blank">20241106_Grid-A4_001_AY copy</a><br>
-            <a class="experiment" href="20241029_Paged_JS_Test_001_AY.html" target="_blank">20241029_Paged_JS_Test_001_AY</a><br>
-        </div>
+      <!-- Category 3: Paged.js Tests -->
+      <div class="category">
+        <h2>Paged.js Tests</h2>
+        <a
+          class="experiment"
+          href="20241106_Grid-A4-Web-Print-Subgrids_004_AY copy.html"
+          target="_blank"
+          >20241106_Grid-A4-Web-Print-Subgrids_004_AY copy</a
+        ><br />
+        <a
+          class="experiment1"
+          href="20241106_Grid-A4-Web-Print_003_AY.html"
+          target="_blank"
+          >20241106_Grid-A4-Web-Print_003_AY</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241106_Grid-A4-Web_002_AY.html"
+          target="_blank"
+          >20241106_Grid-A4-Web_002_AY</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241106_Grid-A4_001_AY copy.html"
+          target="_blank"
+          >20241106_Grid-A4_001_AY copy</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241029_Paged_JS_Test_001_AY.html"
+          target="_blank"
+          >20241029_Paged_JS_Test_001_AY</a
+        ><br />
+      </div>
 
-        <!-- Category 4: Grid Experiments -->
-        <div class="category">
-            <h2>Grid Experiments</h2>
-            <a class="experiment" href="20241105_PAD-Book_002_ST.html" target="_blank">20241105_PAD-Book_002_ST</a><br>
-            <a class="experiment" href="20241105_PAD-Book_001_ST.html" target="_blank">20241105_PAD-Book_001_ST</a><br>
-            <a class="experiment" href="20241105_Grid_Test_001_AY.html" target="_blank">20241105_Grid_Test_001_AY</a><br>
-            <a class="experiment" href="20241126_Grid_Test_AY_3.html" target="_blank">20241126_Grid_Test_AY_3</a><br>
-        </div>
+      <!-- Category 4: Grid Experiments -->
+      <div class="category">
+        <h2>Grid Experiments</h2>
+        <a
+          class="experiment"
+          href="20241105_PAD-Book_002_ST.html"
+          target="_blank"
+          >20241105_PAD-Book_002_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241105_PAD-Book_001_ST.html"
+          target="_blank"
+          >20241105_PAD-Book_001_ST</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241105_Grid_Test_001_AY.html"
+          target="_blank"
+          >20241105_Grid_Test_001_AY</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241126_Grid_Test_AY_3.html"
+          target="_blank"
+          >20241126_Grid_Test_AY_3</a
+        ><br />
+      </div>
 
-        <!-- Category 5: Toggle Views -->
-        <div class="category">
-            <h2>Toggle Views</h2>
-            <a class="experiment" href="20241105_Toggle-View_001_AY.html" target="_blank">20241105_Toggle-View_001_AY</a><br>
-            <a class="experiment" href="20241015_Toggle-View_001_ST.html" target="_blank">20241015_Toggle-View_001_ST</a><br>
-        </div>
+      <!-- Category 5: Toggle Views -->
+      <div class="category">
+        <h2>Toggle Views</h2>
+        <a
+          class="experiment"
+          href="20241105_Toggle-View_001_AY.html"
+          target="_blank"
+          >20241105_Toggle-View_001_AY</a
+        ><br />
+        <a
+          class="experiment"
+          href="20241015_Toggle-View_001_ST.html"
+          target="_blank"
+          >20241015_Toggle-View_001_ST</a
+        ><br />
+      </div>
     </div>
-
-</body>
-
+  </body>
 </html>
