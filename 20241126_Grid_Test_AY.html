@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Page</title>
+  <title>Master Page with Dynamic Flow</title>
   <style>
-    /* Apply basic styles to html and body */
     html, body {
       margin: 0;
       padding: 0;
@@ -13,44 +12,110 @@
       box-sizing: border-box;
     }
 
-    /* Styles for .master-page */
     .master-page {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      padding: 20px;
       width: 100vw;
       height: 100vh;
-      margin: 0 auto;
-      padding: 2%;
-      border: 1px solid black;
-      background: lightgray;
       box-sizing: border-box;
-      text-align: center;
-      display: grid; /* Set to grid layout */
-      grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
-      grid-template-rows: repeat(2, 1fr); /* Two equal-height rows */
-      gap: 10px; /* Space between grid items */
-      justify-items: center; /* Center content horizontally */
-      align-items: center; /* Center content vertically */
-      font-size: calc(1rem + 1vw); /* Responsive font size */
-      font-family: sans-serif;
     }
 
-    /* Optional: Style grid items to make them stand out */
     .grid-item {
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: lightgray;
       border: 1px solid black;
-      padding: 10px;
+      padding: 30px;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 7vw;
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+      font-size: 3vw;
+      overflow: hidden;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    #page1 {
+      background-color: lightblue;
+    }
+
+    #page2 {
+      background-color: lightgreen;
+    }
+
+    #page3 {
+      background-color: lightcoral;
     }
   </style>
 </head>
 <body>
   <div class="master-page">
-    <div class="grid-item">Page 1</div>
-    <div class="grid-item">This layout is responsive to the browser size!</div>
-    <div class="grid-item">Additional Content</div>
-    <div class="grid-item">More Content Here</div>
+    <div class="grid-item" id="page1">
+      <div id="contentPage1"></div>
+    </div>
+    <div class="grid-item" id="page2">
+      <div id="contentPage2"></div>
+    </div>
+    <div class="grid-item" id="page3">
+      <div id="contentPage3"></div>
+    </div>
   </div>
+
+  <script>
+    function flowText() {
+      const page1 = document.getElementById('page1');
+      const page2 = document.getElementById('page2');
+      const page3 = document.getElementById('page3');
+      const contentPage1 = document.getElementById('contentPage1');
+      const contentPage2 = document.getElementById('contentPage2');
+      const contentPage3 = document.getElementById('contentPage3');
+
+      // Define the long text content
+      const longText = `This layout is responsive to the browser size! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nulla aliquet porttitor lacus luctus accumsan tortor. Nulla at volutpat diam ut venenatis. Nunc sed velit dignissim sodales ut eu sem integer. Quis varius quam quisque id diam vel quam elementum. Mi eget mauris pharetra et ultrices neque ornare aenean.`;
+
+      // Add the full text to page1 initially
+      contentPage1.innerText = longText;
+
+      // Determine the jump target (page2, page3, or skip page2)
+      let jumpTarget = 2; // Set to 2 for Page 2, or 3 for Page 3 directly.
+
+      // Handle overflow for Page 1
+      while (page1.scrollHeight > page1.clientHeight) {
+        const page1Text = contentPage1.innerText;
+        const lastWordIndex = page1Text.lastIndexOf(" ");
+        if (lastWordIndex === -1) break;
+
+        const remainingText = page1Text.slice(lastWordIndex + 1);
+
+        contentPage1.innerText = page1Text.slice(0, lastWordIndex);
+
+        // Move overflow to the selected target
+        if (jumpTarget === 2) {
+          contentPage2.innerText = remainingText + " " + contentPage2.innerText;
+
+          // Check for overflow in Page 2
+          while (page2.scrollHeight > page2.clientHeight) {
+            const page2Text = contentPage2.innerText;
+            const lastWordIndex2 = page2Text.lastIndexOf(" ");
+            if (lastWordIndex2 === -1) break;
+
+            const remainingText2 = page2Text.slice(lastWordIndex2 + 1);
+
+            contentPage2.innerText = page2Text.slice(0, lastWordIndex2);
+            contentPage3.innerText = remainingText2 + " " + contentPage3.innerText;
+          }
+        } else if (jumpTarget === 3) {
+          contentPage3.innerText = remainingText + " " + contentPage3.innerText;
+        }
+      }
+    }
+
+    // Call the function to flow the text when the page loads
+    window.onload = flowText;
+
+    // Optional: Recheck and flow the text on window resize
+    window.onresize = flowText;
+  </script>
 </body>
 </html>
