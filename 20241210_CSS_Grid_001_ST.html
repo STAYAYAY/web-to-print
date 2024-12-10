@@ -154,41 +154,106 @@
         }
       }
 
-      /* Print-specific styles */
       @media print {
         @page {
           size: A4; /* Set A4 page size */
-          margin: 10mm; /* Adjust margins as needed */
+          margin: 0mm; /* Adjust margins as needed */
         }
 
         body {
-          margin: 0; /* Remove extra margins */
+          margin: 5mm; /* Remove extra margins */
+        }
+
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+          font-size: 15pt;
+          font-weight: bold;
+          line-height: 18pt;
+          /* min-height: 100vh; */
+        }
+
+        h1 {
+          font-size: 28pt;
+          font-weight: bold;
+          line-height: 28pt;
+        }
+
+        h2 {
+          font-size: 15pt;
+          font-weight: bold;
+          line-height: 18pt;
+          margin-bottom: 18pt;
+        }
+
+        .text p {
+          margin: 0;
+          text-indent: 0; /* Ensure no indent for all <p> initially */
+        }
+
+        .text p:first-of-type {
+          text-indent: 0; /* Explicitly reset the first <p> to have no indent */
+        }
+
+        .text p:not(:first-of-type) {
+          text-indent: 10mm; /* Indent only subsequent paragraphs */
         }
 
         .grid-container {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(6, 1fr);
           grid-template-areas:
-            "image-l image-l image-l title"
-            "image-s image-l image-l image-l"
-            "image-4 image-4 text text"
-            "image-4 image-4 text text";
-          gap: 10px;
+            "image-l image-l image-l image-l image-l title"
+            "image-l image-l image-l image-l image-l image-s"
+            "image-4 image-4 text text text text"
+            "image-4 image-4 text text text text";
+          gap: 3mm;
+          row-gap: 3mm;
           margin: 0; /* Avoid additional margins */
           width: 100%; /* Ensure the layout spans the page */
           height: auto; /* Fit content */
         }
 
+        .title {
+          grid-area: title;
+          text-align: left; /* Ensure alignment in the grid */
+        }
+
         .text {
-          column-count: 1; /* Use two columns for text in print */
+          grid-area: text;
+          column-count: 1; /* Single column for print */
+          margin: 0; /* Avoid any default margins */
+        }
+
+        .image-l {
+          grid-area: image-l;
+        }
+
+        .image-s {
+          grid-area: image-s;
         }
 
         .image-4 {
-          grid-area: image-4; /* Occupies the designated grid area */
-          display: grid; /* Turns the .image-4 container into a grid */
-          grid-template-columns: repeat(2, 1fr); /* 2 columns of equal width */
-          grid-template-rows: repeat(2, 1fr); /* Rows adjust based on content */
-          gap: 10px; /* Adds spacing between grid items */
+          grid-area: image-4;
+          display: grid;
+          grid-template-columns: 1fr; /* Single column layout for images */
+          grid-template-rows: repeat(
+            4,
+            60mm
+          ); /* Four equal-height rows for the images */
+          gap: 5mm; /* Adds spacing between images */
+          height: 100%; /* Match height with adjacent text block */
+        }
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+
+        .image-4 img {
+          width: 100%; /* Ensures the image fills the width of the grid cell */
+          height: 100%; /* Ensures the image fills the height of the grid cell */
+          object-fit: cover; /* Crops the image to fit while preserving aspect ratio */
+          display: block; /* Avoids inline spacing issues */
         }
       }
     </style>
