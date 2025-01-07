@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid fluid layout</title>
+    <style>
+      * {
+        margin: 0.1em;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-size: 28px;
+        font-weight: bold;
+        line-height: 28px;
+      }
+
+      h2 {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        margin-bottom: 20px;
+      }
+
+      .title {
+        grid-area: title;
+      }
+
+      .text {
+        grid-area: text;
+      }
+
+      .image-1 {
+        grid-area: image-1;
+      }
+
+      .image-2 {
+        grid-area: image-2;
+      }
+
+      .image-1 img,
+      .image-2 img {
+        width: 100%;
+        height: auto;
+        display: block; /* Ensures no unexpected gaps around the image */
+      }
+
+      .grid-container {
+        margin: 1fr;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        grid-template-areas:
+          "title image-1 image-1 image-1"
+          "title image-1 image-1 image-1"
+          "image-2 image-2 text text"
+          "image-2 image-2 text text";
+      }
+
+      .text {
+        grid-area: text;
+        column-count: 1;
+      }
+
+      .image-1 {
+        grid-area: image-1;
+        display: grid;
+        grid-template-columns: 1fr; /* Single column layout */
+        grid-template-rows: auto; /* Rows adjust to content */
+        gap: 10px; /* Adds spacing between images */
+      }
+
+      .image-2 {
+        grid-area: image-2;
+        display: grid;
+        grid-template-columns: 1fr; /* Single column layout */
+        grid-template-rows: auto; /* Rows adjust to content */
+        gap: 10px; /* Adds spacing between images */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="title">
+        <h1>Title goes here</h1>
+      </div>
+      <div class="image-1"><img src=imgs/TV-Garden-Nam-June-Paik.jpg></div>
+      <div class="image-2"><img src=imgs/Holt-Up_and_Under-009.jpg></div>
+
+      <div class="text">
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+          commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+          et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
+          felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
+          consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
+          nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
+          venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+          Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
+          vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat
+          vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
+          quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius
+          laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel
+          augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam
+          rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam
+          semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
+          blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio
+          et ante tincidunt tempus. Donec vitae sapien ut libero venenatis
+          faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus
+          tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales
+          sagittis magna.
+        </p>
+      </div>
+    </div>
+    <script></script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid with Real-Time Adjustment</title>
+    <style>
+      * {
+        margin: 0.1em;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        min-height: 100vh;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        grid-template-areas:
+          "title image-1 image-1 image-1"
+          "title image-1 image-1 image-1"
+          "image-2 image-2 text text"
+          "image-2 image-2 text text";
+        margin: 20px;
+      }
+
+      .title {
+        grid-area: title;
+      }
+
+      .text {
+        grid-area: text;
+      }
+
+      .image-1 {
+        grid-area: image-1;
+      }
+
+      .image-2 {
+        grid-area: image-2;
+      }
+
+      .image-1 img,
+      .image-2 img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .controls {
+        margin: 20px;
+      }
+
+      textarea {
+        width: 100%;
+        height: 100px;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <h2>Adjust Grid Template Areas:</h2>
+      <textarea id="grid-template-areas-input">
+"title image-1 image-1 image-1"
+"title image-1 image-1 image-1"
+"image-2 image-2 text text"
+"image-2 image-2 text text"
+      </textarea>
+      <button id="apply-layout">Apply Layout</button>
+    </div>
+
+    <div class="grid-container">
+      <div class="title">
+        <h1>Title goes here</h1>
+      </div>
+      <div class="image-1">
+        <img src="imgs/TV-Garden-Nam-June-Paik.jpg" alt="Image 1" />
+      </div>
+      <div class="image-2">
+        <img src="imgs/Holt-Up_and_Under-009.jpg" alt="Image 2" />
+      </div>
+      <div class="text">
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+          commodo ligula eget dolor.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const gridContainer = document.querySelector(".grid-container");
+      const gridInput = document.getElementById("grid-template-areas-input");
+      const applyButton = document.getElementById("apply-layout");
+
+      applyButton.addEventListener("click", () => {
+        const newTemplateAreas = gridInput.value.trim();
+        gridContainer.style.gridTemplateAreas = newTemplateAreas;
+      });
+    </script>
+  </body>
+</html>
