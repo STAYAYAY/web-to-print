@@ -64,7 +64,8 @@
       { id: "page1", background: "lightblue", text: "" },
       { id: "page2", background: "lightgreen", text: "" },
       { id: "page3", background: "lightcoral", text: "" },
-      { id: "page4", background: "yellow", text: "" }
+      { id: "page4", background: "yellow", text: "" },  
+      { id: "page5", background: "yellow", text: "" }
     ];
 
     // Function to dynamically create divs based on the pagesConfig
@@ -102,7 +103,14 @@
     createPages();
 
     // Long text content
-    const longText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nulla aliquet porttitor lacus luctus accumsan tortor. Nulla at volutpat diam ut venenatis. Nunc sed velit dignissim sodales ut eu sem integer. Quis varius quam quisque id diam vel quam elementum. Mi eget mauris pharetra et ultrices neque ornare aenean.`;
+    const longText = 
+    `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+    Nulla aliquet porttitor lacus luctus accumsan tortor. Nulla at volutpat diam ut venenatis. 
+    Nunc sed velit dignissim sodales ut eu sem integer. Quis varius quam quisque id diam vel quam elementum. 
+    Mi eget mauris pharetra et ultrices neque ornare aenean.`;
 
     /**
      * Function to dynamically create the text flow for each page
@@ -146,10 +154,8 @@
         }
       }
     }
-
     // Call the flowText function on window load
     window.onload = flowText;
-
     // Recheck and flow the text on window resize
     window.onresize = flowText;
   </script>
