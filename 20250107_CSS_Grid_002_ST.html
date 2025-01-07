@@ -39,6 +39,10 @@
         grid-area: text;
       }
 
+      .text-2 {
+        grid-area: text-2;
+      }
+
       .image-1 {
         grid-area: image-1;
       }
@@ -47,8 +51,13 @@
         grid-area: image-2;
       }
 
+      .image-3 {
+        grid-area: image-3;
+      }
+
       .image-1 img,
-      .image-2 img {
+      .image-2 img,
+      .image-3 img {
         width: 100%;
         height: auto;
         display: block; /* Ensures no unexpected gaps around the image */
@@ -64,7 +73,8 @@
           "title image-1 image-1 image-1"
           "title image-1 image-1 image-1"
           "image-2 image-2 text text"
-          "image-2 image-2 text text";
+          "image-2 image-2 text text"
+          "image-3 . . text-2";
       }
     </style>
   </head>
@@ -75,6 +85,7 @@
       </div>
       <div class="image-1"><img src=imgs/TV-Garden-Nam-June-Paik.jpg></div>
       <div class="image-2"><img src=imgs/Holt-Up_and_Under-009.jpg></div>
+      <div class="image-3"><img src=imgs/T01747_10.jpg></div>
 
       <div class="text">
         <p>
@@ -99,6 +110,19 @@
           tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales
           sagittis magna.
         </p>
+      </div>
+
+      <div class="text-2">
+        <p>Aenean imperdiet. Etiam ultricies nisi vel
+          augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam
+          rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam
+          semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc,
+          blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio
+          et ante tincidunt tempus. Donec vitae sapien ut libero venenatis
+          faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus
+          tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales
+          sagittis magna.
+        </p></p>
       </div>
     </div>
     <script></script>
