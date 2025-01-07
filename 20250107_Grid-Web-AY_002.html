@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Template Areas Layout</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .grid-container {
+            display: grid;
+            /* grid-template-columns: 1fr 1fr 1fr;  3 equal columns */
+            grid-template-rows: auto auto auto; /* Explicitly define 3 rows */
+            gap: 10px; /* Adds consistent spacing between items */
+            grid-template-areas: 
+                "image image image"
+                "caption caption ."
+                "caption2 caption2 text";
+        }
+
+        /* Grid Items */
+        .image {
+            grid-area: image;
+            background-color: #e0e0e0;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+        }
+
+        .caption {
+            grid-area: caption;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .text {
+            grid-area: text;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .caption2 {
+            grid-area: caption2; /* Define unique area for caption2 */
+            background-color: #d0d0d0;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Placeholder Styling */
+        .image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr; /* Single column for smaller screens */
+                grid-template-areas: 
+                    "image"
+                    "caption"
+                    "text"
+                    "caption2"; /* Stack items vertically */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <!-- First Row -->
+        <div class="image">
+            <!-- Placeholder Image -->
+            <img src="https://via.placeholder.com/800x400" alt="Placeholder Image">
+        </div>
+
+        <!-- Second Row -->
+        <div class="caption">
+            <h3>Image Caption</h3>
+            <p>This is a descriptive caption for the image above.</p>
+        </div>
+        
+        <div class="text">
+            <h2>Main Content</h2>
+            <p>This is the main content area spanning two columns. It contains the primary text.</p>
+        </div>
+
+        <!-- Third Row -->
+        <div class="caption2">
+            <h3>Additional Caption</h3>
+            <p>This is an additional caption placed in the third row of the grid layout.</p>
+        </div>
+    </div>
+</body>
+</html>
