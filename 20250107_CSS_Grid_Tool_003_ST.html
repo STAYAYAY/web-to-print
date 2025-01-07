@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid with GUI Adjustments</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        display: grid;
+        grid-template-rows: auto 1fr; /* Controls at the top, grid container below */
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Two columns for layout */
+        grid-gap: 20px;
+        padding: 20px;
+      }
+
+      .controls h2 {
+        grid-column: span 2; /* Make headings span both columns */
+      }
+
+      .controls textarea,
+      .controls input {
+        width: 100%;
+        padding: 10px;
+        font-family: monospace;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 20px;
+        padding: 20px;
+        grid-template-areas:
+          "title image-1 image-1 image-1"
+          "title image-1 image-1 image-1"
+          "image-2 image-2 text text"
+          "image-2 image-2 text text";
+      }
+
+      .title {
+        grid-area: title;
+      }
+
+      .text {
+        grid-area: text;
+      }
+
+      .image-1 {
+        grid-area: image-1;
+      }
+
+      .image-2 {
+        grid-area: image-2;
+      }
+
+      .image-1 img,
+      .image-2 img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <h2>Adjust Number of Columns:</h2>
+      <input
+        type="number"
+        id="grid-columns-input"
+        min="1"
+        max="12"
+        value="4"
+        placeholder="Enter number of columns"
+      />
+      <button id="apply-columns">Set Columns</button>
+      <h2>Adjust Grid Template Areas:</h2>
+      <textarea id="grid-template-areas-input" rows="4">
+"title image-1 image-1 image-1"
+"title image-1 image-1 image-1"
+"image-2 image-2 text text"
+"image-2 image-2 text text"
+      </textarea>
+      <button id="apply-layout">Apply Layout</button>
+    </div>
+
+    <div class="grid-container">
+      <div class="title">
+        <h1>Title goes here</h1>
+      </div>
+      <div class="image-1">
+        <img src="imgs/TV-Garden-Nam-June-Paik.jpg" alt="Image 1" />
+      </div>
+      <div class="image-2">
+        <img src="imgs/Holt-Up_and_Under-009.jpg" alt="Image 2" />
+      </div>
+      <div class="text">
+        <p>
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+          commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
+          et magnis dis parturient montes, nascetur ridiculus mus.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const gridContainer = document.querySelector(".grid-container");
+      const gridInput = document.getElementById("grid-template-areas-input");
+      const applyLayoutButton = document.getElementById("apply-layout");
+      const columnsInput = document.getElementById("grid-columns-input");
+      const applyColumnsButton = document.getElementById("apply-columns");
+
+      // Adjust grid-template-areas
+      applyLayoutButton.addEventListener("click", () => {
+        const newTemplateAreas = gridInput.value.trim();
+        gridContainer.style.gridTemplateAreas = newTemplateAreas;
+
+        // Extract all areas from the new template
+        const areas = newTemplateAreas
+          .replace(/"/g, "") // Remove quotes
+          .split(/\s+/) // Split into individual areas
+          .filter((area) => area !== "." && area !== ""); // Ignore empty spaces and dots
+
+        // Loop through all child elements of the grid container
+        document.querySelectorAll(".grid-container > div").forEach((child) => {
+          if (areas.includes(child.className)) {
+            child.style.display = "block"; // Show elements included in the grid layout
+          } else {
+            child.style.display = "none"; // Hide elements not included in the grid layout
+          }
+        });
+      });
+
+      // Adjust number of columns
+      applyColumnsButton.addEventListener("click", () => {
+        const numColumns = parseInt(columnsInput.value, 10);
+        if (numColumns > 0) {
+          gridContainer.style.gridTemplateColumns = `repeat(${numColumns}, 1fr)`;
+        } else {
+          alert("Please enter a valid number of columns.");
+        }
+      });
+    </script>
+  </body>
+</html>
