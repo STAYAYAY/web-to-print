@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout with Print Mode</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+
+        /* Web Version Styles */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 5px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .grid-item {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .grid-item.highlighted {
+            background-color: #e0f7fa;
+            border: 2px solid #00bcd4;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #00bcd4;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #008ba3;
+        }
+
+        .counter {
+            margin-top: 5px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Print Mode Styles */
+        .print-mode {
+            background-color: white;
+            width: 210mm; /* A4 width */
+            min-height: 297mm; /* A4 height */
+            margin: 0 auto;
+            padding: 20mm; /* Standard margin for printing */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .print-mode .grid-container {
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10mm;
+            padding: 0;
+        }
+
+        .print-mode .grid-item {
+            box-shadow: none;
+            border: 1px solid #ccc;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+
+        .print-mode .grid-item:hover {
+            transform: none;
+        }
+
+        /* Toggle Switch Styles */
+        .switch-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #00bcd4;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .controls, .switch-container {
+                display: none;
+            }
+
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 10mm;
+                padding: 0;
+            }
+
+            .grid-item {
+                box-shadow: none;
+                border: 1px solid #ccc;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="switch-container">
+        <span>Web</span>
+        <label class="switch">
+            <input type="checkbox" id="modeToggle" onclick="toggleMode()">
+            <span class="slider"></span>
+        </label>
+        <span>Print</span>
+    </div>
+
+    <div class="controls">
+        <button onclick="addItem()">Add Item</button>
+        <button onclick="removeItem()">Remove Item</button>
+    </div>
+
+    <div class="grid-container" id="grid">
+        <div class="grid-item" onclick="toggleHighlight(this)">
+            <h3>Item 1</h3>
+            <p>Click to highlight</p>
+            <div class="counter">0</div>
+        </div>
+        <div class="grid-item" onclick="toggleHighlight(this)">
+            <h3>Item 2</h3>
+            <p>Click to highlight</p>
+            <div class="counter">0</div>
+        </div>
+        <div class="grid-item" onclick="toggleHighlight(this)">
+            <h3>Item 3</h3>
+            <p>Click to highlight</p>
+            <div class="counter">0</div>
+        </div>
+    </div>
+
+    <script>
+        let itemCount = 3;
+
+        function toggleMode() {
+            document.body.classList.toggle('print-mode');
+        }
+
+        function toggleHighlight(element) {
+            element.classList.toggle('highlighted');
+            let counter = element.querySelector('.counter');
+            counter.textContent = parseInt(counter.textContent) + 1;
+        }
+
+        function addItem() {
+            itemCount++;
+            const newItem = document.createElement('div');
+            newItem.className = 'grid-item';
+            newItem.onclick = function() { toggleHighlight(this); };
+            newItem.innerHTML = `
+                <h3>Item ${itemCount}</h3>
+                <p>Click to highlight</p>
+                <div class="counter">0</div>
+            `;
+            document.getElementById('grid').appendChild(newItem);
+        }
+
+        function removeItem() {
+            const grid = document.getElementById('grid');
+            if (grid.children.length > 0) {
+                grid.removeChild(grid.lastChild);
+                itemCount--;
+            }
+        }
+    </script>
+</body>
+</html>
