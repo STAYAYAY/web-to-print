@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Grid fluid layout</title>
+    <style>
+      /* * {
+        margin: 0.1em;
+        padding: 0;
+      } */
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+      }
+
+      .title {
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 1em;
+        letter-spacing: -1px;
+        word-spacing: -2px;
+        align-self: end;
+        grid-area: title;
+      }
+
+      .title .credit {
+        font-size: 8px;
+        font-weight: bold;
+        line-height: 10px;
+        letter-spacing: normal;
+        word-spacing: normal;
+        margin-left: -8px;
+      }
+
+      .text {
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 14px;
+        word-spacing: -1px;
+        align-self: start;
+        grid-area: text;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        grid-area: subtitle;
+      }
+
+      .caption {
+        font-size: 8px;
+        font-weight: bold;
+        line-height: 10px;
+        grid-area: caption;
+      }
+
+      .image-1 {
+        grid-area: image-1;
+      }
+
+      .image-1 img {
+        width: 100%;
+        height: auto;
+        display: block; /* Ensures no unexpected gaps around the image */
+      }
+
+      .grid-container {
+        margin: 1fr;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        grid-template-areas:
+          ".       subtitle .       .       ."
+          ".       .        title   title   title"
+          "caption image-1  image-1 image-1 image-1"
+          ".       image-1  image-1 image-1 image-1"
+          ".       text     text    text    text";
+      }
+
+      @media print {
+        @page {
+          size: A4;
+          margin: 0mm;
+          height: 297mm; /* A4 height */
+          width: 210mm; /* A4 width */
+          overflow: hidden;
+        }
+
+        body {
+          margin: 5mm;
+          min-height: initial;
+        }
+
+        .grid-container {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          grid-template-rows: auto auto auto 1fr auto;
+          grid-template-areas:
+            "image-1 image-1 image-1 image-1 image-1"
+            "image-1 image-1 image-1 image-1 image-1"
+            "subtitle caption . text text"
+            ". . . text text"
+            ". . . . ."
+            "title title title title title";
+          height: 287mm; /* to ensure layout stretches the full page*/
+          width: 200mm;
+          page-break-after: avoid;
+        }
+
+        .title {
+          align-self: end; /* Align the title to the bottom edge */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="title">
+        What a great time to be alive if you love the theater of the
+        absurd&nbsp;<span class="credit">David&nbsp;Lynch&nbsp;1946–2025</span>
+      </div>
+
+      <div class="subtitle">2025</div>
+
+      <div class="text">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+        dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
+        arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras
+        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
+        tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+        enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
+        Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+        imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+        ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus
+        eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing
+        sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,
+        hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec
+        vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit
+        amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris
+        sit amet nibh. Donec sodales sagittis magna.
+      </div>
+
+      <div class="caption">
+        Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+        imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+        ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus
+        eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing
+        sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,
+        hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec
+        vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit
+        amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris
+        sit amet nibh. Donec sodales sagittis magna.
+      </div>
+
+      <div class="image-1"><img src=imgs/cybertruck-trump.jpg></div>
+    </div>
+    <script></script>
+  </body>
+</html>
