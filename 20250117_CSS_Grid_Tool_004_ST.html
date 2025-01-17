@@ -147,6 +147,10 @@
           ".       text     text    text    text";
       }
 
+      .grid-container > div.hidden {
+        display: none !important;
+      }
+
       .title {
         font-size: 48px;
         font-weight: bold;
@@ -372,6 +376,28 @@
           .map((row) => `"${row.join(" ")}"`)
           .join("\n");
         gridContainer.style.gridTemplateAreas = templateAreas;
+
+        // Get all unique area names from the grid (excluding ".")
+        const usedAreas = new Set(areas.flat().filter((area) => area !== "."));
+
+        // Get all grid elements
+        const gridElements = gridContainer.children;
+
+        // Show/hide elements based on whether they're used in the grid
+        Array.from(gridElements).forEach((element) => {
+          // Get the grid-area name from the element's class
+          const areaClass = Array.from(element.classList).find(
+            (className) => className !== "hidden"
+          );
+
+          if (areaClass) {
+            if (usedAreas.has(areaClass)) {
+              element.classList.remove("hidden");
+            } else {
+              element.classList.add("hidden");
+            }
+          }
+        });
       }
 
       function updateColumnWidths() {
