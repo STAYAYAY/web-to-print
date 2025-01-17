@@ -83,20 +83,16 @@
         gap: 4px;
         width: 100%;
         margin-bottom: 20px;
-        background: #f5f5f5;
-        padding: 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
       }
 
       .grid-cell {
         background: white;
-        padding: 8px;
+        padding: 5px;
         min-height: 30px;
         border: 1px solid #ddd;
         border-radius: 2px;
         font-family: monospace;
-        text-align: center;
+        text-align: start;
       }
 
       .grid-cell:focus {
@@ -338,13 +334,36 @@
 
       function addColumn() {
         if (gridColumns < 12) {
+          // First get the current layout
+          const cells = Array.from(
+            gridAreaInput.querySelectorAll(".grid-cell")
+          );
+          const currentLayout = [];
+          for (let i = 0; i < gridRows; i++) {
+            currentLayout.push(
+              cells.slice(i * gridColumns, (i + 1) * gridColumns)
+            );
+          }
+
+          // Increment column count
           gridColumns++;
           columnCountSpan.textContent = gridColumns;
-          const currentAreas = getCurrentAreas();
-          currentAreas.forEach((row) => row.push("."));
-          renderGrid(currentAreas);
-          updateGridLayout();
+
+          // Update grid template
+          gridAreaInput.style.gridTemplateColumns = `repeat(${gridColumns}, 1fr)`;
           gridContainer.style.gridTemplateColumns = `repeat(${gridColumns}, 1fr)`;
+
+          // For each row, keep existing cells and add new cell at the end
+          currentLayout.forEach((row) => {
+            row.forEach((cell) => {
+              // Keep existing cells in the DOM
+              gridAreaInput.appendChild(cell);
+            });
+            // Add new cell with "." at the end of each row
+            gridAreaInput.appendChild(createGridCell("."));
+          });
+
+          updateGridLayout();
         }
       }
 
