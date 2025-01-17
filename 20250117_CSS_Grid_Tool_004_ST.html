@@ -432,9 +432,18 @@
           gridColumns--;
           columnCountSpan.textContent = gridColumns;
           columnWidths.pop();
-          const currentAreas = getCurrentAreas();
-          currentAreas.forEach((row) => row.pop());
-          renderGrid(currentAreas);
+
+          // Remove the rightmost cell from each row
+          for (let i = 0; i < gridRows; i++) {
+            const lastCellIndex = (i + 1) * (gridColumns + 1) - 1;
+            const cellToRemove = gridAreaInput.children[lastCellIndex];
+            if (cellToRemove) {
+              gridAreaInput.removeChild(cellToRemove);
+            }
+          }
+
+          // Update column widths display
+          renderColumnWidths();
           updateGridLayout();
         }
       }
