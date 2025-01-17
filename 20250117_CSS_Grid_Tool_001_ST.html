@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid Layout Editor</title>
+    <style>
+      /* * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      } */
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+      }
+
+      .controls {
+        background: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      button {
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      .layout-input {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .layout-input label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .layout-input textarea {
+        width: 100%;
+        height: 120px;
+        padding: 8px;
+        font-family: monospace;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .grid-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: 10px;
+        grid-template-areas:
+          ".       subtitle .       .       ."
+          ".       .        title   title   title"
+          "caption image-1  image-1 image-1 image-1"
+          ".       image-1  image-1 image-1 image-1"
+          ".       text     text    text    text";
+      }
+
+      .title {
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 1em;
+        letter-spacing: -1px;
+        word-spacing: -2px;
+        align-self: end;
+        grid-area: title;
+      }
+
+      .title .credit {
+        font-size: 8px;
+        font-weight: bold;
+        line-height: 10px;
+        letter-spacing: normal;
+        word-spacing: normal;
+        margin-left: -8px;
+      }
+
+      .text {
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 14px;
+        word-spacing: -1px;
+        align-self: start;
+        grid-area: text;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        grid-area: subtitle;
+      }
+
+      .caption {
+        font-size: 8px;
+        font-weight: bold;
+        line-height: 10px;
+        grid-area: caption;
+      }
+
+      .image-1 {
+        grid-area: image-1;
+      }
+
+      .image-1 img {
+        width: 100%;
+        height: auto;
+        display: block; /* Ensures no unexpected gaps around the image */
+      }
+
+      @media print {
+        @page {
+          size: A4;
+          margin: 0mm;
+          height: 297mm; /* A4 height */
+          width: 210mm; /* A4 width */
+          overflow: hidden;
+        }
+
+        body {
+          margin: 5mm;
+          min-height: initial;
+        }
+
+        .grid-container {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          grid-template-rows: auto auto auto 1fr auto;
+          grid-template-areas:
+            "image-1 image-1 image-1 image-1 image-1"
+            "image-1 image-1 image-1 image-1 image-1"
+            "subtitle caption . text text"
+            ". . . text text"
+            ". . . . ."
+            "title title title title title";
+          height: 287mm; /* to ensure layout stretches the full page*/
+          width: 200mm;
+          page-break-after: avoid;
+        }
+
+        .title {
+          align-self: end; /* Align the title to the bottom edge */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <div class="button-group">
+        <button id="resetLayout" class="outline">Reset Layout</button>
+      </div>
+      <div class="layout-input">
+        <label for="gridAreas">Grid Template Areas:</label>
+        <textarea id="gridAreas" spellcheck="false">
+".       subtitle .       .       ."
+".       .        title   title   title"
+"caption image-1  image-1 image-1 image-1"
+".       image-1  image-1 image-1 image-1"
+".       text     text    text    text"</textarea
+        >
+      </div>
+    </div>
+
+    <div class="grid-container">
+      <div class="title">
+        What a great time to be alive if you love the theater of the
+        absurd&nbsp;<span class="credit">David&nbsp;Lynch&nbsp;1946–2025</span>
+      </div>
+
+      <div class="subtitle">2025</div>
+
+      <div class="text">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+        dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
+        arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras
+        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
+        tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+        enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
+        Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+        imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+        ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus
+        eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing
+        sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,
+        hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec
+        vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit
+        amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris
+        sit amet nibh. Donec sodales sagittis magna.
+      </div>
+
+      <div class="caption">
+        Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+        imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+        ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus
+        eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing
+        sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,
+        hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec
+        vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit
+        amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris
+        sit amet nibh. Donec sodales sagittis magna.
+      </div>
+
+      <div class="image-1"><img src=imgs/cybertruck-trump.jpg></div>
+    </div>
+
+    <script>
+      const gridContainer = document.querySelector(".grid-container");
+      const gridAreasInput = document.getElementById("gridAreas");
+      const resetLayoutBtn = document.getElementById("resetLayout");
+
+      const defaultLayout = gridAreasInput.value;
+
+      // Update grid layout based on textarea input
+      gridAreasInput.addEventListener("input", (e) => {
+        const newTemplateAreas = e.target.value.trim();
+        gridContainer.style.gridTemplateAreas = newTemplateAreas;
+      });
+
+      // Reset layout
+      resetLayoutBtn.addEventListener("click", () => {
+        gridAreasInput.value = defaultLayout;
+        gridContainer.style.gridTemplateAreas = defaultLayout;
+        gridContainer.classList.remove("print-view");
+      });
+    </script>
+  </body>
+</html>
