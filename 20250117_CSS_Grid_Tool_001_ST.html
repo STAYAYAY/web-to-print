@@ -14,12 +14,17 @@
       body {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 16px;
+        margin: 0;
       }
 
       .controls {
-        background: #fff;
         padding: 20px;
-        margin-bottom: 20px;
+      }
+
+      .line {
+        margin: 0;
+        border: none; /* Remove default border styling */
+        border-bottom: 1px solid #000000;
       }
 
       .button-group {
@@ -55,6 +60,7 @@
       }
 
       .grid-container {
+        margin: 5px;
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-gap: 10px;
@@ -170,6 +176,7 @@
         >
       </div>
     </div>
+    <hr class="line" />
 
     <div class="grid-container">
       <div class="title">
@@ -233,7 +240,6 @@
       resetLayoutBtn.addEventListener("click", () => {
         gridAreasInput.value = defaultLayout;
         gridContainer.style.gridTemplateAreas = defaultLayout;
-        gridContainer.classList.remove("print-view");
       });
     </script>
   </body>
