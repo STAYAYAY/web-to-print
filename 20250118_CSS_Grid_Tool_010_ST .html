@@ -55,7 +55,8 @@
       }
 
       .control-input input {
-        width: 30px;
+        width: 60px;
+        padding: 4px 8px;
         border: 1px solid #ddd;
         border-radius: 4px;
       }
@@ -307,13 +308,8 @@
         grid-area: title;
       }
 
-      .title .credit {
-        font-size: 8px;
-        font-weight: bold;
-        line-height: 10px;
-        letter-spacing: normal;
-        word-spacing: normal;
-        margin-left: -8px;
+      .title-2 {
+        font-size: 48px;
       }
 
       .text {
@@ -475,7 +471,7 @@
               type="number"
               id="rowCount"
               min="1"
-              max="40"
+              max="12"
               value="5"
               step="1"
             />
@@ -533,8 +529,7 @@
 
     <div class="grid-container">
       <div class="title" data-editable="true">
-        What a great time to be alive if you love the theater of the
-        absurd&nbsp;<span class="credit">David&nbsp;Lynch&nbsp;1946–2025</span>
+        What a great time to be alive if you love the theater of the absurd
       </div>
 
       <div class="subtitle" data-editable="true">2025</div>
@@ -574,6 +569,14 @@
       </div>
 
       <div class="image-1"><img src=imgs/cybertruck-trump.jpg></div>
+
+      <div class="title-2 hidden" data-editable="true">Second Title</div>
+      <div class="subtitle-2 hidden" data-editable="true">Second Subtitle</div>
+      <div class="text-2 hidden" data-editable="true">Second text block</div>
+      <div class="caption-2 hidden" data-editable="true">Second caption</div>
+      <div class="image-2 hidden">
+        <img src="/api/placeholder/400/300" alt="placeholder" />
+      </div>
     </div>
 
     <!-- New edit controls -->
