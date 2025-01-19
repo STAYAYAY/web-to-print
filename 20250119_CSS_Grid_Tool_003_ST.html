@@ -31,12 +31,12 @@
         display: flex;
         align-items: center;
         padding: 15px;
-        background-color: #f0f0f0;
+        background-color: rgb(255, 245, 156);
         position: relative;
       }
 
       .nav-title {
-        font-size: 16px;
+        font-size: 26px;
         font-weight: 500;
         position: absolute;
         left: 50%;
@@ -58,6 +58,7 @@
         font-family: "Avara_Bold", Arial, sans-serif;
         padding: 0px 15px 0px;
         border-bottom: 1px solid #000000;
+        background-color: rgb(255, 245, 156);
       }
 
       .top-controls {
@@ -84,10 +85,10 @@
       }
 
       button.outline {
-        background-color: #f0f0f0;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        padding: 8px 16px;
+        background-color: rgb(255, 245, 156);
+        border: 1px solid #000000;
+        border-radius: 15px;
+        padding: 8px 16px 5px 16px;
         cursor: pointer;
       }
 
@@ -102,7 +103,7 @@
       }
 
       .control-input input {
-        width: 60px;
+        width: 40px;
         padding: 4px 8px;
         border: 1px solid #ddd;
         border-radius: 4px;
@@ -141,6 +142,7 @@
       .layout-input label {
         display: block;
         margin-bottom: 8px;
+        margin-top: 20px;
         font-weight: 500;
         text-align: center;
       }
@@ -432,10 +434,6 @@
           "title title title title title";
       }
 
-      body.print-preview .controls {
-        background: white;
-      }
-
       /* —————————————————————————————————————— ACTUAL PRINT STYLES —————————————————————————————————————— */
 
       @media print {
@@ -506,7 +504,7 @@
 
           <div class="control-group">
             <div class="control-input">
-              <label for="columnCount">Columns:</label>
+              <label for="columnCount">Columns</label>
               <input
                 type="number"
                 id="columnCount"
@@ -517,7 +515,7 @@
               />
             </div>
             <div class="control-input">
-              <label for="rowCount">Rows:</label>
+              <label for="rowCount">Rows</label>
               <input
                 type="number"
                 id="rowCount"
@@ -531,7 +529,7 @@
 
           <div class="control-group">
             <div class="control-input">
-              <label for="columnGap">Column Gap:</label>
+              <label for="columnGap">Column Gap</label>
               <input
                 type="number"
                 id="columnGap"
@@ -543,7 +541,7 @@
               <span>px</span>
             </div>
             <div class="control-input">
-              <label for="rowGap">Row Gap:</label>
+              <label for="rowGap">Row Gap</label>
               <input
                 type="number"
                 id="rowGap"
@@ -559,11 +557,11 @@
 
         <div id="gridControls" class="grid-controls">
           <div class="layout-input">
-            <label for="gridAreas">Grid Template Areas:</label>
+            <label for="gridAreas">Grid Template Areas</label>
             <div id="gridAreaInput" class="grid-input">
               <!-- Grid cells will be dynamically created here -->
             </div>
-            <label for="columnWidths">Column Widths:</label>
+            <label for="columnWidths">Column Widths</label>
             <div id="columnWidthsInput" class="column-widths">
               <!-- Column width inputs will be dynamically created here -->
             </div>
