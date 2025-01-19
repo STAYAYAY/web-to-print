@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid Layout Editor</title>
+    <link rel="stylesheet" href="fonts/Avara/font.css" />
+    <style>
+      @font-face {
+        font-family: "Avara_Bold";
+        src: url("./fonts/Avara/Bold/Avara-Bold.eot"),
+          url("./fonts/Avara/Bold/Avara-Bold.eot?#iefix")
+            format("embedded-opentype"),
+          url("./fonts/Avara/Bold/Avara-Bold.woff") format("woff"),
+          url("./fonts/Avara/Bold/Avara-Bold.woff2") format("woff2"),
+          url("./fonts/Avara/Bold/Avara-Bold.ttf") format("truetype");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        margin: 0;
+      }
+
+      /* —————————————————————————————————————— NAV BAR —————————————————————————————————————— */
+
+      .nav-bar {
+        font-family: "Avara_Bold", Arial, sans-serif;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background-color: #f0f0f0;
+        /* border-bottom: 1px solid #000000; */
+      }
+
+      .nav-title {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      .nav-controls {
+        display: flex;
+        gap: 10px;
+      }
+
+      /* —————————————————————————————————————— LAYOUT CONTROLS —————————————————————————————————————— */
+
+      .controls {
+        font-family: "Avara_Bold", Arial, sans-serif;
+        padding: 0px 15px 0px;
+        border-bottom: 1px solid #000000;
+      }
+
+      .top-controls {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .control-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      button {
+        font-family: "Avara_Bold", Arial, sans-serif;
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+      }
+
+      button.outline {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 8px 16px;
+        cursor: pointer;
+      }
+
+      button.outline:hover {
+        background-color: #e0e0e0;
+      }
+
+      .control-input {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .control-input input {
+        width: 60px;
+        padding: 4px 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      .control-input label {
+        font-weight: 500;
+      }
+
+      .all-grid-controls {
+        padding: 0;
+        max-height: 1000px;
+        opacity: 1;
+        overflow: hidden;
+      }
+
+      .all-grid-controls.collapsed {
+        max-height: 0;
+        opacity: 0;
+        margin: 0;
+        padding: 0;
+      }
+
+      .gap-controls {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+        align-items: center;
+      }
+
+      .layout-input {
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
+      .layout-input label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .grid-input {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+        width: 100%;
+        margin-bottom: 8px;
+      }
+
+      .column-widths {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+        width: 100%;
+        margin-bottom: 20px;
+        margin-top: -2px; /* Adjust gap between grids */
+      }
+
+      /* Make width inputs match grid cells exactly */
+      .width-input,
+      .grid-cell {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 30px;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        font-family: monospace;
+      }
+
+      .width-input {
+        text-align: center;
+      }
+
+      .grid-cell {
+        text-align: start;
+        background: white;
+      }
+
+      .width-input:focus,
+      .grid-cell:focus {
+        outline: 2px solid #0066ff;
+        border-color: #0066ff;
+      }
+
+      .width-input {
+        background: white;
+        padding: 5px;
+        min-height: 30px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        font-family: monospace;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .width-input:focus {
+        outline: 2px solid #0066ff;
+        border-color: #0066ff;
+      }
+
+      .grid-cell {
+        background: white;
+        padding: 5px;
+        min-height: 30px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        font-family: monospace;
+        text-align: start;
+      }
+
+      .grid-cell:focus {
+        outline: 2px solid #0066ff;
+        border-color: #0066ff;
+      }
+
+      /* —————————————————————————————————————— EDIT ELEMENTS —————————————————————————————————————— */
+
+      .edit-controls {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+
+      .edit-button {
+        background: #0066ff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin: 0 5px;
+      }
+
+      .edit-button:hover {
+        background: #0052cc;
+      }
+
+      .edit-mode [contenteditable="true"] {
+        outline: 2px dashed #0066ff;
+        padding: 4px;
+        min-height: 1em;
+      }
+
+      .edit-mode [contenteditable="true"]:hover {
+        background: rgba(0, 102, 255, 0.1);
+      }
+
+      .edit-mode [contenteditable="true"]:focus {
+        outline: 2px solid #0066ff;
+        background: white;
+      }
+
+      .image-upload {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        z-index: 1001;
+      }
+
+      .image-upload.visible {
+        display: block;
+      }
+
+      .image-upload input[type="file"] {
+        margin: 10px 0;
+      }
+
+      .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+      }
+
+      .overlay.visible {
+        display: block;
+      }
+
+      /* —————————————————————————————————————— ACTUAL LAYOUT —————————————————————————————————————— */
+
+      .grid-container {
+        padding: 0;
+        box-sizing: border-box;
+        margin: 15px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: 10px;
+        grid-template-areas:
+          ".       subtitle .       .       ."
+          ".       .        title   title   title"
+          "caption image-1  image-1 image-1 image-1"
+          ".       image-1  image-1 image-1 image-1"
+          ".       text     text    text    text";
+      }
+
+      .grid-container > div.hidden {
+        display: none !important;
+      }
+
+      .title {
+        font-size: 48px;
+        font-weight: bold;
+        line-height: 1em;
+        letter-spacing: -1px;
+        word-spacing: -2px;
+        align-self: end;
+        grid-area: title;
+      }
+
+      .title-2 {
+        font-size: 48px;
+      }
+
+      .text {
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 14px;
+        word-spacing: -1px;
+        align-self: start;
+        grid-area: text;
+      }
+
+      .subtitle {
+        font-size: 16px;
+        font-weight: bold;
+        line-height: 20px;
+        grid-area: subtitle;
+      }
+
+      .caption {
+        font-size: 8px;
+        font-weight: bold;
+        line-height: 10px;
+        grid-area: caption;
+      }
+
+      .image-1 {
+        grid-area: image-1;
+      }
+
+      .image-1 img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      [contenteditable="true"] {
+        cursor: text;
+      }
+
+      .title[contenteditable="true"] {
+        min-height: 48px;
+      }
+
+      .subtitle[contenteditable="true"] {
+        min-height: 16px;
+      }
+
+      .text[contenteditable="true"] {
+        min-height: 12px;
+      }
+
+      .caption[contenteditable="true"] {
+        min-height: 8px;
+      }
+
+      /* —————————————————————————————————————— PRINT PREVIEW STYLE —————————————————————————————————————— */
+      body.print-preview {
+        background: #f0f0f0;
+        padding: 0;
+      }
+
+      body.print-preview .grid-input,
+      body.print-preview .column-widths {
+        width: 200mm;
+        margin-left: auto;
+        margin-right: auto;
+        box-sizing: border-box;
+      }
+
+      body.print-preview .layout-input label {
+        width: 200mm;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
+
+      body.print-preview .grid-container {
+        /* Basic container styles */
+        background: white;
+        margin: 20px auto;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+        /* Print dimensions */
+        width: 210mm;
+        height: 297mm;
+        padding: 5mm;
+
+        /* Grid layout */
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: auto auto auto 1fr auto;
+        grid-template-areas:
+          "image-1 image-1 image-1 image-1 image-1"
+          "image-1 image-1 image-1 image-1 image-1"
+          "subtitle caption . text text"
+          ". . . text text"
+          ". . . . ."
+          "title title title title title";
+      }
+
+      body.print-preview .controls {
+        background: white;
+      }
+
+      /* —————————————————————————————————————— ACTUAL PRINT STYLES —————————————————————————————————————— */
+
+      @media print {
+        @page {
+          size: A4;
+          margin: 0;
+          height: 297mm;
+          width: 210mm;
+          margin: 0;
+          overflow: hidden;
+        }
+
+        body {
+          margin: 5mm;
+          min-height: initial;
+        }
+
+        .controls,
+        .edit-controls,
+        .line {
+          display: none;
+        }
+
+        .grid-container {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          grid-template-rows: auto auto auto 1fr auto;
+          grid-template-areas:
+            "image-1 image-1 image-1 image-1 image-1"
+            "image-1 image-1 image-1 image-1 image-1"
+            "subtitle caption . text text"
+            ". . . text text"
+            ". . . . ."
+            "title title title title title";
+          height: 287mm;
+          width: 200mm;
+          padding: 0 !important; /* Override the default 16px padding */
+          margin: 0 !important; /* Override the default 5px margin */
+          page-break-after: avoid;
+        }
+
+        .title {
+          align-self: end;
+        }
+
+        body.print-preview .grid-container {
+          box-shadow: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="nav-bar">
+      <div class="nav-title">Grid Layout Editor</div>
+      <div class="nav-controls">
+        <button id="toggleView" class="outline">Switch to Print View</button>
+        <button id="toggleAllControls" class="outline">Hide Controls</button>
+        <button id="about" class="outline">About</button>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div id="allGridControls" class="all-grid-controls">
+        <div class="top-controls">
+          <div class="control-group">
+            <button id="resetLayout" class="outline">Reset Layout</button>
+          </div>
+
+          <div class="control-group">
+            <div class="control-input">
+              <label for="columnCount">Columns:</label>
+              <input
+                type="number"
+                id="columnCount"
+                min="1"
+                max="12"
+                value="5"
+                step="1"
+              />
+            </div>
+            <div class="control-input">
+              <label for="rowCount">Rows:</label>
+              <input
+                type="number"
+                id="rowCount"
+                min="1"
+                max="12"
+                value="5"
+                step="1"
+              />
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="control-input">
+              <label for="columnGap">Column Gap:</label>
+              <input
+                type="number"
+                id="columnGap"
+                min="0"
+                max="50"
+                value="10"
+                step="1"
+              />
+              <span>px</span>
+            </div>
+            <div class="control-input">
+              <label for="rowGap">Row Gap:</label>
+              <input
+                type="number"
+                id="rowGap"
+                min="0"
+                max="50"
+                value="10"
+                step="1"
+              />
+              <span>px</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="gridControls" class="grid-controls">
+          <div class="layout-input">
+            <label for="gridAreas">Grid Template Areas:</label>
+            <div id="gridAreaInput" class="grid-input">
+              <!-- Grid cells will be dynamically created here -->
+            </div>
+            <label for="columnWidths">Column Widths:</label>
+            <div id="columnWidthsInput" class="column-widths">
+              <!-- Column width inputs will be dynamically created here -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-container">
+      <div class="title" data-editable="true">
+        What a great time to be alive if you love the theater of the absurd
+      </div>
+
+      <div class="subtitle" data-editable="true">2025</div>
+
+      <div class="text" data-editable="true">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+        dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+        quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
+        arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras
+        dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend
+        tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+        enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
+        Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+        imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+        ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus
+        eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing
+        sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,
+        hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec
+        vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit
+        amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris
+        sit amet nibh. Donec sodales sagittis magna.
+      </div>
+
+      <div class="caption" data-editable="true">
+        Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean
+        imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper
+        ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus
+        eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing
+        sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,
+        hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec
+        vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit
+        amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris
+        sit amet nibh. Donec sodales sagittis magna.
+      </div>
+
+      <div class="image-1"><img src=imgs/cybertruck-trump.jpg></div>
+
+      <div class="title-2 hidden" data-editable="true">Second Title</div>
+      <div class="subtitle-2 hidden" data-editable="true">Second Subtitle</div>
+      <div class="text-2 hidden" data-editable="true">Second text block</div>
+      <div class="caption-2 hidden" data-editable="true">Second caption</div>
+      <div class="image-2 hidden">
+        <img src="/api/placeholder/400/300" alt="placeholder" />
+      </div>
+    </div>
+
+    <!-- New edit controls -->
+    <div class="edit-controls">
+      <button id="toggleEdit" class="edit-button">Enable Editing</button>
+      <button id="editImage" class="edit-button">Change Image</button>
+    </div>
+
+    <!-- Image upload dialog -->
+    <div class="image-upload" id="imageUpload">
+      <h3>Upload New Image</h3>
+      <input type="file" id="imageInput" accept="image/*" />
+      <button class="edit-button" id="confirmUpload">Upload</button>
+      <button class="edit-button" id="cancelUpload">Cancel</button>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+      // DOM Elements
+      const elements = {
+        gridContainer: document.querySelector(".grid-container"),
+        gridAreaInput: document.getElementById("gridAreaInput"),
+        columnWidthsInput: document.getElementById("columnWidthsInput"),
+        resetLayoutBtn: document.getElementById("resetLayout"),
+        columnCountInput: document.getElementById("columnCount"),
+        rowCountInput: document.getElementById("rowCount"),
+        toggleViewBtn: document.getElementById("toggleView"),
+        columnGapInput: document.getElementById("columnGap"),
+        rowGapInput: document.getElementById("rowGap"),
+        toggleEditBtn: document.getElementById("toggleEdit"),
+        editImageBtn: document.getElementById("editImage"),
+        imageUpload: document.getElementById("imageUpload"),
+        imageInput: document.getElementById("imageInput"),
+        confirmUploadBtn: document.getElementById("confirmUpload"),
+        cancelUploadBtn: document.getElementById("cancelUpload"),
+        overlay: document.getElementById("overlay"),
+        toggleGridControlsBtn: document.getElementById("toggleGridControls"),
+        gridControls: document.getElementById("gridControls"),
+        toggleAllControlsBtn: document.getElementById("toggleAllControls"),
+        allGridControls: document.getElementById("allGridControls"),
+        aboutBtn: document.getElementById("about"),
+      };
+
+      // Grid Configuration
+      const config = {
+        defaultAreas: [
+          [".", "subtitle", ".", ".", "."],
+          [".", ".", "title", "title", "title"],
+          ["caption", "image-1", "image-1", "image-1", "image-1"],
+          [".", "image-1", "image-1", "image-1", "image-1"],
+          [".", "text", "text", "text", "text"],
+        ],
+        printAreas: [
+          ["image-1", "image-1", "image-1", "image-1", "image-1"],
+          ["image-1", "image-1", "image-1", "image-1", "image-1"],
+          ["subtitle", "caption", ".", "text", "text"],
+          [".", ".", ".", "text", "text"],
+          ["title", "title", "title", "title", "title"],
+        ],
+      };
+
+      // Initial State
+      let state = {
+        gridColumns: 5,
+        gridRows: 5,
+        columnWidths: new Array(5).fill("1fr"),
+        isPrintView: false,
+        isEditMode: false,
+      };
+
+      // Grid Cell Creation and Management
+      function createGridCell(value) {
+        const cell = document.createElement("input");
+        cell.type = "text";
+        cell.className = "grid-cell";
+        cell.value = value;
+        cell.addEventListener("input", updateGridLayout);
+        return cell;
+      }
+
+      function createWidthInput(value, index) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.className = "width-input";
+        input.value = value;
+        input.placeholder = "1fr";
+        input.addEventListener("input", (e) => {
+          state.columnWidths[index] = e.target.value.endsWith("fr")
+            ? e.target.value
+            : e.target.value + "fr";
+          updateColumnWidths();
+        });
+        return input;
+      }
+
+      // Grid Layout Updates
+      function updateGridLayout() {
+        const cells = Array.from(
+          elements.gridAreaInput.querySelectorAll(".grid-cell")
+        );
+        const areas = [];
+
+        for (let i = 0; i < state.gridRows; i++) {
+          const row = cells
+            .slice(i * state.gridColumns, (i + 1) * state.gridColumns)
+            .map((cell) => cell.value || ".");
+          areas.push(row);
+        }
+
+        const templateAreas = areas
+          .map((row) => `"${row.join(" ")}"`)
+          .join("\n");
+        elements.gridContainer.style.gridTemplateAreas = templateAreas;
+
+        const usedAreas = new Set(areas.flat().filter((area) => area !== "."));
+        const gridElements = elements.gridContainer.children;
+
+        Array.from(gridElements).forEach((element) => {
+          const areaClass = Array.from(element.classList).find(
+            (className) => className !== "hidden"
+          );
+
+          if (areaClass) {
+            if (usedAreas.has(areaClass)) {
+              element.classList.remove("hidden");
+            } else {
+              element.classList.add("hidden");
+            }
+          }
+        });
+
+        if (state.isEditMode) {
+          document
+            .querySelectorAll('[data-editable="true"]')
+            .forEach((element) => {
+              if (!element.classList.contains("hidden")) {
+                element.contentEditable = true;
+              }
+            });
+        }
+      }
+
+      function updateColumnWidths() {
+        const templateColumns = state.columnWidths.join(" ");
+        elements.gridContainer.style.gridTemplateColumns = templateColumns;
+        elements.gridAreaInput.style.gridTemplateColumns = templateColumns;
+        elements.columnWidthsInput.style.gridTemplateColumns = templateColumns;
+      }
+
+      function renderColumnWidths() {
+        elements.columnWidthsInput.innerHTML = "";
+        state.columnWidths.forEach((width, index) => {
+          elements.columnWidthsInput.appendChild(
+            createWidthInput(width, index)
+          );
+        });
+        updateColumnWidths();
+      }
+
+      function renderGrid(areas = config.defaultAreas) {
+        elements.gridAreaInput.innerHTML = "";
+        areas.forEach((row) => {
+          row.forEach((area) => {
+            elements.gridAreaInput.appendChild(createGridCell(area));
+          });
+        });
+        renderColumnWidths();
+      }
+
+      // Grid Gap Management
+      function updateGridGap() {
+        const columnGap = `${elements.columnGapInput.value}px`;
+        const rowGap = `${elements.rowGapInput.value}px`;
+
+        elements.gridContainer.style.columnGap = columnGap;
+        elements.gridContainer.style.rowGap = rowGap;
+        elements.gridAreaInput.style.gap = `${elements.rowGapInput.value}px ${elements.columnGapInput.value}px`;
+        elements.columnWidthsInput.style.gap = `${elements.columnGapInput.value}px`;
+      }
+
+      // Grid Dimension Handlers
+      function handleColumnCountChange(e) {
+        const newCount = parseInt(e.target.value);
+        if (newCount >= 1 && newCount <= 12 && newCount !== state.gridColumns) {
+          const difference = newCount - state.gridColumns;
+          if (difference > 0) {
+            // Adding columns
+            for (let i = 0; i < difference; i++) {
+              const cells = Array.from(
+                elements.gridAreaInput.querySelectorAll(".grid-cell")
+              );
+              const currentLayout = [];
+              for (let j = 0; j < state.gridRows; j++) {
+                currentLayout.push(
+                  cells.slice(
+                    j * state.gridColumns,
+                    (j + 1) * state.gridColumns
+                  )
+                );
+              }
+
+              state.gridColumns++;
+              state.columnWidths.push("1fr");
+
+              currentLayout.forEach((row) => {
+                row.forEach((cell) => {
+                  elements.gridAreaInput.appendChild(cell);
+                });
+                elements.gridAreaInput.appendChild(createGridCell("."));
+              });
+            }
+          } else {
+            // Removing columns
+            for (let i = 0; i < Math.abs(difference); i++) {
+              if (state.gridColumns > 1) {
+                state.gridColumns--;
+                state.columnWidths.pop();
+                for (let j = 0; j < state.gridRows; j++) {
+                  const lastCellIndex = (j + 1) * (state.gridColumns + 1) - 1;
+                  const cellToRemove =
+                    elements.gridAreaInput.children[lastCellIndex];
+                  if (cellToRemove) {
+                    elements.gridAreaInput.removeChild(cellToRemove);
+                  }
+                }
+              }
+            }
+          }
+          renderColumnWidths();
+          updateGridLayout();
+        }
+      }
+
+      function handleRowCountChange(e) {
+        const newCount = parseInt(e.target.value);
+        if (newCount >= 1 && newCount <= 12 && newCount !== state.gridRows) {
+          const difference = newCount - state.gridRows;
+          if (difference > 0) {
+            // Adding rows
+            for (let i = 0; i < difference; i++) {
+              state.gridRows++;
+              const currentAreas = getCurrentAreas();
+              currentAreas.push(new Array(state.gridColumns).fill("."));
+              renderGrid(currentAreas);
+            }
+          } else {
+            // Removing rows
+            for (let i = 0; i < Math.abs(difference); i++) {
+              if (state.gridRows > 1) {
+                state.gridRows--;
+                const currentAreas = getCurrentAreas();
+                currentAreas.pop();
+                renderGrid(currentAreas);
+              }
+            }
+          }
+          updateGridLayout();
+        }
+      }
+
+      // Utility Functions
+      function getCurrentAreas() {
+        const cells = Array.from(
+          elements.gridAreaInput.querySelectorAll(".grid-cell")
+        );
+        const areas = [];
+        for (let i = 0; i < state.gridRows; i++) {
+          areas.push(
+            cells
+              .slice(i * state.gridColumns, (i + 1) * state.gridColumns)
+              .map((cell) => cell.value || ".")
+          );
+        }
+        return areas;
+      }
+
+      function resetLayout() {
+        state.gridColumns = 5;
+        state.gridRows = 5;
+        state.columnWidths = new Array(state.gridColumns).fill("1fr");
+        elements.columnCountInput.value = state.gridColumns;
+        elements.rowCountInput.value = state.gridRows;
+        elements.columnGapInput.value = "10";
+        elements.rowGapInput.value = "10";
+
+        renderGrid(state.isPrintView ? config.printAreas : config.defaultAreas);
+        updateGridLayout();
+        updateGridGap();
+      }
+
+      // Image Upload Handlers
+      function handleImageUpload(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = document.querySelector(".image-1 img");
+          img.src = e.target.result;
+          elements.imageUpload.classList.remove("visible");
+          elements.overlay.classList.remove("visible");
+          elements.imageInput.value = "";
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Event Listeners
+      function initializeEventListeners() {
+        // Grid Controls
+        elements.columnCountInput.addEventListener(
+          "input",
+          handleColumnCountChange
+        );
+        elements.rowCountInput.addEventListener("input", handleRowCountChange);
+        elements.resetLayoutBtn.addEventListener("click", resetLayout);
+        elements.columnGapInput.addEventListener("input", updateGridGap);
+        elements.rowGapInput.addEventListener("input", updateGridGap);
+
+        // View Toggle
+        elements.toggleViewBtn.addEventListener("click", () => {
+          state.isPrintView = !state.isPrintView;
+          document.body.classList.toggle("print-preview", state.isPrintView);
+          elements.toggleViewBtn.textContent = state.isPrintView
+            ? "Switch to Web View"
+            : "Switch to Print View";
+
+          const currentLayout = state.isPrintView
+            ? config.printAreas
+            : config.defaultAreas;
+          renderGrid(currentLayout);
+          updateGridLayout();
+        });
+
+        // Grid Controls Toggle
+        elements.toggleAllControlsBtn.addEventListener("click", () => {
+          elements.allGridControls.classList.toggle("collapsed");
+          elements.toggleAllControlsBtn.textContent =
+            elements.allGridControls.classList.contains("collapsed")
+              ? "Show Controls"
+              : "Hide Controls";
+        });
+
+        elements.aboutBtn.addEventListener("click", () => {
+          alert(
+            "Grid Layout Editor\nVersion 1.0\nA simple tool for creating and editing grid layouts."
+          );
+        });
+
+        // Edit Mode Toggle
+        elements.toggleEditBtn.addEventListener("click", () => {
+          state.isEditMode = !state.isEditMode;
+          document.body.classList.toggle("edit-mode");
+          elements.toggleEditBtn.textContent = state.isEditMode
+            ? "Disable Editing"
+            : "Enable Editing";
+
+          document
+            .querySelectorAll('[data-editable="true"]')
+            .forEach((element) => {
+              element.contentEditable = state.isEditMode;
+            });
+        });
+
+        // Image Upload
+        elements.editImageBtn.addEventListener("click", () => {
+          elements.imageUpload.classList.add("visible");
+          elements.overlay.classList.add("visible");
+        });
+
+        elements.cancelUploadBtn.addEventListener("click", () => {
+          elements.imageUpload.classList.remove("visible");
+          elements.overlay.classList.remove("visible");
+          elements.imageInput.value = "";
+        });
+
+        elements.confirmUploadBtn.addEventListener("click", () => {
+          const file = elements.imageInput.files[0];
+          if (file) {
+            handleImageUpload(file);
+          }
+        });
+      }
+
+      // Initialize Application
+      function init() {
+        renderGrid();
+        updateGridGap();
+        initializeEventListeners();
+      }
+
+      // Start the application
+      init();
+    </script>
+  </body>
+</html>
