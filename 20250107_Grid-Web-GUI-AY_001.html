@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    gap: 0;
+    font-family: Arial, sans-serif;
+}
+
+.top-row {
+    display: flex;
+    width: 150px;
+    gap: 5px;
+    height: 20px;
+    margin-bottom: 20px;
+}
+
+.main-container {
+    display: flex;
+    gap: 2px;
+    height: 252px;
+    align-items: flex-start; /* Align items to the top */
+}
+
+.center-area {
+    flex: 1;
+}
+
+.main-textarea {
+    width: 700px;
+    height: 250px;
+    resize: none;
+    padding: 0px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0;
+    display: block;
+}
+
+.side-area {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.side-textarea {
+    height: calc((150px - 10px) / 6); /* Evenly divide the side height */
+    width: 75px; /* Take up 100% of the side-area width */
+    resize: none;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.bottom-row {
+    display: flex;
+    gap: 2px;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+    width: 700px; /* Matches main textarea width */
+}
+
+.small-textarea {
+    min-width: 0; /* Remove min-width constraint */
+    flex: 1; /* Make all small textareas equal width */
+    height: 100%;
+    resize: none;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+textarea:focus {
+    outline: 2px solid #007bff;
+    border-color: #007bff;
+}
+</style>
+</head>
+<body>
+    <div class="top-row">
+        <textarea class="small-textarea"></textarea>
+        <textarea class="small-textarea"></textarea>
+    </div>
+
+    <div class="main-container">
+        <div class="center-area">
+            <textarea class="main-textarea" placeholder="Enter your text here..."></textarea>
+        </div>
+        <div class="side-area">
+            <textarea class="side-textarea"></textarea>
+            <textarea class="side-textarea"></textarea>
+            <textarea class="side-textarea"></textarea>
+            <textarea class="side-textarea"></textarea>
+            <textarea class="side-textarea"></textarea>
+            <textarea class="side-textarea"></textarea>
+        </div>
+    </div>
+
+    <div class="bottom-row">
+        <textarea class="small-textarea"></textarea>
+        <textarea class="small-textarea"></textarea>
+        <textarea class="small-textarea"></textarea>
+        <textarea class="small-textarea"></textarea>
+        <textarea class="small-textarea"></textarea>
+        <textarea class="small-textarea"></textarea>
+        <textarea class="small-textarea"></textarea>
+        <textarea class="small-textarea"></textarea>
+        <textarea class="small-textarea"></textarea>
+    </div>
+</body>
+</html>
