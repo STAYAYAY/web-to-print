@@ -88,3 +88,27 @@ Meeting with Ted at 2pm
 
 **10.12.2024**  
 Midterm presentation
+
+**28.01.2025**
+to-do's
+
+[ ] Template's
+	3 Layouts
+	- verschiedene Schriften
+	- verschiedene  Bilder
+	- random Shuffle 
+
+[ ] Upload Images
+    - wie Umgehen mit mehreren Bildern?
+
+[ ] Control for Typographie and Images Tool weitertüffteln
+
+[ ] Print pdf debuggen
+
+[ ] Export Button html too a Webpage | Wenigsten Runterladen können
+
+[ ] Index sortieren || 
+    - Hover mit Comments, Lexikon
+    - besseres System
+
+[ ] Index ausweiten "nice to have"
