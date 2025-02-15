@@ -580,8 +580,14 @@
 
       .controls,
       .edit-controls,
-      .line {
-        display: none;
+      .line,
+      .nav-bar,
+      .about-section,
+      .image-upload,
+      #loadModal,
+      #saveModal,
+      #overlay {
+        display: none !important;
       }
 
       .grid-container {
@@ -1460,10 +1466,14 @@
     }
 
     function getFullHTML() {
-      const fullDocument = document.cloneNode(true);
+      const fullDocument = document.documentElement.cloneNode(true);
       
       // Entfernen Sie unnötige Skript-Tags, um Konflikte zu vermeiden
       fullDocument.querySelectorAll("script").forEach(script => script.remove());
+      
+      // Entfernen Sie die Layout-Editor-Elemente und relevante <div>-Tags
+      const layoutEditorElements = fullDocument.querySelectorAll("#layoutEditor, .editor-controls, .css-editor, .layout-editor-div, .edit-controls, .nav-bar, .nav-controls, .controls, .image-upload, #loadModal, #saveModal, #aboutSection");
+      layoutEditorElements.forEach(element => element.remove());
       
       // Inline das CSS aus den Stylesheets
       const styles = getCSS();
@@ -1471,11 +1481,24 @@
       // Fügen Sie die Stile direkt in ein neues <style>-Tag im <head> ein
       const styleTag = document.createElement("style");
       styleTag.textContent = styles;
-      fullDocument.head.appendChild(styleTag);
-
-      console.log(styleTag.textContent);
+      fullDocument.querySelector("head").appendChild(styleTag);
       
-      return `<!DOCTYPE html>\n<html lang='en'>\n` + fullDocument.documentElement.outerHTML + `\n</html>`;
+      // Entferne den Editor-Modus für den Druck
+      removeEditorModeForPrint();
+      
+      // Füge die Funktion removeEditorModeForPrint in den exportierten HTML-Code ein
+      const scriptTag = document.createElement("script");
+      scriptTag.textContent = `
+        function removeEditorModeForPrint() {
+          document.body.classList.remove('edit-mode');
+          document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+            element.contentEditable = false;
+          });
+        }
+      `;
+      fullDocument.querySelector("body").appendChild(scriptTag);
+      
+      return `<!DOCTYPE html>\n<html lang='en'>\n` + fullDocument.outerHTML + `\n</html>`;
     }
 
     function exportFullHTML() {
@@ -1495,6 +1518,16 @@
     function addExportListener() {
       document.getElementById("exportHTML").addEventListener("click", exportFullHTML);
     }
+
+    function removeEditorModeForPrint() {
+      document.body.classList.remove('edit-mode');
+      document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+        element.contentEditable = false;
+      });
+    }
+
+    // Fügen Sie den Event-Listener für den Druck hinzu
+    window.addEventListener('beforeprint', removeEditorModeForPrint);
 
     // Initialisieren Sie die Anwendung
     function init() {
