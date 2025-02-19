@@ -143,6 +143,10 @@
         opacity: 1;
       }
 
+      tr.highlighted td {
+        background-color: #dfffe0;
+      }
+
       /* Fixed column widths */
       th:nth-child(1),
       td:nth-child(1) {
@@ -298,6 +302,7 @@
           url: "20250219_CSS_Grid_Tool_001_AY.html",
           tooltip:
             "There is a Version where you able to Save you presentings as Web and Print to Export this as a clean HTML File",
+          highlight: true,
         },
         {
           date: "25-02-08",
@@ -935,13 +940,21 @@
         tbody.innerHTML = sketches
           .map(
             (sketch) => `
-      <tr>
-        <td><a href="${sketch.url}" target="_blank" title="${sketch.tooltip}">${sketch.date}</a></td>
-        <td><a href="${sketch.url}" target="_blank" title="${sketch.tooltip}">${sketch.type}</a></td>
-        <td><a href="${sketch.url}" target="_blank" title="${sketch.tooltip}">${sketch.description}</a></td>
-        <td><a href="${sketch.url}" target="_blank" title="${sketch.tooltip}">${sketch.author}</a></td>
-      </tr>
-        `
+            <tr ${sketch.highlight ? 'class="highlighted"' : ""}>
+                <td><a href="${sketch.url}" target="_blank" title="${
+              sketch.tooltip
+            }">${sketch.date}</a></td>
+                <td><a href="${sketch.url}" target="_blank" title="${
+              sketch.tooltip
+            }">${sketch.type}</a></td>
+                <td><a href="${sketch.url}" target="_blank" title="${
+              sketch.tooltip
+            }">${sketch.description}</a></td>
+                <td><a href="${sketch.url}" target="_blank" title="${
+              sketch.tooltip
+            }">${sketch.author}</a></td>
+            </tr>
+            `
           )
           .join("");
       }
