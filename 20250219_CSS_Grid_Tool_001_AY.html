@@ -615,7 +615,7 @@
         align-self: end;
       }
 
-      body.print-preview .grid-container {
+      ...printCSS... body.print-preview .grid-container {
         box-shadow: none !important;
       }
     }
@@ -1531,77 +1531,123 @@
 
     function getCSS() {
       let css = "";
+      let printCSS = "@media print {\n";
       for (let i = 0; i < document.styleSheets.length; i++) {
         const sheet = document.styleSheets[i];
         try {
           const rules = sheet.cssRules || sheet.rules;
           for (let j = 0; j < rules.length; j++) {
-            css += rules[j].cssText + "\n";
+            const rule = rules[j].cssText;
+            if (rule.includes("@media print")) {
+              printCSS += rule.replace("@media print {", "").replace("}", "") + "\n";
+            } else {
+              css += rule + "\n";
+            }
           }
         } catch (e) {
           console.warn("Access to stylesheet %s is restricted", sheet.href);
         }
       }
-      return css;
+      printCSS += "}";
+      return { css, printCSS };
     }
 
-    function getFullHTML() {
+    function getCSSFromLayout(layout) {
+      let css = layout.styles.web || "";
+      let printCSS = "@media print {\n" + (layout.styles.print || "") + "\n}";
+      return { css, printCSS };
+    }
+    function getLayoutStyles(webLayout, printLayout) {
+      // Web-Layout CSS
+      const webGridCSS = `
+    .grid-container {
+      display: grid;
+      grid-template-columns: ${webLayout.columnWidths.join(' ')};
+      grid-template-areas: ${webLayout.areas.map(row => `"${row.join(' ')}"`).join(' ')};
+      gap: ${webLayout.rowGap}px ${webLayout.columnGap}px;
+    }
+  `;
+
+      // Print-Layout CSS
+      const printGridCSS = `
+    @media print {
+      .grid-container {
+        display: grid;
+        grid-template-columns: ${printLayout.columnWidths.join(' ')};
+        grid-template-areas: ${printLayout.areas.map(row => `"${row.join(' ')}"`).join(' ')};
+        gap: ${printLayout.rowGap}px ${printLayout.columnGap}px;
+      }
+    }
+  `;
+
+      return {
+        webCSS: `
+      ${webGridCSS}
+      ${webLayout.styles?.web || ''}
+    `,
+        printCSS: `
+      ${printGridCSS}
+      ${printLayout.styles?.print || ''}
+    `
+      };
+    }
+
+    function getFullHTML(webLayout, printLayout) {
       // Set state to web view before generating HTML
       state.isPrintView = false;
       document.body.classList.remove('print-preview');
-      elements.toggleViewBtn.textContent = 'Switch to Print View';
 
       const fullDocument = document.documentElement.cloneNode(true);
 
-      // Entfernen Sie unnötige Skript-Tags, um Konflikte zu vermeiden
+      // Entferne unnötige Elemente
       fullDocument.querySelectorAll("script").forEach(script => script.remove());
-
-      // Entfernen Sie die Layout-Editor-Elemente und relevante <div>-Tags
       const layoutEditorElements = fullDocument.querySelectorAll("#layoutEditor, .editor-controls, .css-editor, .layout-editor-div, .edit-controls, .nav-bar, .nav-controls, .controls, .image-upload, #loadModal, #saveModal, #aboutSection");
       layoutEditorElements.forEach(element => element.remove());
 
-      // Inline das CSS aus den Stylesheets
-      const styles = getCSS();
+      // Hole die Styles für Web und Print
+      const { webCSS, printCSS } = getLayoutStyles(webLayout, printLayout);
 
-      // Fügen Sie die Stile direkt in ein neues <style>-Tag im <head> ein
-      const styleTag = document.createElement("style");
-      styleTag.textContent = styles;
-      fullDocument.querySelector("head").appendChild(styleTag);
+      // Erstelle zwei separate Style-Tags
+      const webStyleTag = document.createElement("style");
+      const printStyleTag = document.createElement("style");
 
-      // Entferne den Editor-Modus für den Druck
+      // Setze die Styles
+      webStyleTag.textContent = webCSS;
+      printStyleTag.textContent = printCSS;
+
+      // Füge die Style-Tags zum Head hinzu
+      const head = fullDocument.querySelector("head");
+      head.appendChild(webStyleTag);
+      head.appendChild(printStyleTag);
+
+      // Entferne Editor-Modus
       removeEditorModeForPrint();
 
-      // Füge die Funktion removeEditorModeForPrint in den exportierten HTML-Code ein
-      const scriptTag = document.createElement("script");
-      scriptTag.textContent = `
-    function removeEditorModeForPrint() {
-      document.body.classList.remove('edit-mode');
-      document.querySelectorAll('[contenteditable="true"]').forEach(element => {
-        element.contentEditable = false;
-      });
-    }
-  `;
-      fullDocument.querySelector("body").appendChild(scriptTag);
-
-      return `<!DOCTYPE html>\n<html lang='en'>\n` + fullDocument.outerHTML + `\n</html>`;
+      return `<!DOCTYPE html>\n<html lang='en'>\n${fullDocument.outerHTML}\n</html>`;
     }
 
     // Funktion zum Exportieren des vollständigen HTML
     function exportFullHTML() {
-      const htmlContent = getFullHTML();
+      const webLayoutIndex = elements.webLayout.value;
+      const printLayoutIndex = elements.printLayout.value;
+      const savedLayouts = JSON.parse(localStorage.getItem('gridLayouts') || '[]');
+      const webLayout = savedLayouts[webLayoutIndex];
+      const printLayout = savedLayouts[printLayoutIndex];
+
+      const htmlContent = getFullHTML(webLayout, printLayout);
       const zip = new JSZip();
 
-      // Fügen Sie die HTML-Datei zur ZIP-Datei hinzu
+      // Füge die HTML-Datei zur ZIP-Datei hinzu
       zip.file("index.html", htmlContent);
 
-      // Fügen Sie das Bild zur ZIP-Datei hinzu
+      // Füge das Bild zur ZIP-Datei hinzu
       const imageSrc = document.querySelector(".image-1 img").src;
       fetch(imageSrc)
         .then(response => response.blob())
         .then(blob => {
           zip.file("imgs/cybertruck-trump.jpg", blob);
 
-          // Generieren Sie die ZIP-Datei und laden Sie sie herunter
+          // Generiere die ZIP-Datei und lade sie herunter
           zip.generateAsync({ type: "blob" }).then(content => {
             saveAs(content, "exported_layout.zip");
           });
@@ -1618,7 +1664,11 @@
 
     // Initialisieren Sie die Anwendung
     function init() {
-      // ...existing initialization code...
+      // Stellen Sie sicher, dass diese Funktionen definiert sind
+      if (typeof renderGrid === 'function') renderGrid();
+      if (typeof updateGridGap === 'function') updateGridGap();
+      if (typeof initializeEventListeners === 'function') initializeEventListeners();
+      if (typeof initializeTextControls === 'function') initializeTextControls();
       addExportListener(); // Rufen Sie diese Funktion auf, um den Event-Listener hinzuzufügen
     }
 
