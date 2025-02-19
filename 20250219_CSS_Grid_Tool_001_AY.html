@@ -546,7 +546,7 @@
       /* Print dimensions */
       width: 210mm;
       height: 297mm;
-      padding: 5mm;
+      padding: 10mm;
 
       /* Grid layout */
       display: grid;
@@ -603,11 +603,12 @@
           "title title title title title";
         height: 287mm;
         width: 200mm;
-        padding: 0 !important;
+        padding: 10mm !important;
         /* Override the default 16px padding */
-        margin: 0 !important;
+        margin: 0mm !important;
         /* Override the default 5px margin */
         page-break-after: avoid;
+        border: 0mm solid white;
       }
 
       .title {
@@ -822,6 +823,23 @@
     </div>
   </div>
 
+  <!-- Layout Selection Modal -->
+  <div id="layoutSelectionModal" class="modal">
+    <div class="modal-content">
+      <h3>Select Layouts for Export</h3>
+      <label for="webLayout">Choose Web Layout:</label>
+      <select id="webLayout"></select>
+      <label for="printLayout">Choose Print Layout:</label>
+      <select id="printLayout"></select>
+      <div class="modal-buttons">
+        <button class="edit-button" id="confirmLayoutSelection">Confirm</button>
+        <button class="edit-button" id="cancelLayoutSelection">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
   <script>
     // DOM Elements
     const elements = {
@@ -852,7 +870,11 @@
       fontFamily: document.getElementById("fontFamily"),
       lineHeight: document.getElementById("lineHeight"),
 
-      
+      layoutSelectionModal: document.getElementById('layoutSelectionModal'),
+      webLayout: document.getElementById('webLayout'),
+      printLayout: document.getElementById('printLayout'),
+      confirmLayoutSelection: document.getElementById('confirmLayoutSelection'),
+      cancelLayoutSelection: document.getElementById('cancelLayoutSelection'),
 
     };
 
@@ -868,52 +890,97 @@
     elements.cancelLoad = document.getElementById('cancelLoad');
     elements.deleteLayout = document.getElementById('deleteLayout');
 
+    // Funktion zum Laden der Layout-Auswahl
+    function updateLayoutSelection() {
+      const savedLayouts = JSON.parse(localStorage.getItem('gridLayouts') || '[]');
+      elements.webLayout.innerHTML = '';
+      elements.printLayout.innerHTML = '';
+
+      savedLayouts.forEach((layout, index) => {
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `${layout.name} (${layout.viewType})`;
+        if (layout.viewType === 'web') {
+          elements.webLayout.appendChild(option);
+        } else if (layout.viewType === 'print') {
+          elements.printLayout.appendChild(option);
+        }
+      });
+    }
+
+    // Funktion zum Laden des ausgewählten Layouts
+    function loadSelectedLayoutsForExport() {
+      const webLayoutIndex = elements.webLayout.value;
+      const printLayoutIndex = elements.printLayout.value;
+      const savedLayouts = JSON.parse(localStorage.getItem('gridLayouts') || '[]');
+      const webLayout = savedLayouts[webLayoutIndex];
+      const printLayout = savedLayouts[printLayoutIndex];
+
+      if (webLayout) {
+        loadLayout(webLayout);
+      }
+      if (printLayout) {
+        loadLayout(printLayout);
+      }
+    }
+
+    // Event-Listener für die Layout-Auswahl
+    elements.confirmLayoutSelection.addEventListener('click', () => {
+      loadSelectedLayoutsForExport();
+      elements.layoutSelectionModal.style.display = 'none';
+      exportFullHTML();
+    });
+
+    elements.cancelLayoutSelection.addEventListener('click', () => {
+      elements.layoutSelectionModal.style.display = 'none';
+    });
+
 
     // Save Configuration
-      function saveLayout() {
-        const layoutData = {
-          name: elements.layoutName.value,
-          viewType: state.isPrintView ? 'print' : 'web',
-          areas: getCurrentAreas(),
-          columnWidths: state.columnWidths,
-          columnGap: elements.columnGapInput.value,
-          rowGap: elements.rowGapInput.value,
-          columns: state.gridColumns,
-          rows: state.gridRows,
-          styles: getAllStyles() // Add styles to saved data
-        };
+    function saveLayout() {
+      const layoutData = {
+        name: elements.layoutName.value,
+        viewType: state.isPrintView ? 'print' : 'web',
+        areas: getCurrentAreas(),
+        columnWidths: state.columnWidths,
+        columnGap: elements.columnGapInput.value,
+        rowGap: elements.rowGapInput.value,
+        columns: state.gridColumns,
+        rows: state.gridRows,
+        styles: getAllStyles() // Add styles to saved data
+      };
 
-        let savedLayouts = JSON.parse(localStorage.getItem('gridLayouts') || '[]');
-        savedLayouts.push(layoutData);
-        localStorage.setItem('gridLayouts', JSON.stringify(savedLayouts));
+      let savedLayouts = JSON.parse(localStorage.getItem('gridLayouts') || '[]');
+      savedLayouts.push(layoutData);
+      localStorage.setItem('gridLayouts', JSON.stringify(savedLayouts));
 
-        elements.saveModal.style.display = 'none';
-        elements.layoutName.value = '';
+      elements.saveModal.style.display = 'none';
+      elements.layoutName.value = '';
+    }
+
+    function loadLayout(layoutData) {
+      state.isPrintView = layoutData.viewType === 'print';
+      state.gridColumns = layoutData.columns;
+      state.gridRows = layoutData.rows;
+      state.columnWidths = layoutData.columnWidths;
+
+      elements.columnCountInput.value = layoutData.columns;
+      elements.rowCountInput.value = layoutData.rows;
+      elements.columnGapInput.value = layoutData.columnGap;
+      elements.rowGapInput.value = layoutData.rowGap;
+
+      document.body.classList.toggle('print-preview', state.isPrintView);
+      elements.toggleViewBtn.textContent = state.isPrintView ? 'Switch to Web View' : 'Switch to Print View';
+
+      renderGrid(layoutData.areas);
+      updateGridLayout();
+      updateGridGap();
+
+      // Apply saved styles
+      if (layoutData.styles) {
+        applyStyles(layoutData.styles);
       }
-
-        function loadLayout(layoutData) {
-          state.isPrintView = layoutData.viewType === 'print';
-          state.gridColumns = layoutData.columns;
-          state.gridRows = layoutData.rows;
-          state.columnWidths = layoutData.columnWidths;
-
-          elements.columnCountInput.value = layoutData.columns;
-          elements.rowCountInput.value = layoutData.rows;
-          elements.columnGapInput.value = layoutData.columnGap;
-          elements.rowGapInput.value = layoutData.rowGap;
-
-          document.body.classList.toggle('print-preview', state.isPrintView);
-          elements.toggleViewBtn.textContent = state.isPrintView ? 'Switch to Web View' : 'Switch to Print View';
-
-          renderGrid(layoutData.areas);
-          updateGridLayout();
-          updateGridGap();
-
-          // Apply saved styles
-          if (layoutData.styles) {
-            applyStyles(layoutData.styles);
-          }
-        }
+    }
 
     function updateLayoutsList() {
       const savedLayouts = JSON.parse(localStorage.getItem('gridLayouts') || '[]');
@@ -937,6 +1004,10 @@
 
     // Add these to your initializeEventListeners function
     elements.saveLayoutBtn.addEventListener('click', () => {
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString('de-DE');
+      const formattedTime = now.toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+      elements.layoutName.value = `${formattedDate} ${formattedTime} - `;
       elements.saveModal.style.display = 'block';
     });
 
@@ -1451,6 +1522,13 @@
       });
     }
 
+    function removeEditorModeForPrint() {
+      document.body.classList.remove('edit-mode');
+      document.querySelectorAll('[contenteditable="true"]').forEach(element => {
+        element.contentEditable = false;
+      });
+    }
+
     function getCSS() {
       let css = "";
       for (let i = 0; i < document.styleSheets.length; i++) {
@@ -1468,76 +1546,79 @@
     }
 
     function getFullHTML() {
+      // Set state to web view before generating HTML
+      state.isPrintView = false;
+      document.body.classList.remove('print-preview');
+      elements.toggleViewBtn.textContent = 'Switch to Print View';
+
       const fullDocument = document.documentElement.cloneNode(true);
-      
+
       // Entfernen Sie unnötige Skript-Tags, um Konflikte zu vermeiden
       fullDocument.querySelectorAll("script").forEach(script => script.remove());
-      
+
       // Entfernen Sie die Layout-Editor-Elemente und relevante <div>-Tags
       const layoutEditorElements = fullDocument.querySelectorAll("#layoutEditor, .editor-controls, .css-editor, .layout-editor-div, .edit-controls, .nav-bar, .nav-controls, .controls, .image-upload, #loadModal, #saveModal, #aboutSection");
       layoutEditorElements.forEach(element => element.remove());
-      
+
       // Inline das CSS aus den Stylesheets
       const styles = getCSS();
-      
+
       // Fügen Sie die Stile direkt in ein neues <style>-Tag im <head> ein
       const styleTag = document.createElement("style");
       styleTag.textContent = styles;
       fullDocument.querySelector("head").appendChild(styleTag);
-      
+
       // Entferne den Editor-Modus für den Druck
       removeEditorModeForPrint();
-      
+
       // Füge die Funktion removeEditorModeForPrint in den exportierten HTML-Code ein
       const scriptTag = document.createElement("script");
       scriptTag.textContent = `
-        function removeEditorModeForPrint() {
-          document.body.classList.remove('edit-mode');
-          document.querySelectorAll('[contenteditable="true"]').forEach(element => {
-            element.contentEditable = false;
-          });
-        }
-      `;
-      fullDocument.querySelector("body").appendChild(scriptTag);
-      
-      return `<!DOCTYPE html>\n<html lang='en'>\n` + fullDocument.outerHTML + `\n</html>`;
-    }
-
-    function exportFullHTML() {
-      const htmlContent = getFullHTML();
-      const blob = new Blob([htmlContent], { type: "text/html" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "exported_layout.html";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
-
-    // Fügen Sie den Event-Listener für den Export-Button hinzu
-    function addExportListener() {
-      document.getElementById("exportHTML").addEventListener("click", exportFullHTML);
-    }
-
     function removeEditorModeForPrint() {
       document.body.classList.remove('edit-mode');
       document.querySelectorAll('[contenteditable="true"]').forEach(element => {
         element.contentEditable = false;
       });
     }
+  `;
+      fullDocument.querySelector("body").appendChild(scriptTag);
 
-    // Fügen Sie den Event-Listener für den Druck hinzu
-    window.addEventListener('beforeprint', removeEditorModeForPrint);
+      return `<!DOCTYPE html>\n<html lang='en'>\n` + fullDocument.outerHTML + `\n</html>`;
+    }
+
+    // Funktion zum Exportieren des vollständigen HTML
+    function exportFullHTML() {
+      const htmlContent = getFullHTML();
+      const zip = new JSZip();
+
+      // Fügen Sie die HTML-Datei zur ZIP-Datei hinzu
+      zip.file("index.html", htmlContent);
+
+      // Fügen Sie das Bild zur ZIP-Datei hinzu
+      const imageSrc = document.querySelector(".image-1 img").src;
+      fetch(imageSrc)
+        .then(response => response.blob())
+        .then(blob => {
+          zip.file("imgs/cybertruck-trump.jpg", blob);
+
+          // Generieren Sie die ZIP-Datei und laden Sie sie herunter
+          zip.generateAsync({ type: "blob" }).then(content => {
+            saveAs(content, "exported_layout.zip");
+          });
+        });
+    }
+
+    // Event-Listener für den Export-Button
+    function addExportListener() {
+      document.getElementById("exportHTML").addEventListener("click", () => {
+        updateLayoutSelection();
+        elements.layoutSelectionModal.style.display = 'block';
+      });
+    }
 
     // Initialisieren Sie die Anwendung
     function init() {
-      // Stellen Sie sicher, dass diese Funktionen definiert sind
-      if (typeof renderGrid === 'function') renderGrid();
-      if (typeof updateGridGap === 'function') updateGridGap();
-      if (typeof initializeEventListeners === 'function') initializeEventListeners();
-      if (typeof initializeTextControls === 'function') initializeTextControls();
+      // ...existing initialization code...
       addExportListener(); // Rufen Sie diese Funktion auf, um den Event-Listener hinzuzufügen
     }
 
