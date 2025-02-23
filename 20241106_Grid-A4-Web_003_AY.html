@@ -106,6 +106,7 @@
       border: none;
       cursor: pointer;
       font-size: 16px;
+      z-index: 1000; /* Ensure the button is on top */
     }
   </style>
 </head>
@@ -133,7 +134,8 @@
   </div>
 
   <script>
-    let scale = 0.5; // Set initial scale to 0.5 for A4 format
+    let scale = window.innerHeight / 1200; // Set initial scale to 0.5 for A4 format
+    
     const grid = document.getElementById('grid');
     const container = document.getElementById('zoom-container');
     const toggleButton = document.querySelector('.toggle-button');
@@ -146,7 +148,7 @@
       if (container.classList.contains('webpage-layout')) {
         // Switch to A4 layout
         container.classList.remove('webpage-layout');
-        scale = 0.5; // Set scale to 0.5 for A4 layout
+        scale = window.innerHeight / 1200; // Set scale to 0.5 for A4 layout
       } else {
         // Switch to webpage layout
         container.classList.add('webpage-layout');

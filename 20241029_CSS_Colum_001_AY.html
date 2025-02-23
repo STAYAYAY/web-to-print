@@ -41,9 +41,15 @@
             padding: 10px; /* Padding inside columns */
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 1000px) {
+            body {
+                flex-direction: column; /* Stack containers vertically */
+            }
             .container, .container2 {
                 column-count: 1; /* Switch to 1 column on small screens */
+            }
+            .container2 {
+                margin-top: 20px; /* Add margin-top to separate container2 from container1 */
             }
         }
 
@@ -60,8 +66,7 @@
         @media (min-width: 801px) {
             .container {
                 column-count: 1; /* 2 columns on larger screens */
-            2
-
+            }
             .container2 {
                 column-count: 3; /* 3 columns on larger screens */
             }

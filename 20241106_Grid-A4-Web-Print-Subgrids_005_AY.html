@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Layout Toggle (A4 / Webpage)</title>
+  <style>
+    /* Basic Body styling */
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      overflow: auto;
+      flex-direction: column;
+    }
+
+    /* Outer container */
+    .zoom-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      transform-origin: top left;
+      transition: transform 0.3s ease, padding-top 0.3s ease, padding-left 0.3s ease;
+    }
+
+    /* A4 Grid Layout */
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 210mm);
+      grid-template-rows: repeat(1, 297mm);
+      gap: 10mm;
+      width: max-content;
+      padding-left: 20px;
+      padding-top: 20px;
+    }
+
+    /* Individual page styling */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      border: 1px solid #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      color: #555;
+    }
+
+   /* Page 1 layout with text section and 2x2 grid */
+.page-grid .page:nth-child(1) {
+  display: flex;
+  flex-direction: column; /* Stack header and grid vertically */
+  padding: 10px;
+}
+
+/* Text section at the top of Page 1 */
+.page-grid .page:nth-child(1) .page-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10vw;
+  font-weight: bold;
+  color: red;
+  margin-bottom: 10px; /* Space between header and grid */
+}
+
+/* 2x2 grid area on Page 1 */
+.page-grid .page:nth-child(1) .grid-section {
+  flex-grow: 1; /* Take up remaining space */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 5px;
+  width: 100%; /* Full width */
+  box-sizing: border-box;
+}
+
+/* Styling for each grid cell */
+.page-grid .page:nth-child(1) .grid-section .subpage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4vw;
+  border: 0px solid #000; /* Border around each cell */
+  background: linear-gradient(red, yellow);
+  color: #333;
+}
+
+
+    /* Webpage layout */
+    .webpage-layout .zoom-container {
+      transform: none; /* Reset transform for webpage layout */
+    }
+
+    .webpage-layout .page-grid {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100vw;
+      justify-content: flex-start;
+      padding: 0;
+      border: 2px black;
+      gap: 0;
+    }
+
+    .webpage-layout .page {
+      width: 100vw; /* Full width of the viewport */
+      height: calc(100vw * 1.414); /* Aspect ratio for A4 */
+      max-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 5vw;
+      border: 1px solid #333;
+      box-sizing: border-box;
+    }
+
+    /* Button styling */
+    .toggle-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 10;
+    }
+
+    @media print {
+      .toggle-button {
+        display: none;
+      }
+
+      body, .zoom-container, .page-grid {
+        margin: 0;
+        padding: 0;
+        width: auto;
+        height: auto;
+      }
+
+      .page-grid {
+        display: block;
+        width: 210mm;
+        height: auto;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        page-break-after: always;
+        page-break-inside: avoid;
+        border: none;
+        text-align: center;
+        margin: 0;
+      }
+
+      .zoom-container, .page-grid, .page {
+        padding: 0;
+
+        .page-grid .subpage {
+        background: linear-gradient(red, yellow) !important;
+        -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <button class="toggle-button">Toggle Layout</button>
+
+  <div class="zoom-container" id="zoom-container">
+    <div class="page-grid" id="grid">
+      <div class="page">
+        <div class="page-header">Page 1 Header</div>
+        <div class="grid-section">
+          <div class="subpage">Grid 1</div>
+          <div class="subpage">Grid 2</div>
+          <div class="subpage">Grid 3</div>
+          <div class="subpage">Grid 4</div>
+          <div class="subpage">Grid 3</div>
+          <div class="subpage">Grid 4</div>
+        </div>
+      </div>
+      <div class="page">Page 2</div>
+      <div class="page">Page 3</div>
+      <div class="page">Page 4</div>
+      <div class="page">Page 5</div>
+      <div class="page">Page 6</div>
+      <div class="page">Page 7</div>
+      <div class="page">Page 8</div>
+      <div class="page">Page 9</div>
+      <div class="page">Page 10</div>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('zoom-container');
+    const toggleButton = document.querySelector('.toggle-button');
+
+    function toggleLayout() {
+      document.body.classList.toggle('webpage-layout');
+      container.classList.toggle('webpage-layout');
+    }
+
+    let scale = window.innerHeight / 1200; // Set initial scale to 0.5 for A4 format
+
+    // Apply initial scale
+    container.style.transform = `scale(${scale})`;
+
+    // Function to toggle between A4 and Webpage layout
+    function toggleLayout() {
+      if (container.classList.contains('webpage-layout')) {
+        // Switch to A4 layout
+        container.classList.remove('webpage-layout');
+        scale = window.innerHeight / 1200; // Set scale to 0.5 for A4 layout
+      } else {
+        // Switch to webpage layout
+        container.classList.add('webpage-layout');
+        scale = 1; // Set scale to 1 for webpage layout
+      }
+      container.style.transform = `scale(${scale})`; // Apply the scale
+    }
+
+    // Event Listener für den Toggle-Button
+    toggleButton.addEventListener('click', toggleLayout);
+
+    function zoom(event) {
+      if (event.shiftKey) {
+        event.preventDefault();
+        scale += event.deltaY < 0 ? 0.1 : -0.1;
+        scale = Math.min(Math.max(0.5, scale), 2);
+        container.style.transform = `scale(${scale})`;
+      }
+    }
+
+    window.addEventListener('wheel', zoom);
+  </script>
+</body>
+
+</html>
