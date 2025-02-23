@@ -1,1015 +1,977 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>STAYAYAY</title>
+    <style>
+      /* ———————————————————————————————— TYPOGRAPHY ————————————————————————————————— */
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    rel="stylesheet" />
-  <title>STAYAYAY</title>
-  <style>
-    /* ———————————————————————————————— TYPOGRAPHY ————————————————————————————————— */
+      .space-mono-regular {
+        font-family: "Space Mono", serif;
+        font-weight: 400;
+        font-style: normal;
+      }
 
-    .space-mono-regular {
-      font-family: "Space Mono", serif;
-      font-weight: 400;
-      font-style: normal;
-    }
+      .space-mono-bold {
+        font-family: "Space Mono", serif;
+        font-weight: 700;
+        font-style: normal;
+      }
 
-    .space-mono-bold {
-      font-family: "Space Mono", serif;
-      font-weight: 700;
-      font-style: normal;
-    }
+      .space-mono-regular-italic {
+        font-family: "Space Mono", serif;
+        font-weight: 400;
+        font-style: italic;
+      }
 
-    .space-mono-regular-italic {
-      font-family: "Space Mono", serif;
-      font-weight: 400;
-      font-style: italic;
-    }
+      .space-mono-bold-italic {
+        font-family: "Space Mono", serif;
+        font-weight: 700;
+        font-style: italic;
+      }
 
-    .space-mono-bold-italic {
-      font-family: "Space Mono", serif;
-      font-weight: 700;
-      font-style: italic;
-    }
+      /* ———————————————————————————————— OVERALL ————————————————————————————————— */
 
-    /* ———————————————————————————————— OVERALL ————————————————————————————————— */
-
-    body {
-      font-family: "Space Mono", serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 14px;
-      margin: 0 auto;
-      padding: 0 20px 20px 20px;
-      /* height: 100vh; */
-      overflow-y: auto;
-    }
-
-    /* ———————————————————————————————— HEADER ————————————————————————————————— */
-
-    .header-container {
-      display: grid;
-      grid-template-columns: 2fr 5fr;
-      gap: 20px;
-      margin-bottom: 40px;
-      position: static;
-      top: 0;
-      background-color: white;
-      padding: 20px 0;
-      z-index: 3;
-    }
-
-    .project-title {
-      margin: 0;
-      font-size: 14px;
-      font-weight: normal;
-    }
-
-    .project-description {
-      margin: 0;
-    }
-
-    a:hover {
-      font-style: italic;
-      color: #ff00e1;
-    }
-
-    /* ———————————————————————————————— SKETCHES LIST ————————————————————————————————— */
-
-    thead {
-      position: static;
-      top: 120px;
-      /* Adjust this value based on your header height */
-      background-color: white;
-      z-index: 2;
-      border-bottom: 1px solid #ffbbf7;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    th,
-    td {
-      font-weight: normal;
-      padding: 6px;
-      text-align: left;
-      vertical-align: top;
-    }
-
-    th {
-      border-bottom: none;
-    }
-
-    td {
-      border-bottom: 1px solid #ffbbf7;
-    }
-
-    th.sortable {
-      cursor: pointer;
-      user-select: none;
-    }
-
-    th.sortable:hover::after {
-      opacity: 1;
-      color: #ff00e1;
-    }
-
-    th.sortable {
-      position: relative;
-    }
-
-    th.sortable::after {
-      content: " ↕";
-      opacity: 0.3;
-      display: inline-block;
-      margin-left: 4px;
-      width: 12px;
-    }
-
-    th.sortable.sorted-asc::after {
-      content: " ↓";
-      opacity: 1;
-    }
-
-    th.sortable.sorted-desc::after {
-      content: " ↑";
-      opacity: 1;
-    }
-
-    /* Fixed column widths */
-    th:nth-child(1),
-    td:nth-child(1) {
-      width: 100px;
-    }
-
-    th:nth-child(2),
-    td:nth-child(2) {
-      width: 100px;
-    }
-
-    th:nth-child(3),
-    td:nth-child(3) {
-      width: auto;
-    }
-
-    th:nth-child(4),
-    td:nth-child(4) {
-      width: 70px;
-    }
-
-    tr:hover td {
-      font-style: italic;
-      color: #ff00e1;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-      display: block;
-    }
-
-    /* ———————————————————————————————— RESPONSIVENESS ————————————————————————————————— */
-
-    @media (max-width: 768px) {
       body {
         font-family: "Space Mono", serif;
         font-weight: 400;
         font-style: normal;
-        font-size: 12px;
+        font-size: 14px;
         margin: 0 auto;
-        padding: 0 10px;
+        padding: 0 20px 20px 20px;
+        /* height: 100vh; */
         overflow-y: auto;
       }
 
+      /* ———————————————————————————————— HEADER ————————————————————————————————— */
+
       .header-container {
-        grid-template-columns: 1fr;
-        margin-bottom: 20px;
-        gap: 10px;
-        padding: 10px;
+        display: grid;
+        grid-template-columns: 2fr 5fr;
+        gap: 20px;
+        margin-bottom: 40px;
         position: static;
         top: 0;
-        background: white;
+        background-color: white;
+        padding: 20px 0;
         z-index: 3;
       }
 
       .project-title {
         margin: 0;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: normal;
       }
 
+      .project-description {
+        margin: 0;
+      }
+
+      a:hover {
+        font-style: italic;
+        color: #ff00e1;
+      }
+
+      /* ———————————————————————————————— SKETCHES LIST ————————————————————————————————— */
+
       thead {
         position: static;
+        top: 120px;
+        /* Adjust this value based on your header height */
         background-color: white;
         z-index: 2;
         border-bottom: 1px solid #ffbbf7;
-        /* Added border-bottom */
       }
 
       table {
         width: 100%;
+        border-collapse: collapse;
       }
 
       th,
       td {
-        padding: 8px;
+        font-weight: normal;
+        padding: 6px;
+        text-align: left;
+        vertical-align: top;
       }
 
-      /* Fixed columns */
+      th {
+        border-bottom: none;
+      }
+
+      td {
+        border-bottom: 1px solid #ffbbf7;
+      }
+
+      th.sortable {
+        cursor: pointer;
+        user-select: none;
+      }
+
+      th.sortable:hover::after {
+        opacity: 1;
+        color: #ff00e1;
+      }
+
+      th.sortable {
+        position: relative;
+      }
+
+      th.sortable::after {
+        content: " ↕";
+        opacity: 0.3;
+        display: inline-block;
+        margin-left: 4px;
+        width: 12px;
+      }
+
+      th.sortable.sorted-asc::after {
+        content: " ↓";
+        opacity: 1;
+      }
+
+      th.sortable.sorted-desc::after {
+        content: " ↑";
+        opacity: 1;
+      }
+
+      tr.highlighted td {
+        background-color: #dfffe0;
+      }
+
+      /* Fixed column widths */
       th:nth-child(1),
       td:nth-child(1) {
-        width: 70px;
+        width: 100px;
       }
 
       th:nth-child(2),
       td:nth-child(2) {
-        width: 70px;
+        width: 100px;
+      }
+
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: auto;
       }
 
       th:nth-child(4),
       td:nth-child(4) {
-        width: 50px;
+        width: 70px;
       }
 
-      /* Description column */
-      th:nth-child(3),
-      td:nth-child(3) {
-        width: auto;
-        white-space: normal;
-        word-wrap: break-word;
+      tr:hover td {
+        font-style: italic;
+        color: #ff00e1;
       }
 
-      td:nth-child(3) a {
-        white-space: normal;
+      a {
+        color: inherit;
+        text-decoration: none;
+        display: block;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <div class="header-container">
-    <h1 class="project-title">
-      STAYAYAY Web-to-Print Experiments<br /><a href="https://github.com/STAYAYAY/web-to-print"
-        target="_blank">Github</a>
-    </h1>
-    <p class="project-description">
-      This website documents the process of our individual project during the
-      autumn semester 24/25 in the MA program Digital Communication
-      Environments at IDCE HGK/FHNW. Throughout this project we aimed to
-      explore innovative layout techniques and graphical frameworks that
-      function seamlessly across both web and print mediums. The project was
-      mentored by Ted Davis.
-      <br />
-      — Siiri Tännler & Alper Yagcioglu
-    </p>
-  </div>
+      /* ———————————————————————————————— RESPONSIVENESS ————————————————————————————————— */
 
-  <table id="sketchTable">
-    <thead>
-      <tr>
-        <th class="sortable sorted-desc" onclick="sortTable(0)">When</th>
-        <th class="sortable" onclick="sortTable(1)">What</th>
-        <th>Description</th>
-        <th class="sortable" onclick="sortTable(3)">Who</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody">
-      <!-- Table content populated by JSON -->
-    </tbody>
-  </table>
+      @media (max-width: 768px) {
+        body {
+          font-family: "Space Mono", serif;
+          font-weight: 400;
+          font-style: normal;
+          font-size: 12px;
+          margin: 0 auto;
+          padding: 0 10px;
+          overflow-y: auto;
+        }
 
-  <script>
-    const sketches = [
-      {
-        date: "25-02-19",
-        type: "Tool",
-        description:
-          "Export your File as HTML with @Print",
-        author: "Alper",
-        url: "20250219_CSS_Grid_Tool_001_AY.html",
-        tooltip: "There is a Version where you able to Save you presentings as Web and Print to Export this as a clean HTML File",
-      },
-      {
-        date: "25-02-08",
-        type: "Tool",
-        description:
-          "Added ability to adjust text alignment, size, leading and font",
-        author: "Siiri",
-        url: "20250208_CSS_Grid_Tool_001_ST.html",
-        tooltip: "Adjust text alignment, size, leading and font",
-      },
-      {
-        date: "25-02-08",
-        type: "Layout",
-        description: "Started working on a new template but not finished",
-        author: "Siiri",
-        url: "20250208_CSS_Grid_001_ST.html",
-        tooltip: "Started working on a new template",
-      },
-      {
-        date: "25-01-19",
-        type: "Tool",
-        description:
-          "Added select for different templates (gathered as JSON array) — need to make different templates!!",
-        author: "Siiri",
-        url: "20250119_CSS_Grid_Tool_006_ST.html",
-        tooltip: "Added select for different templates",
-      },
-      {
-        date: "25-01-19",
-        type: "Tool",
-        description: "Moved About button",
-        author: "Siiri",
-        url: "20250119_CSS_Grid_Tool_005_ST.html",
-        tooltip: "Moved About button",
-      },
-      {
-        date: "25-01-19",
-        type: "Tool",
-        description: "Tweaks to GUI appearance",
-        author: "Siiri",
-        url: "20250119_CSS_Grid_Tool_004_ST.html",
-        tooltip: "Tweaks to GUI appearance",
-      },
-      {
-        date: "25-01-19",
-        type: "Tool",
-        description:
-          "Redesigned GUI interface and added color to make it look less austere",
-        author: "Siiri",
-        url: "20250119_CSS_Grid_Tool_003_ST.html",
-        tooltip: "Redesigned GUI interface",
-      },
-      {
-        date: "25-01-19",
-        type: "Tool",
-        description: "Added GUI header element",
-        author: "Siiri",
-        url: "20250119_CSS_Grid_Tool_001_ST.html",
-        tooltip: "Added GUI header element",
-      },
-      {
-        date: "25-01-18",
-        type: "Tool",
-        description:
-          "Removed span element from title to simplify things for template",
-        author: "Siiri",
-        url: "20250118_CSS_Grid_Tool_010_ST.html",
-        tooltip: "Removed span element from title",
-      },
-      {
-        date: "25-01-18",
-        type: "Tool",
-        description: "Making small changes to GUI element appearance again",
-        author: "Siiri",
-        url: "20250118_CSS_Grid_Tool_009_ST.html",
-        tooltip: "Making small changes to GUI element appearance",
-      },
-      {
-        date: "25-01-18",
-        type: "Tool",
-        description: "Making small changes to GUI element appearance",
-        author: "Siiri",
-        url: "20250118_CSS_Grid_Tool_007_ST.html",
-        tooltip: "Making small changes to GUI element appearance",
-      },
-      {
-        date: "25-01-18",
-        type: "Tool",
-        description: "Moved GUI elements on one line",
-        author: "Siiri",
-        url: "20250118_CSS_Grid_Tool_006_ST.html",
-        tooltip: "Moved GUI elements on one line",
-      },
-      {
-        date: "25-01-18",
-        type: "Tool",
-        description:
-          "Rearranged GUI elements and simplified appearance of column/row count",
-        author: "Siiri",
-        url: "20250118_CSS_Grid_Tool_005_ST.html",
-        tooltip: "Rearranged GUI elements",
-      },
-      {
-        date: "25-01-18",
-        type: "Tool",
-        description: "Moved column/row gap input to the top",
-        author: "Siiri",
-        url: "20250118_CSS_Grid_Tool_003_ST.html",
-        tooltip: "Moved column/row gap input to the top",
-      },
-      {
-        date: "25-01-18",
-        type: "Tool",
-        description: "Added toggle button to switch to print view",
-        author: "Siiri",
-        url: "20250118_CSS_Grid_Tool_002_ST.html",
-        tooltip: "Added toggle button to switch to print view",
-      },
-      {
-        date: "25-01-17",
-        type: "Tool",
-        description: "Added to GUI ability to adjust column and row gap",
-        author: "Siiri",
-        url: "20250117_CSS_Grid_Tool_006_ST.html",
-        tooltip: "Added to GUI ability to adjust column and row gap",
-      },
-      {
-        date: "25-01-17",
-        type: "Tool",
-        description:
-          "Added ability to modify text and upload different image",
-        author: "Siiri",
-        url: "20250117_CSS_Grid_Tool_005_ST.html",
-        tooltip: "Added ability to modify text and upload different image",
-      },
-      {
-        date: "25-01-17",
-        type: "Tool",
-        description: "Added input to control column widths",
-        author: "Siiri",
-        url: "20250117_CSS_Grid_Tool_004_ST.html",
-        tooltip: "Added input to control column widths",
-      },
-      {
-        date: "25-01-17",
-        type: "Tool",
-        description:
-          "Turned template area input into individual cells (rather than just text input field)",
-        author: "Siiri",
-        url: "20250117_CSS_Grid_Tool_003_ST.html",
-        tooltip: "Turned template area input into individual cells",
-      },
-      {
-        date: "25-01-17",
-        type: "Tool",
-        description: "Added column and row counter (works sort of?)",
-        author: "Siiri",
-        url: "20250117_CSS_Grid_Tool_002_ST.html",
-        tooltip: "Added column and row counter",
-      },
-      {
-        date: "25-01-17",
-        type: "Tool",
-        description:
-          "Getting real about making a workable tool: text area input works!",
-        author: "Siiri",
-        url: "20250117_CSS_Grid_Tool_001_ST.html",
-        tooltip: "Text area input works",
-      },
-      {
-        date: "25-01-17",
-        type: "Layout",
-        description:
-          "New layout (the day after I learned of David Lynch's death)",
-        author: "Siiri",
-        url: "20250117_CSS_Grid_001_ST.html",
-        tooltip: "New layout",
-      },
-      {
-        date: "25-01-07",
-        type: "Tool",
-        description: "Testing out GUI elements",
-        author: "Alper",
-        url: "20250107_Grid-Web-GUI-AY_001.html",
-        tooltip: "Testing out GUI elements",
-      },
-      {
-        date: "25-01-07",
-        type: "Layout",
-        description: "CSS Grid template area test v2",
-        author: "Alper",
-        url: "20250107_Grid-Web-AY_003.html",
-        tooltip: "CSS Grid template area test v2",
-      },
-      {
-        date: "25-01-07",
-        type: "Layout",
-        description: "CSS Grid template area test",
-        author: "Alper",
-        url: "20250107_Grid-Web-AY_002.html",
-        tooltip: "CSS Grid template area test",
-      },
-      {
-        date: "25-01-07",
-        type: "Tool",
-        description: "Web-to-print tool testing",
-        author: "Alper",
-        url: "20250107_Grid-Web-AY_001.html",
-        tooltip: "Web-to-print tool testing",
-      },
-      {
-        date: "25-01-07",
-        type: "Tool",
-        description:
-          "confused about how to call elements that are not visible",
-        author: "Siiri",
-        url: "20250107_CSS_Grid_Tool_003_ST.html",
-        tooltip: "Confused about how to call elements that are not visible",
-      },
-      {
-        date: "25-01-07",
-        type: "Tool",
-        description: "adding column counter to tool (not working)",
-        author: "Siiri",
-        url: "20250107_CSS_Grid_Tool_002_ST.html",
-        tooltip: "Adding column counter to tool",
-      },
-      {
-        date: "25-01-07",
-        type: "Tool",
-        description:
-          "First attempt at making tool for CSS grid template areas using input text area",
-        author: "Siiri",
-        url: "20250107_CSS_Grid_Tool_001_ST.html",
-        tooltip: "First attempt at making tool for CSS grid template areas",
-      },
-      {
-        date: "25-01-07",
-        type: "Layout",
-        description: "Trying to turn layout into a template v3",
-        author: "Siiri",
-        url: "20250107_CSS_Grid_003_ST.html",
-        tooltip: "Trying to turn layout into a template v3",
-      },
-      {
-        date: "25-01-07",
-        type: "Layout",
-        description: "Trying to turn layout into a template v2",
-        author: "Siiri",
-        url: "20250107_CSS_Grid_002_ST.html",
-        tooltip: "Trying to turn layout into a template v2",
-      },
-      {
-        date: "25-01-07",
-        type: "Layout",
-        description: "Trying to turn layout into a template",
-        author: "Siiri",
-        url: "20250107_CSS_Grid_001_ST.html",
-        tooltip: "Trying to turn layout into a template",
-      },
-      {
-        date: "24-12-10",
-        type: "Layout",
-        description:
-          "CSS Grid template area: layout that works across browser/mobile and print",
-        author: "Siiri",
-        url: "20241210_CSS_Grid_001_ST.html",
-        tooltip:
-          "CSS Grid template area: layout that works across browser/mobile and print",
-      },
-      {
-        date: "24-11-26",
-        type: "Tool",
-        description: "JSON Masterpage test v2",
-        author: "Alper",
-        url: "20241126_JSON_Test_Masterpage_2_AY.html",
-        tooltip: "JSON Masterpage test v2",
-      },
-      {
-        date: "24-11-26",
-        type: "Tool",
-        description: "JSON Masterpage test v1",
-        author: "Alper",
-        url: "20241126_JSON_Test_Masterpage_1_AY.html",
-        tooltip: "JSON Masterpage test v1",
-      },
-      {
-        date: "24-11-26",
-        type: "Tool",
-        description: "CSS Grid — flowing text across multiple divs v3",
-        author: "Alper",
-        url: "20241126_Grid_Test_AY.html",
-        tooltip: "CSS Grid — flowing text across multiple divs v3",
-      },
-      {
-        date: "24-11-26",
-        type: "Tool",
-        description: "CSS Grid — flowing text across multiple divs v2",
-        author: "Alper",
-        url: "20241126_Grid_Test_AY_3.html",
-        tooltip: "CSS Grid — flowing text across multiple divs v2",
-      },
-      {
-        date: "24-11-26",
-        type: "Tool",
-        description: "CSS Grid — flowing text across multiple divs",
-        author: "Alper",
-        url: "20241126_Grid_Test_AY_2.html",
-        tooltip: "CSS Grid — flowing text across multiple divs",
-      },
-      {
-        date: "24-11-26",
-        type: "Layout",
-        description: "CSS Grid template areas — a template",
-        author: "Siiri",
-        url: "20241126_CSS_Grid_template.html",
-        tooltip: "CSS Grid template areas — a template",
-      },
-      {
-        date: "24-11-26",
-        type: "Layout",
-        description:
-          "Getting the hang of CSS Grid template areas — a more complex layout, changing at breakpoints",
-        author: "Siiri",
-        url: "20241126_CSS_Grid_005_ST.html",
-        tooltip:
-          "Getting the hang of CSS Grid template areas — a more complex layout",
-      },
-      {
-        date: "24-11-26",
-        type: "Layout",
-        description:
-          "Getting the hang of CSS Grid template areas — playing with elements",
-        author: "Siiri",
-        url: "20241126_CSS_Grid_003_ST.html",
-        tooltip:
-          "Getting the hang of CSS Grid template areas — playing with elements",
-      },
-      {
-        date: "24-11-26",
-        type: "Layout",
-        description: "Getting the hang of CSS Grid template areas",
-        author: "Siiri",
-        url: "20241126_CSS_Grid_002_ST.html",
-        tooltip: "Getting the hang of CSS Grid template areas",
-      },
-      {
-        date: "24-11-26",
-        type: "Layout",
-        description:
-          "Getting the hang of CSS Grid template areas — rotating the layout",
-        author: "Siiri",
-        url: "20241126_CSS_Grid_001_ST.html",
-        tooltip:
-          "Getting the hang of CSS Grid template areas — rotating the layout",
-      },
-      {
-        date: "24-11-25",
-        type: "Layout",
-        description: "Getting the hang of CSS Grid template areas",
-        author: "Siiri",
-        url: "20241125_CSS_Grid_001_ST.html",
-        tooltip: "Getting the hang of CSS Grid template areas",
-      },
-      {
-        date: "24-11-19",
-        type: "Layout",
-        description:
-          "Getting the hang of CSS Grid template areas, switching positioning of elements at different breakpoints",
-        author: "Siiri",
-        url: "20241119_CSS_Grid_001_ST.html",
-        tooltip:
-          "Getting the hang of CSS Grid template areas, switching positioning of elements",
-      },
-      {
-        date: "24-11-18",
-        type: "Tool",
-        description: "Toggle view print / web with CSS & JavaScript",
-        author: "Alper",
-        url: "20241118_Grid-A4-Web_001_AY_CSS-Java.html",
-        tooltip: "Toggle view print / web with CSS & JavaScript",
-      },
-      {
-        date: "24-11-18",
-        type: "Layout",
-        description:
-          "CSS Grid Layout: One long sentence with horizontal scrolling + one small image",
-        author: "Siiri",
-        url: "20241118_CSS_Grid_007_ST.html",
-        tooltip:
-          "CSS Grid Layout: One long sentence with horizontal scrolling + one small image",
-      },
-      {
-        date: "24-11-18",
-        type: "Layout",
-        description:
-          "CSS Grid Layout: One long sentence with horizontal scrolling + images in different sizes and positions",
-        author: "Siiri",
-        url: "20241118_CSS_Grid_006_ST.html",
-        tooltip:
-          "CSS Grid Layout: One long sentence with horizontal scrolling + images in different sizes",
-      },
-      {
-        date: "24-11-18",
-        type: "Layout",
-        description:
-          "CSS Grid Layout: 2-column body text with smaller column for footnotes",
-        author: "Siiri",
-        url: "20241118_CSS_Grid_005_ST.html",
-        tooltip:
-          "CSS Grid Layout: 2-column body text with smaller column for footnotes",
-      },
-      {
-        date: "24-11-18",
-        type: "Layout",
-        description:
-          "Flex Layout: One long sentence with horizontal scrolling",
-        author: "Siiri",
-        url: "20241118_CSS_Grid_004_ST.html",
-        tooltip: "Flex Layout: One long sentence with horizontal scrolling",
-      },
-      {
-        date: "24-11-18",
-        type: "Layout",
-        description:
-          "CSS Grid Layout: 2-column body text with footnotes in-between",
-        author: "Siiri",
-        url: "20241118_CSS_Grid_003_ST.html",
-        tooltip:
-          "CSS Grid Layout: 2-column body text with footnotes in-between",
-      },
-      {
-        date: "24-11-18",
-        type: "Layout",
-        description:
-          "CSS Grid Layout: 2-column body text with smaller column for footnotes",
-        author: "Siiri",
-        url: "20241118_CSS_Grid_002_ST.html",
-        tooltip:
-          "CSS Grid Layout: 2-column body text with smaller column for footnotes",
-      },
-      {
-        date: "24-11-18",
-        type: "Layout",
-        description:
-          "CSS Grid Layout: 1-column body text with smaller column for footnotes",
-        author: "Siiri",
-        url: "20241118_CSS_Grid_001_ST.html",
-        tooltip:
-          "CSS Grid Layout: 1-column body text with smaller column for footnotes",
-      },
-      {
-        date: "24-11-06",
-        type: "Tool",
-        description: "Web-to-print view including subgrids",
-        author: "Alper",
-        url: "20241106_Grid-A4-Web-Print-Subgrids_004_AY copy.html",
-        tooltip: "Web-to-print view including subgrids",
-      },
-      {
-        date: "24-11-06",
-        type: "Tool",
-        description: "Toggle between multiple A4 pages and web view v2",
-        author: "Alper",
-        url: "20241106_Grid-A4-Web-Print_003_AY.html",
-        tooltip: "Toggle between multiple A4 pages and web view v2",
-      },
-      {
-        date: "24-11-06",
-        type: "Tool",
-        description: "Toggle between multiple A4 pages and web view",
-        author: "Alper",
-        url: "20241106_Grid-A4-Web_002_AY.html",
-        tooltip: "Toggle between multiple A4 pages and web view",
-      },
-      {
-        date: "24-11-06",
-        type: "Tool",
-        description: "Setting up multiple A4 pages",
-        author: "Alper",
-        url: "20241106_Grid-A4_001_AY copy.html",
-        tooltip: "Setting up multiple A4 pages",
-      },
-      {
-        date: "24-11-05",
-        type: "Tool",
-        description: "Playing around with toggle view",
-        author: "Alper",
-        url: "20241105_Toggle-View_001_AY.html",
-        tooltip: "Playing around with toggle view",
-      },
-      {
-        date: "24-11-05",
-        type: "Tool",
-        description:
-          "Connecting with PAD Book from Critical Publishing 1 class with Bérénice Serra v2",
-        author: "Siiri",
-        url: "20241105_PAD-Book_002_ST.html",
-        tooltip:
-          "Connecting with PAD Book from Critical Publishing 1 class with Bérénice Serra v2",
-      },
-      {
-        date: "24-11-05",
-        type: "Tool",
-        description:
-          "Connecting with PAD Book from Critical Publishing 1 class with Bérénice Serra",
-        author: "Siiri",
-        url: "20241105_PAD-Book_001_ST.html",
-        tooltip:
-          "Connecting with PAD Book from Critical Publishing 1 class with Bérénice Serra",
-      },
-      {
-        date: "24-11-05",
-        type: "Layout",
-        description: "Getting familiar with CSS Grid template areas",
-        author: "Alper",
-        url: "20241105_Grid_Test_001_AY.html",
-        tooltip: "Getting familiar with CSS Grid template areas",
-      },
-      {
-        date: "24-11-05",
-        type: "Layout",
-        description: "A rectangle",
-        author: "Siiri",
-        url: "20241105_CSS_Rectangle_001_ST.html",
-        tooltip: "A rectangle",
-      },
-      {
-        date: "24-11-05",
-        type: "Layout",
-        description: "Playing with CSS Grid as boxes",
-        author: "Siiri",
-        url: "20241105_CSS_Grid_004_ST.html",
-        tooltip: "Playing with CSS Grid as boxes",
-      },
-      {
-        date: "24-11-05",
-        type: "Layout",
-        description: "Playing with CSS Grid and paragraphs using fr units v2",
-        author: "Siiri",
-        url: "20241105_CSS_Grid_003_ST.html",
-        tooltip: "Playing with CSS Grid and paragraphs using fr units v2",
-      },
-      {
-        date: "24-11-05",
-        type: "Layout",
-        description: "Playing with CSS Grid and paragraphs using fr units",
-        author: "Siiri",
-        url: "20241105_CSS_Grid_002_ST.html",
-        tooltip: "Playing with CSS Grid and paragraphs using fr units",
-      },
-      {
-        date: "24-11-05",
-        type: "Layout",
-        description: "Playing with CSS columns fluidity",
-        author: "Siiri",
-        url: "20241105_CSS_Colum_001_ST.html",
-        tooltip: "Playing with CSS columns fluidity",
-      },
-      {
-        date: "24-11-05",
-        type: "Layout",
-        description: "Changing CSS column count at different breakpoints",
-        author: "Alper",
-        url: "20241105_CSS_Colum_001_AY.html",
-        tooltip: "Changing CSS column count at different breakpoints",
-      },
-      {
-        date: "24-10-29",
-        type: "Tool",
-        description: "Paged.js test",
-        author: "Alper",
-        url: "20241029_Paged_JS_Test_001_AY.html",
-        tooltip: "Paged.js test",
-      },
-      {
-        date: "24-10-29",
-        type: "Layout",
-        description:
-          "Exploring columns in CSS and changing column count on hover v2 + changing background gradient ",
-        author: "Siiri",
-        url: "20241029_CSS_Colum_002_ST.html",
-        tooltip:
-          "Exploring columns in CSS and changing column count on hover v2 + changing background gradient",
-      },
-      {
-        date: "24-10-29",
-        type: "Layout",
-        description:
-          "Exploring columns in CSS and changing column count on hover",
-        author: "Siiri",
-        url: "20241029_CSS_Colum_001_ST.html",
-        tooltip: "Exploring columns in CSS and changing column count on hover",
-      },
-      {
-        date: "24-10-29",
-        type: "Layout",
-        description: "Working with columns in CSS",
-        author: "Alper",
-        url: "20241029_CSS_Colum_001_AY.html",
-        tooltip: "Working with columns in CSS",
-      },
-      {
-        date: "24-10-22",
-        type: "Layout",
-        description: "Trying to understand CSS Grid",
-        author: "Siiri",
-        url: "20241022_CSS_Grid_001_ST.html",
-        tooltip: "Trying to understand CSS Grid",
-      },
-      {
-        date: "24-10-22",
-        type: "Layout",
-        description: "Getting started with CSS Grid",
-        author: "Alper",
-        url: "20241022_CSS_Grid_001_AY.html",
-        tooltip: "Getting started with CSS Grid",
-      },
-      {
-        date: "24-10-15",
-        type: "Tool",
-        description:
-          "Looked into creating a toggle button between web and print view",
-        author: "Siiri",
-        url: "20241015_Toggle-View_001_ST.html",
-        tooltip: "Looked into creating a toggle button between web and print view",
-      },
-    ];
+        .header-container {
+          grid-template-columns: 1fr;
+          margin-bottom: 20px;
+          gap: 10px;
+          padding: 10px;
+          position: static;
+          top: 0;
+          background: white;
+          z-index: 3;
+        }
 
-    // Function to populate table
-    function populateTable() {
-      const tbody = document.getElementById("tableBody");
-      tbody.innerHTML = sketches
-        .map(
-          (sketch) => `
-      <tr>
-        <td><a href="${sketch.url}" target="_blank" title="${sketch.tooltip}">${sketch.date}</a></td>
-        <td><a href="${sketch.url}" target="_blank" title="${sketch.tooltip}">${sketch.type}</a></td>
-        <td><a href="${sketch.url}" target="_blank" title="${sketch.tooltip}">${sketch.description}</a></td>
-        <td><a href="${sketch.url}" target="_blank" title="${sketch.tooltip}">${sketch.author}</a></td>
-      </tr>
-        `
-        )
-        .join("");
-    }
+        .project-title {
+          margin: 0;
+          font-size: 12px;
+          font-weight: normal;
+        }
 
-    // Enhanced sort function
-    function sortTable(column) {
-      const headers = document.getElementsByTagName("th");
-      const currentHeader = headers[column];
-      const currentOrder = currentHeader.classList.contains("sorted-asc")
-        ? "desc"
-        : "asc";
+        thead {
+          position: static;
+          background-color: white;
+          z-index: 2;
+          border-bottom: 1px solid #ffbbf7;
+          /* Added border-bottom */
+        }
 
-      // Reset all headers
-      Array.from(headers).forEach((header) => {
-        header.classList.remove("sorted-asc", "sorted-desc");
-      });
+        table {
+          width: 100%;
+        }
 
-      // Set new sort direction
-      currentHeader.classList.add(
-        currentOrder === "asc" ? "sorted-asc" : "sorted-desc"
-      );
+        th,
+        td {
+          padding: 8px;
+        }
 
-      // Sort the data array
-      sketches.sort((a, b) => {
-        const getValue = (item) => {
-          switch (column) {
-            case 0:
-              return item.date;
-            case 1:
-              return item.type;
-            case 3:
-              return item.author;
-            default:
-              return "";
+        /* Fixed columns */
+        th:nth-child(1),
+        td:nth-child(1) {
+          width: 70px;
+        }
+
+        th:nth-child(2),
+        td:nth-child(2) {
+          width: 70px;
+        }
+
+        th:nth-child(4),
+        td:nth-child(4) {
+          width: 50px;
+        }
+
+        /* Description column */
+        th:nth-child(3),
+        td:nth-child(3) {
+          width: auto;
+          white-space: normal;
+          word-wrap: break-word;
+        }
+
+        td:nth-child(3) a {
+          white-space: normal;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="header-container">
+      <h1 class="project-title">
+        STAYAYAY Web-to-Print Experiments<br /><a
+          href="https://github.com/STAYAYAY/web-to-print"
+          target="_blank"
+          >Github</a
+        >
+      </h1>
+      <p class="project-description">
+        This website documents the process of our individual project during the
+        autumn semester 24/25 in the MA program Digital Communication
+        Environments at IDCE HGK/FHNW. Throughout this project we aimed to
+        explore innovative layout techniques and graphical frameworks that
+        function seamlessly across both web and print mediums. The project was
+        mentored by Ted Davis.
+        <br />
+        — Siiri Tännler & Alper Yagcioglu
+      </p>
+    </div>
+
+    <table id="sketchTable">
+      <thead>
+        <tr>
+          <th class="sortable sorted-desc" onclick="sortTable(0)">When</th>
+          <th class="sortable" onclick="sortTable(1)">What</th>
+          <th>Description</th>
+          <th class="sortable" onclick="sortTable(3)">Who</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- Table content populated by JSON -->
+      </tbody>
+    </table>
+
+    <script>
+      const sketches = [
+        {
+          date: "25-02-19",
+          type: "Tool",
+          description: "Export your File as HTML with @Print",
+          author: "Alper",
+          url: "20250219_CSS_Grid_Tool_001_AY.html",
+          tooltip:
+            "There is a Version where you able to Save you presentings as Web and Print to Export this as a clean HTML File",
+          highlight: true,
+        },
+        {
+          date: "25-02-08",
+          type: "Tool",
+          description:
+            "Added ability to adjust text alignment, size, leading and font",
+          author: "Siiri",
+          url: "20250208_CSS_Grid_Tool_001_ST.html",
+          tooltip: "Adjust text alignment, size, leading and font",
+        },
+        {
+          date: "25-02-08",
+          type: "CSS Grid",
+          description: "Started working on a new template but not finished",
+          author: "Siiri",
+          url: "20250208_CSS_Grid_001_ST.html",
+          tooltip: "Started working on a new template",
+        },
+        {
+          date: "25-01-19",
+          type: "Tool",
+          description:
+            "Added select for different templates (gathered as JSON array) — need to make different templates!!",
+          author: "Siiri",
+          url: "20250119_CSS_Grid_Tool_006_ST.html",
+          tooltip: "Added select for different templates",
+        },
+        {
+          date: "25-01-19",
+          type: "Tool",
+          description:
+            "Redesigned GUI interface and added color to make it look less austere",
+          author: "Siiri",
+          url: "20250119_CSS_Grid_Tool_005_ST.html",
+          tooltip: "Moved About button",
+          highlight: true,
+        },
+        {
+          date: "25-01-19",
+          type: "Tool",
+          description: "Added GUI header element",
+          author: "Siiri",
+          url: "20250119_CSS_Grid_Tool_001_ST.html",
+          tooltip: "Added GUI header element",
+        },
+        {
+          date: "25-01-18",
+          type: "Tool",
+          description:
+            "Removed span element from title to simplify things for template",
+          author: "Siiri",
+          url: "20250118_CSS_Grid_Tool_010_ST.html",
+          tooltip: "Removed span element from title",
+        },
+        {
+          date: "25-01-18",
+          type: "Tool",
+          description:
+            "Rearranged GUI elements and simplified appearance of column/row count",
+          author: "Siiri",
+          url: "20250118_CSS_Grid_Tool_006_ST.html",
+          tooltip: "Moved GUI elements on one line",
+        },
+        {
+          date: "25-01-18",
+          type: "Tool",
+          description: "Moved column/row gap input to the top",
+          author: "Siiri",
+          url: "20250118_CSS_Grid_Tool_003_ST.html",
+          tooltip: "Moved column/row gap input to the top",
+        },
+        {
+          date: "25-01-18",
+          type: "Tool",
+          description: "Added toggle button to switch to print view",
+          author: "Siiri",
+          url: "20250118_CSS_Grid_Tool_002_ST.html",
+          tooltip: "Added toggle button to switch to print view",
+        },
+        {
+          date: "25-01-17",
+          type: "Tool",
+          description: "Added to GUI ability to adjust column and row gap",
+          author: "Siiri",
+          url: "20250117_CSS_Grid_Tool_006_ST.html",
+          tooltip: "Added to GUI ability to adjust column and row gap",
+        },
+        {
+          date: "25-01-17",
+          type: "Tool",
+          description:
+            "Added ability to modify text and upload different image",
+          author: "Siiri",
+          url: "20250117_CSS_Grid_Tool_005_ST.html",
+          tooltip: "Added ability to modify text and upload different image",
+        },
+        {
+          date: "25-01-17",
+          type: "Tool",
+          description: "Added input to control column widths",
+          author: "Siiri",
+          url: "20250117_CSS_Grid_Tool_004_ST.html",
+          tooltip: "Added input to control column widths",
+        },
+        {
+          date: "25-01-17",
+          type: "Tool",
+          description:
+            "Turned template area input into individual cells (rather than just text input field)",
+          author: "Siiri",
+          url: "20250117_CSS_Grid_Tool_003_ST.html",
+          tooltip: "Turned template area input into individual cells",
+          highlight: true,
+        },
+        {
+          date: "25-01-17",
+          type: "Tool",
+          description: "Added column and row counter (works sort of?)",
+          author: "Siiri",
+          url: "20250117_CSS_Grid_Tool_002_ST.html",
+          tooltip: "Added column and row counter",
+        },
+        {
+          date: "25-01-17",
+          type: "Tool",
+          description:
+            "Getting real about making a workable tool: text area input works!",
+          author: "Siiri",
+          url: "20250117_CSS_Grid_Tool_001_ST.html",
+          tooltip: "Text area input works",
+          highlight: true,
+        },
+        {
+          date: "25-01-17",
+          type: "CSS Grid",
+          description:
+            "New layout (the day after I learned of David Lynch's death)",
+          author: "Siiri",
+          url: "20250117_CSS_Grid_001_ST.html",
+          tooltip: "New layout",
+        },
+        {
+          date: "25-01-07",
+          type: "Tool",
+          description: "Testing out GUI elements",
+          author: "Alper",
+          url: "20250107_Grid-Web-GUI-AY_001.html",
+          tooltip: "Testing out GUI elements",
+        },
+        {
+          date: "25-01-07",
+          type: "Layout",
+          description: "CSS Grid template area test v2",
+          author: "Alper",
+          url: "20250107_Grid-Web-AY_003.html",
+          tooltip: "CSS Grid template area test v2",
+        },
+        {
+          date: "25-01-07",
+          type: "Layout",
+          description: "CSS Grid template area test",
+          author: "Alper",
+          url: "20250107_Grid-Web-AY_002.html",
+          tooltip: "CSS Grid template area test",
+        },
+        {
+          date: "25-01-07",
+          type: "Tool",
+          description: "Web-to-print tool testing",
+          author: "Alper",
+          url: "20250107_Grid-Web-AY_001.html",
+          tooltip: "Web-to-print tool testing",
+        },
+        {
+          date: "25-01-07",
+          type: "Tool",
+          description:
+            "confused about how to call elements that are not visible",
+          author: "Siiri",
+          url: "20250107_CSS_Grid_Tool_003_ST.html",
+          tooltip: "Confused about how to call elements that are not visible",
+        },
+        {
+          date: "25-01-07",
+          type: "Tool",
+          description: "adding column counter to tool (not working)",
+          author: "Siiri",
+          url: "20250107_CSS_Grid_Tool_002_ST.html",
+          tooltip: "Adding column counter to tool",
+        },
+        {
+          date: "25-01-07",
+          type: "Tool",
+          description:
+            "First attempt at making tool for CSS grid template areas using input text area",
+          author: "Siiri",
+          url: "20250107_CSS_Grid_Tool_001_ST.html",
+          tooltip: "First attempt at making tool for CSS grid template areas",
+        },
+        {
+          date: "25-01-07",
+          type: "CSS Grid",
+          description: "Trying to turn layout into a template",
+          author: "Siiri",
+          url: "20250107_CSS_Grid_001_ST.html",
+          tooltip: "Trying to turn layout into a template",
+        },
+        {
+          date: "24-12-10",
+          type: "CSS Grid",
+          description:
+            "CSS Grid template area: layout that works across browser/mobile and print",
+          author: "Siiri",
+          url: "20241210_CSS_Grid_001_ST.html",
+          tooltip:
+            "CSS Grid template area: layout that works across browser/mobile and print",
+          highlight: true,
+        },
+        {
+          date: "24-11-26",
+          type: "Tool",
+          description: "JSON Masterpage test v2",
+          author: "Alper",
+          url: "20241126_JSON_Test_Masterpage_2_AY.html",
+          tooltip: "JSON Masterpage test v2",
+        },
+        {
+          date: "24-11-26",
+          type: "Tool",
+          description: "JSON Masterpage test v1",
+          author: "Alper",
+          url: "20241126_JSON_Test_Masterpage_1_AY.html",
+          tooltip: "JSON Masterpage test v1",
+        },
+        {
+          date: "24-11-26",
+          type: "Tool",
+          description: "CSS Grid — flowing text across multiple divs v3",
+          author: "Alper",
+          url: "20241126_Grid_Test_AY.html",
+          tooltip: "CSS Grid — flowing text across multiple divs v3",
+        },
+        {
+          date: "24-11-26",
+          type: "Tool",
+          description: "CSS Grid — flowing text across multiple divs v2",
+          author: "Alper",
+          url: "20241126_Grid_Test_AY_3.html",
+          tooltip: "CSS Grid — flowing text across multiple divs v2",
+        },
+        {
+          date: "24-11-26",
+          type: "Tool",
+          description: "CSS Grid — flowing text across multiple divs",
+          author: "Alper",
+          url: "20241126_Grid_Test_AY_2.html",
+          tooltip: "CSS Grid — flowing text across multiple divs",
+        },
+        {
+          date: "24-11-26",
+          type: "CSS Grid",
+          description: "CSS Grid template areas — a template",
+          author: "Siiri",
+          url: "20241126_CSS_Grid_template.html",
+          tooltip: "CSS Grid template areas — a template",
+        },
+        {
+          date: "24-11-26",
+          type: "CSS Grid",
+          description:
+            "Getting the hang of CSS Grid template areas — a more complex layout, changing at breakpoints",
+          author: "Siiri",
+          url: "20241126_CSS_Grid_005_ST.html",
+          tooltip:
+            "Getting the hang of CSS Grid template areas — a more complex layout",
+        },
+        {
+          date: "24-11-26",
+          type: "CSS Grid",
+          description:
+            "Getting the hang of CSS Grid template areas — playing with elements",
+          author: "Siiri",
+          url: "20241126_CSS_Grid_003_ST.html",
+          tooltip:
+            "Getting the hang of CSS Grid template areas — playing with elements",
+        },
+        {
+          date: "24-11-26",
+          type: "CSS Grid",
+          description: "Getting the hang of CSS Grid template areas",
+          author: "Siiri",
+          url: "20241126_CSS_Grid_002_ST.html",
+          tooltip: "Getting the hang of CSS Grid template areas",
+        },
+        {
+          date: "24-11-26",
+          type: "CSS Grid",
+          description:
+            "Getting the hang of CSS Grid template areas — rotating the layout",
+          author: "Siiri",
+          url: "20241126_CSS_Grid_001_ST.html",
+          tooltip:
+            "Getting the hang of CSS Grid template areas — rotating the layout",
+          highlight: true,
+        },
+        {
+          date: "24-11-25",
+          type: "CSS Grid",
+          description: "Getting the hang of CSS Grid template areas",
+          author: "Siiri",
+          url: "20241125_CSS_Grid_001_ST.html",
+          tooltip: "Getting the hang of CSS Grid template areas",
+        },
+        {
+          date: "24-11-19",
+          type: "CSS Grid",
+          description:
+            "Getting the hang of CSS Grid template areas, switching positioning of elements at different breakpoints",
+          author: "Siiri",
+          url: "20241119_CSS_Grid_001_ST.html",
+          tooltip:
+            "Getting the hang of CSS Grid template areas, switching positioning of elements",
+        },
+        {
+          date: "24-11-18",
+          type: "Tool",
+          description: "Toggle view print / web with CSS & JavaScript",
+          author: "Alper",
+          url: "20241118_Grid-A4-Web_001_AY_CSS-Java.html",
+          tooltip: "Toggle view print / web with CSS & JavaScript",
+        },
+        {
+          date: "24-11-18",
+          type: "CSS Grid",
+          description:
+            "CSS Grid Layout: One long sentence with horizontal scrolling + one small image",
+          author: "Siiri",
+          url: "20241118_CSS_Grid_007_ST.html",
+          tooltip:
+            "CSS Grid Layout: One long sentence with horizontal scrolling + one small image",
+        },
+        {
+          date: "24-11-18",
+          type: "CSS Grid",
+          description:
+            "CSS Grid Layout: One long sentence with horizontal scrolling + images in different sizes and positions",
+          author: "Siiri",
+          url: "20241118_CSS_Grid_006_ST.html",
+          tooltip:
+            "CSS Grid Layout: One long sentence with horizontal scrolling + images in different sizes",
+          highlight: true,
+        },
+        {
+          date: "24-11-18",
+          type: "CSS Grid",
+          description:
+            "CSS Grid Layout: 2-column body text with smaller column for footnotes",
+          author: "Siiri",
+          url: "20241118_CSS_Grid_005_ST.html",
+          tooltip:
+            "CSS Grid Layout: 2-column body text with smaller column for footnotes",
+        },
+        {
+          date: "24-11-18",
+          type: "Flex Layout",
+          description:
+            "Flex Layout: One long sentence with horizontal scrolling",
+          author: "Siiri",
+          url: "20241118_CSS_Grid_004_ST.html",
+          tooltip: "Flex Layout: One long sentence with horizontal scrolling",
+        },
+        {
+          date: "24-11-18",
+          type: "CSS Grid",
+          description:
+            "CSS Grid Layout: 2-column body text with footnotes in-between",
+          author: "Siiri",
+          url: "20241118_CSS_Grid_003_ST.html",
+          tooltip:
+            "CSS Grid Layout: 2-column body text with footnotes in-between",
+          highlight: true,
+        },
+        {
+          date: "24-11-18",
+          type: "CSS Grid",
+          description:
+            "CSS Grid Layout: 2-column body text with smaller column for footnotes",
+          author: "Siiri",
+          url: "20241118_CSS_Grid_002_ST.html",
+          tooltip:
+            "CSS Grid Layout: 2-column body text with smaller column for footnotes",
+        },
+        {
+          date: "24-11-18",
+          type: "CSS Grid",
+          description:
+            "CSS Grid Layout: 1-column body text with smaller column for footnotes",
+          author: "Siiri",
+          url: "20241118_CSS_Grid_001_ST.html",
+          tooltip:
+            "CSS Grid Layout: 1-column body text with smaller column for footnotes",
+        },
+        {
+          date: "24-11-06",
+          type: "Tool",
+          description: "Web-to-print view including subgrids",
+          author: "Alper",
+          url: "20241106_Grid-A4-Web-Print-Subgrids_004_AY copy.html",
+          tooltip: "Web-to-print view including subgrids",
+        },
+        {
+          date: "24-11-06",
+          type: "Tool",
+          description: "Toggle between multiple A4 pages and web view v2",
+          author: "Alper",
+          url: "20241106_Grid-A4-Web-Print_003_AY.html",
+          tooltip: "Toggle between multiple A4 pages and web view v2",
+        },
+        {
+          date: "24-11-06",
+          type: "Tool",
+          description: "Toggle between multiple A4 pages and web view",
+          author: "Alper",
+          url: "20241106_Grid-A4-Web_002_AY.html",
+          tooltip: "Toggle between multiple A4 pages and web view",
+        },
+        {
+          date: "24-11-06",
+          type: "Tool",
+          description: "Setting up multiple A4 pages",
+          author: "Alper",
+          url: "20241106_Grid-A4_001_AY copy.html",
+          tooltip: "Setting up multiple A4 pages",
+        },
+        {
+          date: "24-11-05",
+          type: "Tool",
+          description: "Playing around with toggle view",
+          author: "Alper",
+          url: "20241105_Toggle-View_001_AY.html",
+          tooltip: "Playing around with toggle view",
+        },
+        {
+          date: "24-11-05",
+          type: "PAD",
+          description:
+            "Connecting with PAD Book from Critical Publishing 1 class with Bérénice Serra",
+          author: "Siiri",
+          url: "20241105_PAD-Book_001_ST.html",
+          tooltip:
+            "Connecting with PAD Book from Critical Publishing 1 class with Bérénice Serra",
+        },
+        {
+          date: "24-11-05",
+          type: "Layout",
+          description: "Getting familiar with CSS Grid template areas",
+          author: "Alper",
+          url: "20241105_Grid_Test_001_AY.html",
+          tooltip: "Getting familiar with CSS Grid template areas",
+        },
+        {
+          date: "24-11-05",
+          type: "Layout",
+          description: "A rectangle",
+          author: "Siiri",
+          url: "20241105_CSS_Rectangle_001_ST.html",
+          tooltip: "A rectangle",
+        },
+        {
+          date: "24-11-05",
+          type: "CSS Grid",
+          description: "Playing with CSS Grid as boxes",
+          author: "Siiri",
+          url: "20241105_CSS_Grid_004_ST.html",
+          tooltip: "Playing with CSS Grid as boxes",
+        },
+        {
+          date: "24-11-05",
+          type: "CSS Grid",
+          description: "Playing with CSS Grid and paragraphs using fr units",
+          author: "Siiri",
+          url: "20241105_CSS_Grid_002_ST.html",
+          tooltip: "Playing with CSS Grid and paragraphs using fr units",
+          highlight: true,
+        },
+        {
+          date: "24-11-05",
+          type: "CSS columns",
+          description: "Playing with CSS columns fluidity",
+          author: "Siiri",
+          url: "20241105_CSS_Colum_001_ST.html",
+          tooltip: "Playing with CSS columns fluidity",
+          highlight: true,
+        },
+        {
+          date: "24-11-05",
+          type: "Layout",
+          description: "Changing CSS column count at different breakpoints",
+          author: "Alper",
+          url: "20241105_CSS_Colum_001_AY.html",
+          tooltip: "Changing CSS column count at different breakpoints",
+        },
+        {
+          date: "24-10-29",
+          type: "Tool",
+          description: "Paged.js test",
+          author: "Alper",
+          url: "20241029_Paged_JS_Test_001_AY.html",
+          tooltip: "Paged.js test",
+        },
+        {
+          date: "24-10-29",
+          type: "CSS columns",
+          description:
+            "Exploring columns in CSS and changing column count on hover v2 + changing background gradient ",
+          author: "Siiri",
+          url: "20241029_CSS_Colum_002_ST.html",
+          tooltip:
+            "Exploring columns in CSS and changing column count on hover v2 + changing background gradient",
+        },
+        {
+          date: "24-10-29",
+          type: "CSS columns",
+          description:
+            "Exploring columns in CSS and changing column count on hover",
+          author: "Siiri",
+          url: "20241029_CSS_Colum_001_ST.html",
+          tooltip:
+            "Exploring columns in CSS and changing column count on hover",
+          highlight: true,
+        },
+        {
+          date: "24-10-29",
+          type: "Layout",
+          description: "Working with columns in CSS",
+          author: "Alper",
+          url: "20241029_CSS_Colum_001_AY.html",
+          tooltip: "Working with columns in CSS",
+        },
+        {
+          date: "24-10-22",
+          type: "CSS Grid",
+          description: "Trying to understand CSS Grid",
+          author: "Siiri",
+          url: "20241022_CSS_Grid_001_ST.html",
+          tooltip: "Trying to understand CSS Grid",
+        },
+        {
+          date: "24-10-22",
+          type: "Layout",
+          description: "Getting started with CSS Grid",
+          author: "Alper",
+          url: "20241022_CSS_Grid_001_AY.html",
+          tooltip: "Getting started with CSS Grid",
+        },
+        {
+          date: "24-10-15",
+          type: "Toggle",
+          description:
+            "Looked into creating a toggle button between web and print view",
+          author: "Siiri",
+          url: "20241015_Toggle-View_001_ST.html",
+          tooltip:
+            "Looked into creating a toggle button between web and print view",
+        },
+      ];
+
+      // Function to populate table
+      function populateTable() {
+        const tbody = document.getElementById("tableBody");
+        tbody.innerHTML = sketches
+          .map(
+            (sketch) => `
+            <tr ${sketch.highlight ? 'class="highlighted"' : ""}>
+                <td><a href="${sketch.url}" target="_blank" title="${
+              sketch.tooltip
+            }">${sketch.date}</a></td>
+                <td><a href="${sketch.url}" target="_blank" title="${
+              sketch.tooltip
+            }">${sketch.type}</a></td>
+                <td><a href="${sketch.url}" target="_blank" title="${
+              sketch.tooltip
+            }">${sketch.description}</a></td>
+                <td><a href="${sketch.url}" target="_blank" title="${
+              sketch.tooltip
+            }">${sketch.author}</a></td>
+            </tr>
+            `
+          )
+          .join("");
+      }
+
+      // Enhanced sort function
+      function sortTable(column) {
+        const headers = document.getElementsByTagName("th");
+        const currentHeader = headers[column];
+        const currentOrder = currentHeader.classList.contains("sorted-asc")
+          ? "desc"
+          : "asc";
+
+        // Reset all headers
+        Array.from(headers).forEach((header) => {
+          header.classList.remove("sorted-asc", "sorted-desc");
+        });
+
+        // Set new sort direction
+        currentHeader.classList.add(
+          currentOrder === "asc" ? "sorted-asc" : "sorted-desc"
+        );
+
+        // Sort the data array
+        sketches.sort((a, b) => {
+          const getValue = (item) => {
+            switch (column) {
+              case 0:
+                return item.date;
+              case 1:
+                return item.type;
+              case 3:
+                return item.author;
+              default:
+                return "";
+            }
+          };
+
+          const aValue = getValue(a);
+          const bValue = getValue(b);
+
+          if (column === 0) {
+            // Parse dates in YY-MM-DD format
+            const [aYear, aMonth, aDay] = aValue
+              .split("-")
+              .map((n) => parseInt(n));
+            const [bYear, bMonth, bDay] = bValue
+              .split("-")
+              .map((n) => parseInt(n));
+            const aDate = aYear * 10000 + aMonth * 100 + aDay;
+            const bDate = bYear * 10000 + bMonth * 100 + aDay;
+            return currentOrder === "asc" ? aDate - bDate : bDate - aDate;
+          } else {
+            // Other columns - sort alphabetically
+            return currentOrder === "asc"
+              ? aValue.localeCompare(bValue)
+              : bValue.localeCompare(aValue);
           }
-        };
+        });
 
-        const aValue = getValue(a);
-        const bValue = getValue(b);
+        // Repopulate the table with sorted data
+        populateTable();
+      }
 
-        if (column === 0) {
-          // Parse dates in YY-MM-DD format
-          const [aYear, aMonth, aDay] = aValue.split("-").map((n) => parseInt(n));
-          const [bYear, bMonth, bDay] = bValue.split("-").map((n) => parseInt(n));
+      // Initialize table on load
+      window.onload = function () {
+        const dateColumn = 0;
+        sketches.sort((a, b) => {
+          const [aYear, aMonth, aDay] = a.date
+            .split("-")
+            .map((n) => parseInt(n));
+          const [bYear, bMonth, bDay] = b.date
+            .split("-")
+            .map((n) => parseInt(n));
           const aDate = aYear * 10000 + aMonth * 100 + aDay;
           const bDate = bYear * 10000 + bMonth * 100 + aDay;
-          return currentOrder === "asc" ? aDate - bDate : bDate - aDate;
-        } else {
-          // Other columns - sort alphabetically
-          return currentOrder === "asc"
-            ? aValue.localeCompare(bValue)
-            : bValue.localeCompare(aValue);
-        }
-      });
-
-      // Repopulate the table with sorted data
-      populateTable();
-    }
-
-    // Initialize table on load
-    window.onload = function () {
-      const dateColumn = 0;
-      sketches.sort((a, b) => {
-        const [aYear, aMonth, aDay] = a.date.split("-").map((n) => parseInt(n));
-        const [bYear, bMonth, bDay] = b.date.split("-").map((n) => parseInt(n));
-        const aDate = aYear * 10000 + aMonth * 100 + aDay;
-        const bDate = bYear * 10000 + bMonth * 100 + aDay;
-        return bDate - aDate; // Sort descending
-      });
-      populateTable();
-      const headers = document.getElementsByTagName("th");
-      headers[dateColumn].classList.add("sorted-desc");
-    };
-  </script>
-</body>
-
+          return bDate - aDate; // Sort descending
+        });
+        populateTable();
+        const headers = document.getElementsByTagName("th");
+        headers[dateColumn].classList.add("sorted-desc");
+      };
+    </script>
+  </body>
 </html>
